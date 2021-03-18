@@ -1,0 +1,13 @@
+{
+    "name": "OurWorks",
+    "alias": "ourworks",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\OurWorks\\Providers\\OurWorksServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
