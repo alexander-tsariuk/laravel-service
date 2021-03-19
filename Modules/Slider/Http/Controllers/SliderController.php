@@ -2,11 +2,12 @@
 
 namespace Modules\Slider\Http\Controllers;
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\Slider\Entities\Slider as SliderModel;
 
-class SliderController extends Controller
+class SliderController extends DashboardController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('slider::index');
+        $this->pageData['items'] = SliderModel::getList();
+
+        return view('slider::index', $this->pageData);
     }
 
     /**
