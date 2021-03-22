@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('slider')->group(function() {
-    Route::get('/', 'SliderController@index');
+Route::prefix('admin')->group(function() {
+    Route::prefix('slider')->group(function() {
+        Route::get('/', 'SliderController@index')->name('dashboard.slider.index');
+        Route::get('/create', 'SliderController@create')->name('dashboard.slider.create');
+    });
 });

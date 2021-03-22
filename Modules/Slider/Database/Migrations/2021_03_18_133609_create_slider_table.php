@@ -14,12 +14,18 @@ class CreateSliderTable extends Migration
     public function up()
     {
         Schema::create('slider', function (Blueprint $table) {
-            $table->id();
-            $table->string('heading_text');
-            $table->string('description')->nullable();
-            $table->string('image');
+            $table->id()->unsigned();
+            $table->string('image')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
+        });
+
+        Schema::create('slide_translations', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('rowId')->unsigned();
+            $table->string('heading_text');
+            $table->string('description')->nullable();
+            $table->bigInteger('languageId')->unsigned();
         });
     }
 
@@ -31,5 +37,6 @@ class CreateSliderTable extends Migration
     public function down()
     {
         Schema::dropIfExists('slider');
+        Schema::dropIfExists('slide_translations');
     }
 }
