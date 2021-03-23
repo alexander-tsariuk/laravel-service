@@ -3,65 +3,107 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <form id="editItem" action="{{ route('dashboard.language.update', ['itemId' => $item->id]) }}" method="POST">
-                @method('PUT')
+            <form id="editItem" action="{{ route('dashboard.slider.update', ['itemId' => $item->id]) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Название языковой версии</label>
-                            <input
-                                type="text"
-                                class="form-control form-control-border {{ $errors->has('name1') ? 'is-invalid' : '' }}"
-                                name="name"
-                                placeholder="English"
-                                value="{{ old('name') ?? $item->name }}"
-                            />
-                            @if($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="prefix">Префикс <br><code>Только латинские символы</code></label>
-                            <input
-                                type="text"
-                                class="form-control form-control-border border-width-2 {{ $errors->has('prefix') ? 'is-invalid' : '' }}"
-                                name="prefix"
-                                placeholder="en"
-                                value="{{ old('prefix') ?? $item->prefix }}"
-                            />
-                            @if($errors->has('prefix'))
-                                <span class="text-danger">{{ $errors->first('prefix') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group">
                             <label for="status">Статус</label>
-                            <select class="custom-select form-control-border {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status">
+                            <select class="custom-select form-control-border {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                 <option value="0" {{ !$item->status ? 'selected' : '' }}>Неактивен</option>
-                                <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Активен</option>
+                                <option value="1" {{ !empty($item->status) && $item->status == 1 ? 'selected' : '' }}>Активен</option>
                             </select>
                             @if($errors->has('status'))
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
                             @endif
                         </div>
+                    </div>
+                    <div class="card-body">
                         <div class="form-group">
-                            <label for="default">По-умолчанию <br><code>При установке этого параметра "Да", языковая версия станет по-умолчанию.</code></label>
-                            <select class="custom-select form-control-border {{ $errors->has('default') ? 'is-invalid' : '' }}" name="default">
-                                <option value="0" {{ !$item->default ? 'selected' : '' }}>Нет</option>
-                                <option value="1" {{ $item->default == 1 ? 'selected' : '' }}>Да</option>
-                            </select>
-                            @if($errors->has('default'))
-                                <span class="text-danger">{{ $errors->first('default') }}</span>
+                            <label for="status">Изображение</label>
+                            <div class="img-bordered mb-3" id="image-area" style="min-height: 200px">
+                                @if(isset($item->image) && !empty($item->image))
+                                    <img src="/storage/{{ $item->image }}" class="img-fluid" style="max-width: 200px;"/>
+                                @endif
+                            </div>
+
+                            <input
+                                type="file"
+                                name="uploadingImage"
+                                class="upload-file"
+                                data-object="slider"
+                                data-id="{{$item->id}}"
+                            />
+
+                            @if($errors->has('status'))
+                                <span class="text-danger">{{ $errors->first('status') }}</span>
                             @endif
                         </div>
                     </div>
-                    <!-- /.card-body -->
+                </div>
+                <div class="card card-outline card-tabs">
+                    <div class="card-header p-0 pt-1 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
+                            @if(isset($languages) && !empty($languages))
+                                @foreach($languages as $language)
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link {{ $loop->first ? 'active' : ''}}"
+                                            id="custom-tabs-{{$language->id}}-home-tab"
+                                            data-toggle="pill"
+                                            href="#custom-tabs-{{$language->id}}-home"
+                                            role="tab"
+                                            aria-controls="custom-tabs-{{$language->id}}-home"
+                                            aria-selected="true">{{ $language->name }}</a>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-two-tabContent">
+                            @if(isset($languages) && !empty($languages))
+                                @foreach($languages as $language)
+                                    <div class="tab-pane fade {{ $loop->first ? 'active show' : ''}}" id="custom-tabs-{{$language->id}}-home" role="tabpanel" aria-labelledby="custom-tabs-{{$language->id}}-home-tab">
+                                        <div class="form-group">
+                                            <label for="name">Заглавный текст</label>
+                                            <input
+                                                type="text"
+                                                class="form-control form-control-border {{ $errors->has('heading_text') ? 'is-invalid' : '' }}"
+                                                name="translation[{{$language->id}}][heading_text]"
+                                                value="{{ $item->preparedTranslations[$language->id]->heading_text ?? null }}"
+                                                required
+                                            />
+                                            @if($errors->has('heading_text'))
+                                                <span class="text-danger">{{ $errors->first('heading_text') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Описание</label>
+                                            <textarea
+                                                rows="2"
+                                                cols="2"
+                                                class="form-control form-control-border {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                                name="translation[{{$language->id}}][description]"
+                                            >{{ $item->preparedTranslations[$language->id]->description ?? null }}</textarea>
+                                            @if($errors->has('description'))
+                                                <span class="text-danger">{{ $errors->first('description') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <!-- /.card -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Сохранить</button>
-                        <a href="{{ route('dashboard.language.index') }}" class="btn btn-default float-right">Отмена</a>
+                        <a href="{{ route('dashboard.slider.index') }}" class="btn btn-default float-right">Отмена</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
 @endsection

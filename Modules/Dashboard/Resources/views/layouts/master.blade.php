@@ -15,13 +15,15 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ Module::asset('dashboard:css/adminlte.min.css') }}">
 
-    <script src="{{ Module::asset('dashboard:plugins/toastr/jquery.min.css') }}"></script>
 
     <style>
         a.delete-item {
             margin-left: 10px;
         }
     </style>
+
+    <link rel="stylesheet" type="text/css" href="{{ Module::asset('dashboard:plugins/toastr/toastr.css') }}"/>
+
 </head>
 <!--
 `body` tag options:
@@ -115,14 +117,15 @@
 <script src="{{ Module::asset('dashboard:js/adminlte.js') }}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="{{ Module::asset('dashboard:plugins/chart.js/Chart.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ Module::asset('dashboard:js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ Module::asset('dashboard:js/pages/dashboard3.js') }}"></script>
+{{--<script src="{{ Module::asset('dashboard:js/pages/dashboard3.js') }}"></script>--}}
 
-<script src="{{ Module::asset('dashboard:plugins/toastr/jquery.min.js') }}"></script>
+<script src="{{ Module::asset('dashboard:plugins/toastr/toastr.min.js') }}"></script>
 
 <script src="{{ Module::asset('dashboard:js/table.js') }}"></script>
+
+<script src="{{ Module::asset('dashboard:js/custom/upload-image.js') }}"></script>
 </body>
 </html>

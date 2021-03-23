@@ -14,7 +14,13 @@ class SlideTranslation extends Model {
         'languageId'
     ];
 
-    protected function createTranslations(int $itemID, array $insertData) : bool {
+    /**
+     * Создаем переводы слайда
+     * @param int $itemID
+     * @param array $insertData
+     * @return bool
+     */
+    protected function createTranslations(int $itemId, array $insertData) : bool {
         $count = (int)count($insertData);
         $saved = (int)0;
 
@@ -23,7 +29,7 @@ class SlideTranslation extends Model {
                 $translationItem = new SlideTranslation();
 
                 $translationItem = $translationItem->fill([
-                    'rowId' => $itemID,
+                    'rowId' => $itemId,
                     'languageId' => $languageId,
                     'heading_text' => $translation['heading_text'],
                     'description' => $translation['description'] ?? null,
@@ -38,4 +44,37 @@ class SlideTranslation extends Model {
         return $saved == $count;
     }
 
+    /**
+     * Обновляем переводы слайда
+     * @param int $itemId
+     * @param array $insertData
+     * @return bool
+     */
+    protected function updateTranslations(int $itemId, array $insertData) : bool {
+        $count = (int)count($insertData);
+        $saved = (int)0;
+
+        if(!empty($insertData)) {
+            foreach ($insertData as $languageId => $translation) {
+                $translationItem = parent::where('rowId', $itemId)->where('languageId', $languageId)->first();
+
+                if(!$translationItem) {
+                    $translationItem = new SlideTranslation();
+                }
+
+                $translationItem = $translationItem->fill([
+                    'rowId' => $itemId,
+                    'languageId' => $translationItem->languageId,
+                    'heading_text' => $translation['heading_text'],
+                    'description' => $translation['description'] ?? null,
+                ]);
+
+                if($translationItem->save()) {
+                    $saved += 1;
+                }
+            }
+        }
+
+        return $saved >= $count ? true : false;
+    }
 }

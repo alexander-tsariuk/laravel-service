@@ -3,6 +3,9 @@
 namespace Modules\Dashboard\Helpers;
 
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 class Upload {
 
     protected $directory;
@@ -12,13 +15,26 @@ class Upload {
         $this->directory = $directory;
     }
 
-    public function upload() {
+    public function upload(int $itemId) {
         if(!$this->directory) {
-            dd('Не удалось загрузить изображение!');
+            throw new \Exception("Некорректно задана директория для загрузки изображения!");
         }
 
-        dd('Удалось нахуй!');
+        $directory = "{$this->directory}/{$itemId}";
+
+        if(!Storage::exists("/public/{$directory}")) {
+            Storage::makeDirectory("/public/{$directory}");
+        }
+
+        $extension = request()->uploadingFile->extension();
+
+        $fileName = Str::random(32).time().".".$extension;
+
+        request()->uploadingFile->storeAs('/public/', $directory.'/'.$fileName);
+
+        return "/{$directory}/{$fileName}";
     }
+
 
 
 

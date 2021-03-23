@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\Slider\Entities\Slider as SliderModel;
 use Modules\Slider\Entities\SlideTranslation as SlideTranslationModel;
-use PHPUnit\Util\Exception;
 
 class SliderController extends DashboardController
 {
@@ -74,18 +73,8 @@ class SliderController extends DashboardController
             return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
         }
 
-        return response()->redirectTo('dashboard.slider.edit', ['itemId' => $item->id])
+        return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $item->id])
             ->with('successMessage', "Слайд был успешно добавлен!");
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('slider::show');
     }
 
     /**
@@ -93,9 +82,23 @@ class SliderController extends DashboardController
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        return view('slider::edit');
+        if(!is_numeric($id) || empty($id)) {
+            abort(404);
+        }
+
+        $this->pageData['item'] = SliderModel::find($id);
+
+        if(!$this->pageData['item']) {
+            abort(404);
+        }
+
+        $this->pageData['item']->preparedTranslations = $this->pageData['item']->prepareTranslationsByID();
+
+        $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        return view('slider::edit', $this->pageData);
     }
 
     /**
@@ -104,9 +107,42 @@ class SliderController extends DashboardController
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'status' => 'required',
+                'translation.*.heading_text' => 'required|min:3|max:255'
+            ], [
+                'required' => 'Поле :attribute обязательно к заполнению!',
+                'min' => 'Минимальная длина поля :attribute :min символов!',
+                'max' => 'Максимальная длина поля :attribute :max символов!',
+                'unique' => 'Значение поля :attribute должно быть уникальным!',
+            ], [
+                'translation.*.heading_text' => 'Заглавный текст',
+                'status' => 'Статус',
+                'translation.*.description' => 'Описание',
+            ]);
+
+            if($validator->fails()) {
+                return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $id])->withErrors($validator->errors())->withInput();
+            }
+
+            $item = SliderModel::updateItem($id, $request->all());
+
+            if(!$item) {
+                throw new \Exception("При создании слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
+            }
+
+            if(!SlideTranslationModel::updateTranslations($id, $request->get('translation'))) {
+                throw new \Exception("При обновлении переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+        }
+
+        return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $id])
+            ->with('successMessage', "Слайд был успешно обновлён!");
     }
 
     /**
@@ -116,6 +152,35 @@ class SliderController extends DashboardController
      */
     public function destroy($id)
     {
-        //
+    }
+
+    public function uploadImage(Request $request, int $id) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'uploadingFile' => 'required|mimes:jpg,png,jpeg'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = SliderModel::uploadImage($id, $request->all());
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['file'] = $uploadedFile;
+                $response['messages'] = 'Изображение успешно загружено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
     }
 }
