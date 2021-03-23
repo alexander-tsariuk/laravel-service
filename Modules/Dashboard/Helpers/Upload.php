@@ -15,7 +15,7 @@ class Upload {
         $this->directory = $directory;
     }
 
-    public function upload(int $itemId) {
+    public function upload($itemId) {
         if(!$this->directory) {
             throw new \Exception("Некорректно задана директория для загрузки изображения!");
         }

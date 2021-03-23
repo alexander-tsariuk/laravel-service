@@ -20,7 +20,7 @@ class CreatePagesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('page_translation', function (Blueprint $table) {
+        Schema::create('page_translations', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('rowId')->unsigned();
             $table->string('name');
@@ -43,6 +43,6 @@ class CreatePagesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('pages');
-        Schema::dropIfExists('page_translation');
+        Schema::dropIfExists('page_translations');
     }
 }

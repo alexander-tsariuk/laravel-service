@@ -1,6 +1,12 @@
 @extends('dashboard::layouts.master')
 
 @section('content')
+    <div class="row mb-3">
+        <div class="col-2">
+            <a href="{{ route('dashboard.language.create') }}" class="btn btn-block btn-primary">Добавить</a>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -37,17 +43,6 @@
                     </table>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                    <div class="card-tools">
-                        <ul class="pagination pagination-sm float-right">
-                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

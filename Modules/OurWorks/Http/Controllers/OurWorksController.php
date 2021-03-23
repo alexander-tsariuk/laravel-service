@@ -6,12 +6,19 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\OurWorks\Entities\OurWorkTranslation as OurWorkTranslationModel;
 
 class OurWorksController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.index'), 'Наши работы');
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -19,6 +26,8 @@ class OurWorksController extends DashboardController
     public function index()
     {
         $this->pageData['items'] = OurWorkModel::getList()->paginate(10);
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('ourworks::index', $this->pageData);
     }
@@ -30,6 +39,10 @@ class OurWorksController extends DashboardController
     public function create()
     {
         $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.create'), 'Новый элемент');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('ourworks::create', $this->pageData);
     }
@@ -98,6 +111,10 @@ class OurWorksController extends DashboardController
         $this->pageData['item']->preparedTranslations = $this->pageData['item']->prepareTranslationsByID();
 
         $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.edit', ['itemId' => $id]), 'Редактирование элемента');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('ourworks::edit', $this->pageData);
     }

@@ -3,6 +3,7 @@
 namespace Modules\Page\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Dashboard\Helpers\Upload;
 
 class Page extends Model {
 
@@ -90,5 +91,12 @@ class Page extends Model {
         $item = parent::find($id);
 
         return $item->delete();
+    }
+
+
+    protected function uploadImage(string $directory, array $insertData) {
+        $uploader = new Upload('pages');
+
+        return $uploader->upload($directory);
     }
 }

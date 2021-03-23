@@ -7,10 +7,17 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 
 class LanguageController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.language.index'), 'Языковые версии');
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -18,6 +25,8 @@ class LanguageController extends DashboardController
     public function index()
     {
         $this->pageData['items'] = LanguageModel::getList()->get();
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('language::index', $this->pageData);
     }
@@ -28,6 +37,10 @@ class LanguageController extends DashboardController
      */
     public function create()
     {
+        Breadcrumbs::setBreadcrumb(route('dashboard.language.create'), 'Новая языковая версия');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+
         return view('language::create', $this->pageData);
     }
 
@@ -89,6 +102,11 @@ class LanguageController extends DashboardController
         if(!$this->pageData['item']) {
             abort(404);
         }
+
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.language.edit', ['itemId' => $id]), 'Редактирование языковой версии');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('language::edit', $this->pageData);
     }

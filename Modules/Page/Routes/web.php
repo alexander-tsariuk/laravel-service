@@ -20,5 +20,8 @@ Route::prefix('admin')->group(function() {
 
         Route::get('/edit/{itemId}', 'PageController@edit')->name('dashboard.page.edit');
         Route::put('/edit/{itemId}', 'PageController@update')->name('dashboard.page.update');
+
+        Route::post('/upload-image/{directory}', 'PageController@uploadImage')->name('dashboard.page.uploadImage');
+
     });
 });

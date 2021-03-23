@@ -5,6 +5,7 @@ namespace Modules\Page\Http\Controllers;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\Page\Entities\Page as PageModel;
 use Modules\Page\Entities\PageTranslation as PageTranslationModel;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PageController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.page.index'), 'Список страниц');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -20,12 +28,18 @@ class PageController extends DashboardController
     {
         $this->pageData['items'] = PageModel::getList()->paginate(10);
 
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+
         return view('page::index', $this->pageData);
     }
 
     public function create()
     {
         $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.page.create'), 'Новая страница');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('page::create', $this->pageData);
     }
@@ -85,6 +99,10 @@ class PageController extends DashboardController
 
         $this->pageData['languages'] = LanguageModel::getList()->get();
 
+        Breadcrumbs::setBreadcrumb(route('dashboard.page.edit', ['itemId' => $id]), 'Редактирование страницы');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+
         return view('page::edit', $this->pageData);
     }
 
@@ -138,5 +156,35 @@ class PageController extends DashboardController
         }
 
         return response()->json($response);
+    }
+
+    public function uploadImage(Request $request, string $directory) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'uploadingFile' => 'required|mimes:jpg,png,jpeg'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = PageModel::uploadImage($directory, $request->all());
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['file'] = $uploadedFile;
+                $response['messages'] = 'Изображение успешно загружено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
     }
 }

@@ -14,19 +14,19 @@
         <li class="nav-header">Контент</li>
         <li class="nav-item">
             <a href="{{ route('dashboard.slider.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-globe"></i>
+                <i class="nav-icon fas fa-th"></i>
                 <p>Слайдер</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('dashboard.ourwork.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-globe"></i>
+                <i class="nav-icon far fa-image"></i>
                 <p>Наши работы</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('dashboard.page.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-globe"></i>
+                <i class="nav-icon fas fa-copy"></i>
                 <p>Страницы</p>
             </a>
         </li>

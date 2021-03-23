@@ -1,6 +1,14 @@
 <ol class="breadcrumb float-sm-right">
-    <li class="breadcrumb-item active">
-        <a href="#">Админ-панель</a>
-    </li>
-{{--    <li class="breadcrumb-item active">Dashboard v3</li>--}}
+    @if(isset($breadcrumbs) && !empty($breadcrumbs))
+        @foreach($breadcrumbs as $breadcrumb)
+            <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
+                @if($loop->last)
+                    {{ $breadcrumb['name'] }}
+                @else
+                    <a href="{{ $breadcrumb['route'] }}">{{ $breadcrumb['name'] }}</a>
+                @endif
+
+            </li>
+        @endforeach
+    @endif
 </ol>

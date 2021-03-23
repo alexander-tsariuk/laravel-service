@@ -6,12 +6,20 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\Slider\Entities\Slider as SliderModel;
 use Modules\Slider\Entities\SlideTranslation as SlideTranslationModel;
 
 class SliderController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.slider.index'), 'Слайдер');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -19,6 +27,8 @@ class SliderController extends DashboardController
     public function index()
     {
         $this->pageData['items'] = SliderModel::getList();
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('slider::index', $this->pageData);
     }
@@ -30,6 +40,10 @@ class SliderController extends DashboardController
     public function create()
     {
         $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.slider.create'), 'Новый слайд');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('slider::create', $this->pageData);
     }
@@ -97,6 +111,10 @@ class SliderController extends DashboardController
         $this->pageData['item']->preparedTranslations = $this->pageData['item']->prepareTranslationsByID();
 
         $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.slider.edit', ['itemId' => $id]), 'Редактирование слайда');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
         return view('slider::edit', $this->pageData);
     }
