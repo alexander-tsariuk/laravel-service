@@ -6,7 +6,9 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Modules\Language\Entities\Language as LanguageModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
+use Modules\OurWorks\Entities\OurWorkTranslation as OurWorkTranslationModel;
 
 class OurWorksController extends DashboardController
 {
@@ -16,7 +18,7 @@ class OurWorksController extends DashboardController
      */
     public function index()
     {
-        $this->pageData['items'] = OurWorkModel::getList();
+        $this->pageData['items'] = OurWorkModel::getList()->paginate(10);
 
         return view('ourworks::index', $this->pageData);
     }
@@ -27,6 +29,8 @@ class OurWorksController extends DashboardController
      */
     public function create()
     {
+        $this->pageData['languages'] = LanguageModel::getList()->get();
+
         return view('ourworks::create', $this->pageData);
     }
 
@@ -40,10 +44,17 @@ class OurWorksController extends DashboardController
         try {
             $validator = Validator::make($request->all(), [
                 'prefix' => 'required|unique:our_works',
-                'status' => 'required'
+                'status' => 'required',
+                'translation.*.name' => 'required|min:3|max:255',
             ], [
                 'required' => "Поле :attribute обязательно к заполнению!",
                 'unique' => "Значение поля :attribute должно быть уникальным!",
+                'min' => 'Минимальная длина поля :attribute :min символов!',
+                'max' => 'Максимальная длина поля :attribute :max символов!',
+            ], [
+                'prefix' => 'Алиас',
+                'status' => 'Статус',
+                'translation.*.name' => 'Название работы',
             ]);
 
             if($validator->fails()) {
@@ -54,6 +65,10 @@ class OurWorksController extends DashboardController
 
             if(!$item) {
                 throw new \Exception("Неудалось создать элемент раздела \"Наши работы\". Повторите попытку позже или обратитесь к администратору!");
+            }
+
+            if(!OurWorkTranslationModel::createTranslations($item->id, $request->get('translation'))) {
+                throw new \Exception("При создании переводов элемента \"Наши работы\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
         } catch (\Exception $exception) {
@@ -80,6 +95,10 @@ class OurWorksController extends DashboardController
             abort(404);
         }
 
+        $this->pageData['item']->preparedTranslations = $this->pageData['item']->prepareTranslationsByID();
+
+        $this->pageData['languages'] = LanguageModel::getList()->get();
+
         return view('ourworks::edit', $this->pageData);
     }
 
@@ -93,7 +112,7 @@ class OurWorksController extends DashboardController
     {
         try {
             $validator = Validator::make($request->all(), [
-                'prefix' => 'required|unique:our_works',
+                'prefix' => 'required|unique:our_works,id,'.$id,
                 'status' => 'required',
                 'translation.*.name'
             ], [
@@ -108,7 +127,11 @@ class OurWorksController extends DashboardController
             $item = OurWorkModel::updateItem($id, $request->all());
 
             if(!$item) {
-                throw new \Exception("Неудалось создать элемент раздела \"Наши работы\". Повторите попытку позже или обратитесь к администратору!");
+                throw new \Exception("Не удалось обновить элемент раздела \"Наши работы\". Повторите попытку позже или обратитесь к администратору!");
+            }
+
+            if(!OurWorkTranslationModel::updateTranslations($id, $request->get('translation'))) {
+                throw new \Exception("При обновлении переводов элемента раздела \"Наши работы\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
         } catch (\Exception $exception) {

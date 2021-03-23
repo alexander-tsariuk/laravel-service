@@ -15,6 +15,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ Module::asset('dashboard:css/adminlte.min.css') }}">
 
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/summernote/summernote-bs4.min.css') }}">
 
     <style>
         a.delete-item {
@@ -127,5 +128,16 @@
 <script src="{{ Module::asset('dashboard:js/table.js') }}"></script>
 
 <script src="{{ Module::asset('dashboard:js/custom/upload-image.js') }}"></script>
+
+<script src="{{ Module::asset('dashboard:plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+
+<script>
+    $(function () {
+        // Summernote
+        $('.summernote').summernote();
+    });
+
+</script>
 </body>
 </html>

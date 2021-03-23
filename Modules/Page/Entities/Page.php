@@ -1,30 +1,27 @@
 <?php
 
-namespace Modules\OurWorks\Entities;
+namespace Modules\Page\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\Dashboard\Helpers\Upload;
 
-class OurWork extends Model {
-    protected $table = 'our_works';
-
-    protected $with = [
-        'translations',
-        'translation'
-    ];
+class Page extends Model {
 
     protected $fillable = [
         'prefix',
         'status',
-        'image'
+    ];
+
+    protected $with = [
+        'translations',
+        'translation',
     ];
 
     public function translations() {
-        return $this->hasMany(OurWorkTranslation::class, 'rowId', 'id');
+        return $this->hasMany(PageTranslation::class, 'rowId', 'id');
     }
 
     public function translation() {
-        return $this->hasOne(OurWorkTranslation::class, 'rowId', 'id')
+        return $this->hasOne(PageTranslation::class, 'rowId', 'id')
             ->where('languageId', 1);
     }
 
@@ -45,6 +42,10 @@ class OurWork extends Model {
         return $result;
     }
 
+    /**
+     * Получаем список слайдов
+     * @return mixed
+     */
     protected function getList() {
         $items = $this->orderBy('id', 'DESC');
 
@@ -52,13 +53,12 @@ class OurWork extends Model {
     }
 
     /**
-     * Создаем элемент
+     * Создаем слайд
      * @param array $insertData
-     * @return OurWork
-     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     * @return Slider
      */
     protected function createItem(array $insertData) {
-        $item = new OurWork();
+        $item = new Page();
 
         $item = $item->fill($insertData);
 
@@ -68,7 +68,7 @@ class OurWork extends Model {
     }
 
     /**
-     * Обновляем информацию элемента
+     * Обновляем информацию слайда
      * @param int $itemId
      * @param array $insertData
      * @return bool
@@ -86,27 +86,9 @@ class OurWork extends Model {
         return $item->save();
     }
 
-    /**
-     * Загружаем изображения
-     * @param int $itemId
-     * @param array $insertData
-     * @return string
-     */
-    protected function uploadImage(int $itemId, array $insertData) {
-        $uploader = new Upload($insertData['directory'] ?? '');
+    protected function deleteItem(int $id) : bool {
+        $item = parent::find($id);
 
-        $uploadedFile = $uploader->upload($itemId);
-
-        $item = parent::find($itemId);
-
-        $item->image = $uploadedFile;
-
-        if(!$item->save()) {
-            throw new \Exception("Изображение было загружено, но при обновлении элемента произошла ошибка. Обратитесь к администратору!");
-        }
-
-        return $uploadedFile;
+        return $item->delete();
     }
-
-
 }

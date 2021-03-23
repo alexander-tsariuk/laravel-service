@@ -1,23 +1,28 @@
 <?php
 
-namespace Modules\OurWorks\Entities;
+namespace Modules\Page\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OurWorkTranslation extends Model {
-    protected $table = 'our_work_translations';
+class PageTranslation extends Model {
 
     public $timestamps = false;
 
     protected $fillable = [
         'rowId',
+        'languageId',
         'name',
-        'languageId'
+        'content',
+        'meta_title',
+        'meta_h1',
+        'meta_keywords',
+        'meta_description',
     ];
 
+
     /**
-     * Создаем переводы элемента раздела "Наши работы"
-     * @param int $itemId
+     * Создаем переводы страницы
+     * @param int $itemID
      * @param array $insertData
      * @return bool
      */
@@ -27,12 +32,17 @@ class OurWorkTranslation extends Model {
 
         if(!empty($insertData)) {
             foreach ($insertData as $languageId => $translation) {
-                $translationItem = new OurWorkTranslation();
+                $translationItem = new PageTranslation();
 
                 $translationItem = $translationItem->fill([
                     'rowId' => $itemId,
                     'languageId' => $languageId,
                     'name' => $translation['name'],
+                    'content' => $translation['content'] ?? null,
+                    'meta_title' => $translation['meta_title'] ?? null,
+                    'meta_h1' => $translation['meta_h1'] ?? null,
+                    'meta_keywords' => $translation['meta_keywords'] ?? null,
+                    'meta_description' => $translation['meta_description'] ?? null,
                 ]);
 
                 if($translationItem->save()) {
@@ -43,8 +53,9 @@ class OurWorkTranslation extends Model {
 
         return $saved == $count;
     }
+
     /**
-     * Обновляем переводы элемента раздела "Наши работы"
+     * Обновляем переводы страницы
      * @param int $itemId
      * @param array $insertData
      * @return bool
@@ -58,13 +69,18 @@ class OurWorkTranslation extends Model {
                 $translationItem = parent::where('rowId', $itemId)->where('languageId', $languageId)->first();
 
                 if(!$translationItem) {
-                    $translationItem = new OurWorkTranslation();
+                    $translationItem = new PageTranslation();
                 }
 
                 $translationItem = $translationItem->fill([
                     'rowId' => $itemId,
                     'languageId' => $translationItem->languageId,
                     'name' => $translation['name'],
+                    'content' => $translation['content'] ?? null,
+                    'meta_title' => $translation['meta_title'] ?? null,
+                    'meta_h1' => $translation['meta_h1'] ?? null,
+                    'meta_keywords' => $translation['meta_keywords'] ?? null,
+                    'meta_description' => $translation['meta_description'] ?? null,
                 ]);
 
                 if($translationItem->save()) {

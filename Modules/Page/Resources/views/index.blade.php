@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-2">
-            <a href="{{ route('dashboard.ourwork.create') }}" class="btn btn-block btn-primary">Добавить</a>
+            <a href="{{ route('dashboard.page.create') }}" class="btn btn-block btn-primary">Добавить</a>
         </div>
     </div>
 
@@ -19,6 +19,7 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Название</th>
+                            <th>Алиас</th>
                             <th>Статус</th>
                             <th></th>
                         </tr>
@@ -29,8 +30,9 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->translation->name }}</td>
+                                    <td>/{{ $item->prefix }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
-                                    <td>{!! tableActions($item->id, 'ourwork') !!}</td>
+                                    <td>{!! tableActions($item->id, 'page') !!}</td>
                                 </tr>
                             @endforeach
                         @else

@@ -152,8 +152,15 @@ class SliderController extends DashboardController
      */
     public function destroy($id)
     {
+        dd($id);
     }
 
+    /**
+     * Загрузка изображений слайда
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
     public function uploadImage(Request $request, int $id) {
         $response = [
             'success' => false,

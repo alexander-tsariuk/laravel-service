@@ -12,7 +12,16 @@
 */
 
 Route::prefix('admin')->group(function() {
-    Route::prefix('ourworks')->group(function() {
-        Route::get('/', 'OurWorksController@index');
+    Route::prefix('ourwork')->group(function() {
+        Route::get('/', 'OurWorksController@index')->name('dashboard.ourwork.index');
+
+        Route::get('/create', 'OurWorksController@create')->name('dashboard.ourwork.create');
+        Route::post('/create', 'OurWorksController@store')->name('dashboard.ourwork.store');
+
+        Route::post('/upload-image/{itemId}', 'OurWorksController@uploadImage')->name('dashboard.ourwork.uploadImage');
+
+        Route::get('/edit/{itemId}', 'OurWorksController@edit')->name('dashboard.ourwork.edit');
+        Route::put('/edit/{itemId}', 'OurWorksController@update')->name('dashboard.ourwork.update');
     });
 });
+

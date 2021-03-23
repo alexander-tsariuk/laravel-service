@@ -11,20 +11,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e06b7082-0bb3-4d7c-bf9d-6e17e674f5bc" name="Default Changelist" comment="created slider module">
-      <change afterPath="$PROJECT_DIR$/Modules/Dashboard/Helpers/Upload.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Slider/Entities/SlideTranslation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Slider/Resources/views/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Slider/Resources/views/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/adminer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Config/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Config/config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Console/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Database/Migrations/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Database/Migrations/2021_03_23_141408_create_pages_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Database/Seeders/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Database/Seeders/PageDatabaseSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Database/factories/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Entities/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Entities/Page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Entities/PageTranslation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Http/Controllers/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Http/Controllers/PageController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Http/Middleware/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Http/Requests/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Providers/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Providers/PageServiceProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/assets/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/assets/sass/app.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/lang/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/create/edit__content.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/create/edit__main_data.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/create/edit__meta_tags.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/edit/edit__content.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/edit/edit__main_data.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/edit/edit__meta_tags.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Resources/views/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Routes/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Routes/api.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Routes/web.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Tests/Feature/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/Tests/Unit/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/module.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Page/webpack.mix.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Slider/Database/Migrations/2021_03_18_133609_create_slider_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Slider/Database/Migrations/2021_03_18_133609_create_slider_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Slider/Entities/Slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Slider/Entities/Slider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Dashboard/Helpers/Table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Dashboard/Helpers/Table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Dashboard/Resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Dashboard/Resources/views/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Dashboard/Resources/views/layouts/parts/master__left_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Dashboard/Resources/views/layouts/parts/master__left_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Entities/OurWork.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Entities/OurWork.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Entities/OurWorkTranslation.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Entities/OurWorkTranslation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Http/Controllers/OurWorksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Http/Controllers/OurWorksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Resources/views/layouts/master.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/OurWorks/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/OurWorks/Routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Slider/Http/Controllers/SliderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Slider/Http/Controllers/SliderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Slider/Resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Slider/Resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Slider/Resources/views/layouts/master.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Slider/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Slider/Routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules_statuses.json" beforeDir="false" afterPath="$PROJECT_DIR$/modules_statuses.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/access.log" beforeDir="false" afterPath="$PROJECT_DIR$/public/access.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/public/error.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,19 +213,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Modules/Page/Resources/views/create" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/Modules/Language/Resources/views" />
-      <recent name="$PROJECT_DIR$/Modules/Dashboard/Resources/assets" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Modules/Dashboard/Resources/views/layouts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Modules/Page/Resources/views/create" />
+      <recent name="$PROJECT_DIR$/Modules/Page/Entities" />
+      <recent name="$PROJECT_DIR$/Modules/Page/Resources/views" />
+      <recent name="$PROJECT_DIR$/Modules/OurWorks/Resources" />
+      <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
   <component name="RunManager">
@@ -200,6 +248,7 @@
       <workItem from="1615994689495" duration="535000" />
       <workItem from="1616055794105" duration="14302000" />
       <workItem from="1616422942226" duration="3884000" />
+      <workItem from="1616500839681" duration="8427000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1615994760147</created>
@@ -237,70 +286,74 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2622" y="324" width="506" height="384" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616073777069" />
-    <state width="1878" height="342" key="GridCell.Tab.0.bottom" timestamp="1616076014031">
+    <state x="2613" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1616512126663">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.0.center" timestamp="1616076014031">
+    <state x="2613" y="277" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616512126663" />
+    <state width="1878" height="342" key="GridCell.Tab.0.bottom" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.0.left" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.0.center" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.0.right" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.0.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.0.left" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.1.bottom" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.0.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.0.right" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.1.center" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.1.bottom" timestamp="1616513448404">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.1.left" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448404" />
+    <state width="1878" height="342" key="GridCell.Tab.1.center" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.1.right" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.1.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.1.left" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.2.bottom" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.1.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.1.right" timestamp="1616513448403">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.2.center" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.1.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448403" />
+    <state width="1878" height="342" key="GridCell.Tab.2.bottom" timestamp="1616513448404">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.2.left" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.2.bottom/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448404" />
+    <state width="1878" height="342" key="GridCell.Tab.2.center" timestamp="1616513448404">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state width="1878" height="342" key="GridCell.Tab.2.right" timestamp="1616076014031">
+    <state width="1878" height="342" key="GridCell.Tab.2.center/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448404" />
+    <state width="1878" height="342" key="GridCell.Tab.2.left" timestamp="1616513448404">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="342" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616076014031" />
-    <state x="2698" y="445" width="354" height="147" key="NewPhpFileDialog" timestamp="1616424275628">
+    <state width="1878" height="342" key="GridCell.Tab.2.left/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448404" />
+    <state width="1878" height="342" key="GridCell.Tab.2.right" timestamp="1616513448404">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2698" y="445" width="354" height="147" key="NewPhpFileDialog/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616424275628" />
-    <state x="2384" y="154" key="SettingsEditor" timestamp="1616075276105">
+    <state width="1878" height="342" key="GridCell.Tab.2.right/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513448404" />
+    <state x="2698" y="445" width="354" height="147" key="NewPhpFileDialog" timestamp="1616509191875">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2384" y="154" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616075276105" />
+    <state x="2698" y="445" width="354" height="147" key="NewPhpFileDialog/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616509191875" />
+    <state x="2384" y="154" key="SettingsEditor" timestamp="1616500776435">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2384" y="154" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616500776435" />
     <state x="2475" y="242" width="800" height="548" key="Vcs.Push.Dialog.v2" timestamp="1616075978914">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="242" width="800" height="548" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616075978914" />
-    <state x="22" y="0" width="1389" height="1000" maximized="true" key="dock-window-1" timestamp="1616425490339">
+    <state x="0" y="0" width="1389" height="1000" maximized="true" key="dock-window-1" timestamp="1616513138549">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="22" y="0" width="1389" height="1000" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616425490339" />
+    <state x="0" y="0" width="1389" height="1000" maximized="true" key="dock-window-1/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1616513138549" />
     <state x="245" y="0" width="1389" height="1000" maximized="true" key="dock-window-2" timestamp="1616426124857">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -322,9 +375,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/Modules/Slider/Http/Controllers/SliderController.php</url>
-          <line>45</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/Modules/Page/Http/Controllers/PageController.php</url>
+          <line>114</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

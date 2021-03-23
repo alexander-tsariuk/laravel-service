@@ -11,6 +11,25 @@
                 </p>
             </a>
         </li>
+        <li class="nav-header">Контент</li>
+        <li class="nav-item">
+            <a href="{{ route('dashboard.slider.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-globe"></i>
+                <p>Слайдер</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('dashboard.ourwork.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-globe"></i>
+                <p>Наши работы</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('dashboard.page.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-globe"></i>
+                <p>Страницы</p>
+            </a>
+        </li>
         <li class="nav-header">Настройки</li>
         <li class="nav-item">
             <a href="{{ route('dashboard.language.index') }}" class="nav-link">

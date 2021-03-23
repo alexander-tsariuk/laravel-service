@@ -1,7 +1,14 @@
 @extends('dashboard::layouts.master')
 
 @section('content')
+    <div class="row mb-3">
+        <div class="col-2">
+            <a href="{{ route('dashboard.slider.create') }}" class="btn btn-block btn-primary">Добавить</a>
+        </div>
+    </div>
+
     <div class="row">
+
         <div class="col-12">
             <div class="card">
 
@@ -23,7 +30,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->translation->heading_text }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
-                                    <td>{!! tableActions($item->id, 'language') !!}</td>
+                                    <td>{!! tableActions($item->id, 'slider') !!}</td>
                                 </tr>
                             @endforeach
                         @else

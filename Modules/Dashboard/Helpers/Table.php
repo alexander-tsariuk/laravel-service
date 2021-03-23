@@ -36,7 +36,9 @@ if(!function_exists('tableDefault')) {
 
 if(!function_exists('tableActions')) {
     function tableActions(int $id, string $route) {
-        $html = "<a href=\"#\" title=\"Редактировать\">
+        $editUrl = route('dashboard.'.$route.'.edit', ['itemId' => $id]);
+
+        $html = "<a href=\"{$editUrl}\" title=\"Редактировать\">
                     <i class=\"fa fa-pen\"></i>
                  </a>
                  <a href=\"#\" class=\"delete-item\" data-id=\"{$id}\" data-route=\"{$route}\" title='Удалить'>
