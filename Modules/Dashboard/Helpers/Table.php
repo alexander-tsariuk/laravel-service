@@ -38,12 +38,11 @@ if(!function_exists('tableActions')) {
     function tableActions(int $id, string $route) {
         $editUrl = route('dashboard.'.$route.'.edit', ['itemId' => $id]);
 
-        $html = "<a href=\"{$editUrl}\" title=\"Редактировать\">
-                    <i class=\"fa fa-pen\"></i>
-                 </a>
-                 <a href=\"#\" class=\"delete-item\" data-id=\"{$id}\" data-route=\"{$route}\" title='Удалить'>
-                    <i class=\"fa fa-trash\"></i>
-                 </a>";
+        $html = "<div class=\"btn-group btn-group-sm\">";
+        $html .= "<a href=\"{$editUrl}\" class=\"btn btn-info\" title=\"Редактировать\"><i class=\"fas fa-pen\"></i></a>";
+        $html .= "<a href=\"#\" class=\"delete-item btn btn-danger\" data-id=\"{$id}\" data-route=\"{$route}\" title='Удалить'>";
+        $html .= "<i class=\"fas fa-trash\"></i></a>";
+        $html .= "</div>";
 
         return $html;
     }

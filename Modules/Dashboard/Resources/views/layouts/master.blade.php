@@ -54,7 +54,7 @@
                     <img src="{{ Module::asset('dashboard:img/user-image.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">{{ Auth::user()->name }} {{ Auth::user()->surname }}</a>
                 </div>
             </div>
 

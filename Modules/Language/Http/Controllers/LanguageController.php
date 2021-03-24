@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
@@ -111,7 +112,7 @@ class LanguageController extends DashboardController
         return view('language::edit', $this->pageData);
     }
 
-    /**+/**
+    /**
      * Update the specified resource in storage.
      * @param Request $request
      * @param int $id

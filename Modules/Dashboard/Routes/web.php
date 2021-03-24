@@ -11,6 +11,10 @@
 |
 */
 
-Route::prefix('dashboard')->group(function() {
-    Route::get('/', 'DashboardController@index');
+
+Route::get('/login', 'AuthController@login')->name('auth.login.page');
+Route::post('/login', 'AuthController@auth')->name('auth.login');
+
+Route::prefix('admin')->group(function() {
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
 });

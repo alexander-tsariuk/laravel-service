@@ -1,9 +1,61 @@
-@extends('user::layouts.master')
+@extends('dashboard::layouts.master')
 
 @section('content')
-    <h1>Hello World</h1>
+    <div class="row mb-3">
+        <div class="col-2">
+            <a href="{{ route('dashboard.user.create') }}" class="btn btn-block btn-primary">Добавить</a>
+        </div>
+    </div>
 
-    <p>
-        This view is loaded from module: {!! config('user.name') !!}
-    </p>
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table text-center">
+                        <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Имя</th>
+                            <th>E-mail</th>
+                            <th>Телефон</th>
+                            <th>Статус</th>
+                            <th>Создан / Редактирован</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(isset($items) && !empty($items))
+                            @foreach($items as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }} {{ $item->surname }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{!! tableStatus($item->status) !!}</td>
+                                    <td>{{ \App\Models\User::prepareDate($item->created_at) }} / {{ \App\Models\User::prepareDate($item->updated_at) }}</td>
+                                    <td>{!! tableActions($item->id, 'user') !!}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5" class="text-danger text-center">Ни одной записи не было найдено!</td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <div class="card-tools">
+                        {{ $items->links('dashboard::pagination.master__pagination') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @include('dashboard::layouts.modals.master__delete_modal')
 @endsection

@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('admin')->group(function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::prefix('language')->group(function() {
         Route::get('/', 'LanguageController@index')->name('dashboard.language.index');
 
