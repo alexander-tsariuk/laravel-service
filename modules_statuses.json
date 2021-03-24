@@ -4,5 +4,6 @@
     "Language": true,
     "OurWorks": true,
     "Page": true,
-    "User": true
+    "User": true,
+    "Front": true
 }

@@ -55,6 +55,14 @@ class Slider extends Model {
     }
 
     /**
+     * Получаем список активных слайдов
+     * @return mixed
+     */
+    protected function getActiveList() {
+        return $this->orderBy('id', 'DESC')->get();
+    }
+
+    /**
      * Создаем слайд
      * @param array $insertData
      * @return Slider

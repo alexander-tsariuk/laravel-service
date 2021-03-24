@@ -64,6 +64,6 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($exception->getMessage(), 'general');
         }
 
-        return response()->redirectToRoute('dashboard.language.index');
+        return response()->redirectToRoute('dashboard.index');
     }
 }

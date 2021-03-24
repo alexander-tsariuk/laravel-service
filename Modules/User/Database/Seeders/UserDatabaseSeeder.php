@@ -24,7 +24,8 @@ class UserDatabaseSeeder extends Seeder
             'email' => "alexander.tsariuk@icloud.com",
             'phone' => "380956343602",
             'password' => Hash::make('test123456'),
-            'status' => 1
+            'status' => 1,
+            'created_at' => now()
         ]);
     }
 }

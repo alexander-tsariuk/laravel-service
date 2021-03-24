@@ -75,7 +75,11 @@ class User extends Authenticatable
         return $item;
     }
 
-    protected function prepareDate(string $date) : string {
+    protected function prepareDate($date) : string {
+        if(!$date) {
+            return '---';
+        }
+
         $date = Carbon::make($date)->translatedFormat('d F Y H:i');
 
         return $date;

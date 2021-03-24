@@ -1,0 +1,39 @@
+@if(isset($slides) && !empty($slides))
+    <section class="hero_banner_section d-flex " id="slider-block">
+        <div id="viewport">
+            <ul id="slidewrapper">
+                @foreach($slides as $slide)
+                    <li class="slide">
+                        <section class="hero_banner_section d-flex slide-item"
+                                 data-bgimg="/storage{{ $slide->image }}">
+                            <div class="container align-self-center">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="hero_banner_inner">
+                                            <div class="hero_content text-center">
+                                                <h1 class="text-white wow fadeInUp" data-wow-delay="0.1s"
+                                                    data-wow-duration="1.1s">{{ $slide->translation->heading_text }}</h1>
+                                                @if(isset($slide->translation->description) && !empty($slide->translation->description))
+                                                    <p class="wow fadeInUp" data-wow-delay="0.2s"
+                                                       data-wow-duration="1.2s">{{ $slide->translation->description }}</p>
+                                                @endif
+                                                <a class="btn btn-link wow fadeInUp" data-wow-delay="0.3s"
+                                                   data-wow-duration="1.3s"
+                                                   href="#">Discover Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </li>
+                @endforeach
+            </ul>
+
+            <div id="prev-next-btns">
+                <div id="prev-btn"></div>
+                <div id="next-btn"></div>
+            </div>
+        </div>
+    </section>
+@endif
