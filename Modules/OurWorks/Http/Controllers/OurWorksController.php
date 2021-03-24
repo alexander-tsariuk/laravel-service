@@ -28,6 +28,7 @@ class OurWorksController extends DashboardController
         $this->pageData['items'] = OurWorkModel::getList()->paginate(10);
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Наши работы';
 
         return view('ourworks::index', $this->pageData);
     }
@@ -43,6 +44,7 @@ class OurWorksController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.create'), 'Новый элемент');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Новый элемент';
 
         return view('ourworks::create', $this->pageData);
     }
@@ -85,7 +87,7 @@ class OurWorksController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'global')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return response()->redirectToRoute('dashboard.ourwork.edit', ['itemId' => $item->id])
@@ -115,6 +117,7 @@ class OurWorksController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.edit', ['itemId' => $id]), 'Редактирование элемента');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Редактирование элемента';
 
         return view('ourworks::edit', $this->pageData);
     }

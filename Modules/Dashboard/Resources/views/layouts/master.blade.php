@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 3</title>
+    <title>{{ $title ?? '' }} | Админ-панель</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -42,7 +42,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="/dashboard" class="brand-link">
+        <a href="{{ route('dashboard.index') }}" class="brand-link">
             <span class="brand-text font-weight-light">Админ-панель</span>
         </a>
 
@@ -70,7 +70,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Админ-панель</h1>
+                        <h1 class="m-0">{{ $title ?? '' }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         @include('dashboard::layouts.parts.master__breadcrumbs')
@@ -154,5 +154,23 @@
     });
 
 </script>
+
+@if(\Illuminate\Support\Facades\Session::has('successMessage') && !empty(\Illuminate\Support\Facades\Session::get('successMessage')))
+    <script>
+        $(function (){
+            toastr.success("{{\Illuminate\Support\Facades\Session::get('successMessage')}}")
+        });
+    </script>
+@endif
+
+@if(\Illuminate\Support\Facades\Session::has('errorMessage') && !empty(\Illuminate\Support\Facades\Session::get('errorMessage')))
+    <script>
+        $(function (){
+            toastr.error("{{\Illuminate\Support\Facades\Session::get('errorMessage')}}")
+        });
+    </script>
+@endif
+
+
 </body>
 </html>

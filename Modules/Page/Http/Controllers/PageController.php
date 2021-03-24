@@ -29,6 +29,7 @@ class PageController extends DashboardController
         $this->pageData['items'] = PageModel::getList()->paginate(10);
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Список страниц';
 
         return view('page::index', $this->pageData);
     }
@@ -40,6 +41,7 @@ class PageController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.page.create'), 'Новая страница');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Новая страница';
 
         return view('page::create', $this->pageData);
     }
@@ -76,7 +78,7 @@ class PageController extends DashboardController
                 throw new \Exception("При создании переводов страницы произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return response()->redirectToRoute('dashboard.page.edit', ['itemId' => $item->id])
@@ -102,6 +104,7 @@ class PageController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.page.edit', ['itemId' => $id]), 'Редактирование страницы');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Редактирование страницы';
 
         return view('page::edit', $this->pageData);
     }
@@ -138,7 +141,7 @@ class PageController extends DashboardController
                 throw new \Exception("При обновлении переводов страницы произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return response()->redirectToRoute('dashboard.page.edit', ['itemId' => $id])

@@ -29,6 +29,7 @@ class SliderController extends DashboardController
         $this->pageData['items'] = SliderModel::getList();
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Слайдер';
 
         return view('slider::index', $this->pageData);
     }
@@ -44,6 +45,7 @@ class SliderController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.slider.create'), 'Новый слайд');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Новый слайд';
 
         return view('slider::create', $this->pageData);
     }
@@ -84,7 +86,7 @@ class SliderController extends DashboardController
                 throw new \Exception("При создании переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $item->id])
@@ -115,6 +117,7 @@ class SliderController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.slider.edit', ['itemId' => $id]), 'Редактирование слайда');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Редактирование слайда';
 
         return view('slider::edit', $this->pageData);
     }
@@ -156,7 +159,7 @@ class SliderController extends DashboardController
                 throw new \Exception("При обновлении переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $id])

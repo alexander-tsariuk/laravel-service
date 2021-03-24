@@ -29,6 +29,8 @@ class LanguageController extends DashboardController
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
+        $this->pageData['title'] = 'Языковые версии';
+
         return view('language::index', $this->pageData);
     }
 
@@ -41,6 +43,7 @@ class LanguageController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.language.create'), 'Новая языковая версия');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Новая языковая версия';
 
         return view('language::create', $this->pageData);
     }
@@ -81,7 +84,7 @@ class LanguageController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('dashboard.language.edit', ['itemId' => $item->id])->with('successMessage', "Языковая версия успешно создана!");
@@ -108,6 +111,7 @@ class LanguageController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.language.edit', ['itemId' => $id]), 'Редактирование языковой версии');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Редактирование языковой версии';
 
         return view('language::edit', $this->pageData);
     }
@@ -149,7 +153,7 @@ class LanguageController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('dashboard.language.edit', ['itemId' => $id])->with('successMessage', "Языковая версия успешно обновлена!");

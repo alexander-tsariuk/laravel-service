@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Helpers\Breadcrumbs;
+use PHPUnit\Util\Exception;
 
 class UserController extends DashboardController
 {
@@ -28,6 +29,8 @@ class UserController extends DashboardController
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
 
+        $this->pageData['title'] = "Пользователи";
+
         return view('user::index', $this->pageData);
     }
 
@@ -40,6 +43,7 @@ class UserController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.user.create'), 'Новый пользователь');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = "Новый пользователь";
 
         return view('user::create', $this->pageData);
     }
@@ -82,7 +86,7 @@ class UserController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('dashboard.user.edit', ['itemId' => $item->id])->with('successMessage', "Пользователь успешно создан!");
@@ -108,6 +112,7 @@ class UserController extends DashboardController
         Breadcrumbs::setBreadcrumb(route('dashboard.user.edit', ['itemId' => $id]), 'Редактирование пользователя');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = "Редактирование пользователя";
 
         return view('user::edit', $this->pageData);
     }
@@ -151,7 +156,7 @@ class UserController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'general')->withInput();
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('dashboard.user.edit', ['itemId' => $id])->with('successMessage', "Данные пользователя успешно обновлены!");
