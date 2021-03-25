@@ -54,7 +54,7 @@
         </li>
         <li class="nav-header">Настройки</li>
         <li class="nav-item">
-            <a href="{{ route('dashboard.settings.index') }}" class="nav-link {{ request()->route()->getName() == route('dashboard.settings.index') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.settings.index') }}" class="nav-link {{ request()->route()->getName() == 'dashboard.settings.index' ? 'active' : '' }}">
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>Основные</p>
             </a>

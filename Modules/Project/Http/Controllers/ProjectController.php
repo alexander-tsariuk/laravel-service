@@ -2,19 +2,36 @@
 
 namespace Modules\Project\Http\Controllers;
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
+use Modules\Dashboard\Helpers\Breadcrumbs;
+use Modules\Language\Entities\Language as LanguageModel;
 
-class ProjectController extends Controller
+use Modules\Project\Entities\Project as ProjectModel;
+use Modules\Project\Entities\ProjectTranslation as ProjectTranslationModel;
+
+class ProjectController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.project.index'), 'Проекты');
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('project::index');
+        $this->pageData['items'] = ProjectModel::getList()->paginate(10);
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Проекты';
+
+        return view('project::index', $this->pageData);
     }
 
     /**
@@ -23,7 +40,14 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project::create');
+        $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.project.create'), 'Новый элемент');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Новый элемент';
+
+        return view('project::create', $this->pageData);
     }
 
     /**
@@ -33,27 +57,70 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try {
+            $validator = Validator::make($request->all(), [
+                'prefix' => 'required|unique:our_works',
+                'status' => 'required',
+                'translation.*.name' => 'required|min:3|max:255',
+            ], [
+                'required' => "Поле :attribute обязательно к заполнению!",
+                'unique' => "Значение поля :attribute должно быть уникальным!",
+                'min' => 'Минимальная длина поля :attribute :min символов!',
+                'max' => 'Максимальная длина поля :attribute :max символов!',
+            ], [
+                'prefix' => 'Алиас',
+                'status' => 'Статус',
+                'translation.*.name' => 'Название работы',
+            ]);
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('project::show');
-    }
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }
 
+            $item = ProjectModel::createItem($request->all());
+
+            if(!$item) {
+                throw new \Exception("Неудалось создать элемент раздела \"Проект\". Повторите попытку позже или обратитесь к администратору!");
+            }
+
+            if(!ProjectTranslationModel::createTranslations($item->id, $request->get('translation'))) {
+                throw new \Exception("При создании переводов элемента \"Проект\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
+            }
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
+        }
+
+        return response()->redirectToRoute('dashboard.project.edit', ['itemId' => $item->id])
+            ->with('successMessage', 'Элемент раздела "Проект" успешно создан!');
+    }
     /**
      * Show the form for editing the specified resource.
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        return view('project::edit');
+        if(!is_numeric($id) || empty($id)) {
+            abort(404);
+        }
+
+        $this->pageData['item'] = ProjectModel::find($id);
+
+        if(!$this->pageData['item']) {
+            abort(404);
+        }
+
+        $this->pageData['item']->preparedTranslations = $this->pageData['item']->prepareTranslationsByID();
+
+        $this->pageData['languages'] = LanguageModel::getList()->get();
+
+        Breadcrumbs::setBreadcrumb(route('dashboard.project.edit', ['itemId' => $id]), 'Редактирование элемента');
+
+        $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
+        $this->pageData['title'] = 'Редактирование элемента';
+
+        return view('project::edit', $this->pageData);
     }
 
     /**
@@ -62,9 +129,38 @@ class ProjectController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'prefix' => 'required|unique:our_works,id,'.$id,
+                'status' => 'required',
+                'translation.*.name'
+            ], [
+                'required' => "Поле :attribute обязательно к заполнению!",
+                'unique' => "Значение поля :attribute должно быть уникальным!",
+            ]);
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }
+
+            $item = ProjectModel::updateItem($id, $request->all());
+
+            if(!$item) {
+                throw new \Exception("Не удалось обновить элемент раздела \"Проект\". Повторите попытку позже или обратитесь к администратору!");
+            }
+
+            if(!ProjectTranslationModel::updateTranslations($id, $request->get('translation'))) {
+                throw new \Exception("При обновлении переводов элемента раздела \"Проект\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
+            }
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors($exception->getMessage(), 'global')->withInput();
+        }
+
+        return response()->redirectToRoute('dashboard.project.index')
+            ->with('successMessage', 'Элемент раздела "Проект" успешно обновлён!');
     }
 
     /**
@@ -75,5 +171,41 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Загрузка изображений слайда
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
+    public function uploadImage(Request $request, int $id) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'uploadingFile' => 'required|mimes:jpg,png,jpeg'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = ProjectModel::uploadImage($id, $request->all());
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['file'] = $uploadedFile;
+                $response['messages'] = 'Изображение успешно загружено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
     }
 }
