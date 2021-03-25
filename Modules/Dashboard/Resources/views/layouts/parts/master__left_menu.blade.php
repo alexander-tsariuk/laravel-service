@@ -23,13 +23,23 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard.ourwork.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
-                'dashboard.ourwork.index',
-                'dashboard.ourwork.create',
-                'dashboard.ourwork.edit',
+            <a href="{{ route('dashboard.ourservice.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
+                'dashboard.ourservice.index',
+                'dashboard.ourservice.create',
+                'dashboard.ourservice.edit',
             ]) ? 'active' : '' }}">
                 <i class="nav-icon far fa-image"></i>
-                <p>Наши работы</p>
+                <p>Наши услуги</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('dashboard.project.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
+                'dashboard.project.index',
+                'dashboard.project.create',
+                'dashboard.project.edit',
+            ]) ? 'active' : '' }}">
+                <i class="nav-icon far fa-image"></i>
+                <p>Проекты</p>
             </a>
         </li>
         <li class="nav-item">
