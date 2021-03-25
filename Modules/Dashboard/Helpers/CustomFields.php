@@ -7,12 +7,10 @@ if(!function_exists('getFieldByIdType')) {
         if($fieldType == 1) {
             $html .= "<input type=\"text\" name=\"{$name}\" class=\"form-control form-control-border\" value='{$value}'>";
         } elseif($fieldType == 2) {
-            $html .= "<textarea name=\"{$name}\" class=\"form-control form-control-border\">{$value}</textarea>";
+            $html .= "<textarea rows='3' cols='2' name=\"{$name}\" class=\"form-control form-control-border\">{$value}</textarea>";
         } elseif($fieldType == 3) {
             $html .= "<textarea name=\"{$name}\" class=\"form-control form-control-border summernote\">{$value}</textarea>";
         }
-
-
 
         return $html;
     }

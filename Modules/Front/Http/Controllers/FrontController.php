@@ -18,7 +18,33 @@ class FrontController extends Controller
 
         $this->pageData['settings'] = SettingModel::getList();
 
+        $this->pageData['seo'] = $this->getSeoData($this->pageData['settings']);
+        $this->pageData['sitename'] = isset($this->pageData['settings']['general']['sitename']) && !empty($this->pageData['settings']['general']['sitename']) ? trim($this->pageData['settings']['general']['sitename']->content) : '';
+        $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
+
         return view('front::index', $this->pageData);
+    }
+
+    private function getSeoData(array $settings) : object {
+        $result = new \stdClass();
+        $lang = 'ru';
+
+        if(isset($settings['mainpage_seo']) && !empty($settings['mainpage_seo'])) {
+            if(isset($settings['mainpage_seo']['title_'.$lang]) && !empty($settings['mainpage_seo']['title_'.$lang]->content)) {
+                $result->title = trim($settings['mainpage_seo']['title_'.$lang]->content);
+            }
+            if(isset($settings['mainpage_seo']['h1_'.$lang]) && !empty($settings['mainpage_seo']['h1_'.$lang]->content)) {
+                $result->h1 = trim($settings['mainpage_seo']['h1_'.$lang]->content);
+            }
+            if(isset($settings['mainpage_seo']['keywords_'.$lang]) && !empty($settings['mainpage_seo']['keywords_'.$lang]->content)) {
+                $result->keywords = trim($settings['mainpage_seo']['keywords_'.$lang]->content);
+            }
+            if(isset($settings['mainpage_seo']['description_'.$lang]) && !empty($settings['mainpage_seo']['description_'.$lang]->content)) {
+                $result->description = trim($settings['mainpage_seo']['description_'.$lang]->content);
+            }
+        }
+
+        return $result;
     }
 
 }

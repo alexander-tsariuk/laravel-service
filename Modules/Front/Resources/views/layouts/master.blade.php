@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ru">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Asore – Business Bootstrap 5 Template</title>
-    <meta name="description"
-          content="240+ Best Bootstrap Templates are available on this website. Find your template for your project compatible with the most popular HTML library in the world." />
+    <title>{{ $seo->title ?? ''}} | {{ $sitename }}</title>
+
+    @if(isset($seo->description) && !empty($seo->description))
+        <meta name="description" content="{{ $seo->description  }}" />
+    @endif
+    @if(isset($seo->keywords) && !empty($seo->keywords))
+        <meta name="keywords" content="{{ $seo->keywords  }}" />
+    @endif
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="profile" href="https://gmpg.org/xfn/11" />
-    <link rel="canonical" href="https://htmldemo.hasthemes.com/asore-preview//" />
+    <link rel="canonical" href="{{ $siteurl }}" />
 
     <!-- Open Graph (OG) meta tags are snippets of code that control how URLs are displayed when shared on social media  -->
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="ru_RU" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Asore – Business Bootstrap 5 Template" />
-    <meta property="og:url" content="https://htmldemo.hasthemes.com/asore-preview//" />
-    <meta property="og:site_name" content="Asore – Business Bootstrap 5 Template" />
+    <meta property="og:title" content="{{ $seo->title ?? ''}} | {{ $sitename }}" />
+    <meta property="og:url" content="{{ $siteurl }}" />
+    <meta property="og:site_name" content="{{ $sitename }}" />
     <!-- For the og:image content, replace the # with a link of an image -->
     <meta property="og:image" content="#" />
-    <meta property="og:description"
-          content="240+ Best Bootstrap Templates are available on this website. Find your template for your project compatible with the most popular HTML library in the world." />
+
+    @if(isset($seo->description) && !empty($seo->description))
+        <meta property="og:description" content="{{ $seo->description }}" />
+    @endif
+
+    @if(isset($seo->keywords) && !empty($seo->keywords))
+        <meta property="og:keywords" content="{{ $seo->keywords }}" />
+    @endif
 
     <!-- Add site Favicon -->
     <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-32x32.png" sizes="32x32" />
@@ -35,8 +48,8 @@
 			{
 				"@context": "http://schema.org",
 				"@type": "WebSite",
-				"name": "Replace_with_your_site_title",
-				"url": "Replace_with_your_site_URL"
+				"name": "{{ $sitename }}",
+				"url": "{{ $siteurl }}"
 			}
 	</script>
 
@@ -49,11 +62,6 @@
     <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/animate.css') }}" />
     <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/magnific-popup.css') }}" />
-
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/vendor.min.css') }}" />
-    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/plugins.min.css') }}" />
-    <link rel="stylesheet" href="css/style.min.css"> -->
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ Module::asset('front:css/style.css') }}" />
@@ -73,173 +81,15 @@
 
 @include('front::layouts.parts.master__our-works')
 
-
-<!--testimonial section start-->
-<section class="testimonial_section">
+<section class="team_members_section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 col-md-6">
-                <div class="testimonial_inner">
-                    <div class="section_title text-start mb-80">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                            More 1,200 <br />
-                            <span>Happy Customers</span>
-                        </h2>
-                    </div>
-                    <div class="testimonial_slick swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="testimonial_slick_list swiper-slide">
-                                <div class="testimonial_content text-start">
-                                    <h3 class="wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                                        This is Photoshop's version of Lorem Ipsum !
-                                    </h3>
-                                    <p class="wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
-                                        Proin gravida nibh vel velit auctor aliquet. Aenean
-                                        sollicitudin, lorem quis bibendum auctor, nisi elit
-                                        consequat ipsum, nec sagittis sem nibh id elit. Duis sed
-                                        odio sit amet nibh vulputate cursus a sit amet mauris.
-                                        Morbi accumsan ipsum velit. Nam nec tellus a odio
-                                        tincidunt auctor a ornare odio. Sed non mauris vitae
-                                        erat consequat auctor eu in elit. Class aptent taciti
-                                        sociosqu ad litora torquent per conubia nostra, per
-                                        inceptos himenaeos
-                                    </p>
-                                    <div class="testimonial_footer wow fadeInUp" data-wow-delay="0.4s"
-                                         data-wow-duration="1.4s">
-                                        <p><a href="#">Aslam Hasib </a> - Founder’s HasTech</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial_slick_list  swiper-slide">
-                                <div class="testimonial_content text-start">
-                                    <h3 class="wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                                        This is Photoshop's version of Lorem Ipsum !
-                                    </h3>
-                                    <p class="wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
-                                        Proin gravida nibh vel velit auctor aliquet. Aenean
-                                        sollicitudin, lorem quis bibendum auctor, nisi elit
-                                        consequat ipsum, nec sagittis sem nibh id elit. Duis sed
-                                        odio sit amet nibh vulputate cursus a sit amet mauris.
-                                        Morbi accumsan ipsum velit. Nam nec tellus a odio
-                                        tincidunt auctor a ornare odio. Sed non mauris vitae
-                                        erat consequat auctor eu in elit. Class aptent taciti
-                                        sociosqu ad litora torquent per conubia nostra, per
-                                        inceptos himenaeos
-                                    </p>
-                                    <div class="testimonial_footer wow fadeInUp" data-wow-delay="0.4s"
-                                         data-wow-duration="1.4s">
-                                        <p><a href="#">Aslam Hasib </a> - Founder’s HasTech</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-buttons">
-                            <div class="swiper-button-next"><i aria-hidden="true" class="ei ei-arrow_right"></i>
-                            </div>
-                            <div class="swiper-button-prev"><i aria-hidden="true" class="ei ei-arrow_left"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="testimonial_position_img d-none d-md-block">
-        <img class="w-100 h-100" src="{{ Module::asset('front:img/others/testimonial-position.png') }}" alt="" />
-    </div>
-</section>
-<!--testimonial section end-->
-
-<!-- blog section start -->
-<section class="blog_section">
-    <div class="container">
-        <div class="section_title text-center mb-66">
-            <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                Latest <span>Articles</span>
-            </h2>
-        </div>
-        <div class="blog_container swiper-container">
-            <div class="swiper-wrapper blog_slick slick_slider_activation">
-                <div class="swiper-slide">
-                    <article class="single_blog wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="{{ Module::asset('front:img/blog/blog1.jpg') }}" alt="" /></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <div class="blog_meta">
-                                    <span>March, 24th, 2025</span>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Put title for single blog with image format here</a>
-                                </h3>
-                                <a href="blog-details.html">Continue <i class="ei ei-arrow_right"></i></a>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="swiper-slide">
-                    <article class="single_blog wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="{{ Module::asset('front:img/blog/blog2.jpg') }}" alt="" /></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <div class="blog_meta">
-                                    <span>March, 24th, 2025</span>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Lorem ipsum dolor sit amet image there are elit.</a>
-                                </h3>
-                                <a href="blog-details.html">Continue <i class="ei ei-arrow_right"></i></a>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="swiper-slide">
-                    <article class="single_blog wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.3s">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="{{ Module::asset('front:img/blog/blog6.jpg') }}" alt="" /></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <div class="blog_meta">
-                                    <span>March, 24th, 2025</span>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">
-                                        Sit amet here elit. Debitis fugiat fuga mollitia
-                                        itaque.</a>
-                                </h3>
-                                <a href="blog-details.html">Continue <i class="ei ei-arrow_right"></i></a>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="swiper-slide">
-                    <article class="single_blog wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s">
-                        <figure>
-                            <div class="blog_thumb">
-                                <a href="blog-details.html"><img src="{{ Module::asset('front:img/blog/blog4.jpg') }}" alt="" /></a>
-                            </div>
-                            <figcaption class="blog_content">
-                                <div class="blog_meta">
-                                    <span>March, 24th, 2025</span>
-                                </div>
-                                <h3>
-                                    <a href="blog-details.html">Put title for single blog with image format here</a>
-                                </h3>
-                                <a href="blog-details.html">Continue <i class="ei ei-arrow_right"></i></a>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
+            <div class="col-12">
+                {!! isset($settings['mainpage']['map_code']) && !empty($settings['mainpage']['map_code']->content) ? trim($settings['mainpage']['map_code']->content) : '' !!}
             </div>
         </div>
     </div>
 </section>
-<!-- blog section end -->
 
 <!--footer area start-->
 <footer class="footer_widgets">
@@ -250,37 +100,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="footer_inner position-relative">
-                    <div class="footer_form">
 
-                        <!-- Contact Form -->
-                        <div class="contact-form">
-
-                            <!--Contact Form-->
-                            <form id="contact-form" action="https://htmlmail.hasthemes.com/nazmul/mail.php"
-                                  method="post">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 form_input_list">
-                                        <input name="name" placeholder="Enter your name..." type="text" />
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 form_input_list">
-                                        <input name="email" placeholder="Enter your Mail.." type="email" />
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 form_input_list">
-                                        <input name="subject" placeholder="Subject (Optional)" type="text" />
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form_input_list">
-                                        <textarea name="message" placeholder="Here goes your message"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                                        <button class="  btn btn-link" type="submit" name="submit-form"><span
-                                                class="txt">Send Message</span></button>
-                                    </div>
-                                </div>
-                            </form>
-                            <p class="form-messege"></p>
-                            <!--End Contact Form -->
-                        </div>
-                    </div>
                     <div class="main_footer d-flex justify-content-between">
                         <div class="footer_widget_list footer_menu mb-lm-30px">
                             <ul>

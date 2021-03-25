@@ -15,6 +15,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-main_page" role="tab" aria-controls="custom-tabs-one-main_page" aria-selected="true">Главная страница</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-main_page_seo" role="tab" aria-controls="custom-tabs-one-main_page_seo" aria-selected="true">Главная страница - SEO</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -24,6 +27,9 @@
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-one-main_page" role="tabpanel" aria-labelledby="custom-tabs-one-main_page-tab">
                                 @include('dashboard::settings.parts.settings__general-main_page')
+                            </div>
+                            <div class="tab-pane fade" id="custom-tabs-one-main_page_seo" role="tabpanel" aria-labelledby="custom-tabs-one-main_page_seo-tab">
+                                @include('dashboard::settings.parts.settings__general-main_page_seo')
                             </div>
                         </div>
                     </div>
