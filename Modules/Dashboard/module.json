@@ -9,7 +9,8 @@
     ],
     "aliases": {},
     "files": [
-        "Helpers/Table.php"
+        "Helpers/Table.php",
+        "Helpers/CustomFields.php"
     ],
     "requires": []
 }

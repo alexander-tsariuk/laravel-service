@@ -15,6 +15,13 @@
 Route::get('/login', 'AuthController@login')->name('auth.login.page');
 Route::post('/login', 'AuthController@auth')->name('auth.login');
 
-Route::prefix('admin')->group(function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/', 'DashboardController@index')->name('dashboard.index');
+
+    Route::prefix('settings')->group(function() {
+        Route::get('/', 'SettingsController@index')->name('dashboard.settings.index');
+        Route::put('/', 'SettingsController@update')->name('dashboard.settings.update');
+    });
 });
+
+

@@ -44,6 +44,12 @@
         </li>
         <li class="nav-header">Настройки</li>
         <li class="nav-item">
+            <a href="{{ route('dashboard.settings.index') }}" class="nav-link {{ request()->route()->getName() == route('dashboard.settings.index') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-cogs"></i>
+                <p>Основные</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('dashboard.language.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
                 'dashboard.language.index',
                 'dashboard.language.create',

@@ -108,5 +108,7 @@ class OurWork extends Model {
         return $uploadedFile;
     }
 
-
+    protected function getActiveList() {
+        return $this->orderBy('id', 'DESC')->where('status', 1)->get();
+    }
 }

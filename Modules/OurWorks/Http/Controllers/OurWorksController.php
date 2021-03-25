@@ -171,4 +171,40 @@ class OurWorksController extends DashboardController
     {
         //
     }
+
+    /**
+     * Загрузка изображений слайда
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
+    public function uploadImage(Request $request, int $id) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'uploadingFile' => 'required|mimes:jpg,png,jpeg'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = OurWorkModel::uploadImage($id, $request->all());
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['file'] = $uploadedFile;
+                $response['messages'] = 'Изображение успешно загружено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
+    }
 }
