@@ -14,7 +14,8 @@ class Project extends Model {
     protected $fillable = [
         'prefix',
         'status',
-        'image'
+        'image',
+        'serviceId'
     ];
 
     public function translations() {
@@ -108,5 +109,11 @@ class Project extends Model {
 
     protected function getActiveList() {
         return $this->orderBy('id', 'DESC')->where('status', 1)->get();
+    }
+
+    protected function getByPrefix(string $prefix) {
+        return $this->where('prefix', $prefix)
+            ->where('status', 1)
+            ->first();
     }
 }

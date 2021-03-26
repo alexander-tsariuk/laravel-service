@@ -15,12 +15,12 @@
                     <div class="work_slider_inner swiper-wrapper">
                         @foreach($ourWorks as $ourWork)
                             <div class="works_slick_list swiper-slide">
-                                <a href="#">
+                                <a href="{{ route('front.service.page', ['prefix' => $ourWork->prefix]) }}">
                                     <img src="/storage{{$ourWork->image}}" alt="" />
                                 </a>
                                 <div class="work_slick_text">
                                     <h2 class="title">
-                                        <a class="title-link" href="#">{{ $ourWork->translation->name }}</a>
+                                        <a class="title-link" href="{{ route('front.service.page', ['prefix' => $ourWork->prefix]) }}">{{ $ourWork->translation->name }}</a>
                                     </h2>
                                 </div>
                             </div>

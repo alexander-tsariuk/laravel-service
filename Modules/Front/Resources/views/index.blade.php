@@ -1,9 +1,9 @@
 @extends('front::layouts.master')
 
 @section('content')
-    <h1>Hello World</h1>
+    @include('front::layouts.parts.master__about_company')
 
-    <p>
-        This view is loaded from module: {!! config('front.name') !!}
-    </p>
+    @include('front::layouts.parts.master__about_us')
+
+    @include('front::layouts.parts.master__our-works')
 @endsection

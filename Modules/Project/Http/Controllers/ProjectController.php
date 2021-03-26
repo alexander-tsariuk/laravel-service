@@ -7,8 +7,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Helpers\Breadcrumbs;
-use Modules\Language\Entities\Language as LanguageModel;
 
+use Modules\Language\Entities\Language as LanguageModel;
+use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Project\Entities\Project as ProjectModel;
 use Modules\Project\Entities\ProjectTranslation as ProjectTranslationModel;
 
@@ -46,6 +47,8 @@ class ProjectController extends DashboardController
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Новый элемент';
+
+        $this->pageData['services'] = OurWorkModel::getList()->get();
 
         return view('project::create', $this->pageData);
     }
@@ -119,6 +122,8 @@ class ProjectController extends DashboardController
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Редактирование элемента';
+
+        $this->pageData['services'] = OurWorkModel::getList()->get();
 
         return view('project::edit', $this->pageData);
     }

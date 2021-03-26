@@ -21,5 +21,19 @@
                 <span class="text-danger">{{ $errors->first('prefix') }}</span>
             @endif
         </div>
+        <div class="form-group">
+            <label for="serviceId">Услуга</label>
+            <select name="serviceId" class="form-control form-control-border {{ $errors->has('serviceId') ? 'is-invalid' : '' }}">
+                <option value="0">Не выбрано</option>
+                @if(isset($services) && !empty($services))
+                    @foreach($services as $service)
+                        <option value="{{ $service->id }}">{{ $service->translation->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+            @if($errors->has('serviceId'))
+                <span class="text-danger">{{ $errors->first('serviceId') }}</span>
+            @endif
+        </div>
     </div>
 </div>

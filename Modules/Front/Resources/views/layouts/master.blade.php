@@ -75,11 +75,7 @@
 
 @include('front::layouts.parts.master__top-slider')
 
-@include('front::layouts.parts.master__about_company')
-
-@include('front::layouts.parts.master__about_us')
-
-@include('front::layouts.parts.master__our-works')
+@yield('content')
 
 <section class="team_members_section">
     <div class="container">

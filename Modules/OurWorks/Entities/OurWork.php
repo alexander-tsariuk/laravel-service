@@ -51,6 +51,12 @@ class OurWork extends Model {
         return $items;
     }
 
+    protected function getByPrefix(string $servicePrefix) {
+        return $this->where('prefix', $servicePrefix)
+            ->where('status', 1)
+            ->first();
+    }
+
     /**
      * Создаем элемент
      * @param array $insertData
