@@ -76,13 +76,13 @@ class FrontController extends Controller
 
         $result->robots = '';
 
-        if(isset($page->translation->set_noindex) && !empty($page->translation->set_noindex)) {
+        if(isset($page->translation->set_noindex) && $page->translation->set_noindex != 0) {
             $result->robots .= 'noindex';
         } else {
             $result->robots .= 'index';
         }
 
-        if(isset($page->translation->set_nofollow) && !empty($page->translation->set_nofollow)) {
+        if(isset($page->translation->set_nofollow) && $page->translation->set_nofollow != 0) {
             $result->robots .= ',nofollow';
         } else {
             $result->robots .= ',follow';
@@ -98,7 +98,7 @@ class FrontController extends Controller
 
         $this->pageData['service'] = OurWorkModel::getByPrefix($servicePrefix);
 
-        if(!$this->pageData['service']) {
+        if(!$this->pageData['service'] || (isset($this->pageData['service']) && $this->pageData['service']->translation->set_404 == 1)) {
             abort(404);
         }
 
@@ -116,7 +116,7 @@ class FrontController extends Controller
 
         $this->pageData['project'] = ProjectModel::getByPrefix($projectPrefix);
 
-        if(!$this->pageData['project']) {
+        if(!$this->pageData['project'] || (isset($this->pageData['project']) && $this->pageData['project']->translation->set_404 == 1)) {
             abort(404);
         }
 
@@ -132,7 +132,7 @@ class FrontController extends Controller
 
         $this->pageData['page'] = PageModel::getByPrefix($pagePrefix);
 
-        if(!$this->pageData['page']) {
+        if(!$this->pageData['page'] || (isset($this->pageData['page']) && $this->pageData['page']->translation->set_404 == 1)) {
             abort(404);
         }
 

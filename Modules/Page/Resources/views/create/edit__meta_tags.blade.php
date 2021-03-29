@@ -67,6 +67,42 @@
                                 <span class="text-danger">{{ $errors->first('meta_description') }}</span>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="name">Установить 404 ответ сервера</label>
+                            <select class="form-control form-control-border {{ $errors->has('set_404') ? 'is-invalid' : '' }}"
+                                    name="translation[{{$language->id}}][set_404]">
+                                <option value="0">Нет</option>
+                                <option value="1">Да</option>
+                            </select>
+
+                            @if($errors->has('set_404'))
+                                <span class="text-danger">{{ $errors->first('set_404') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Установить NOINDEX</label>
+                            <select class="form-control form-control-border {{ $errors->has('set_noindex') ? 'is-invalid' : '' }}"
+                                    name="translation[{{$language->id}}][set_noindex]">
+                                <option value="0">Нет</option>
+                                <option value="1">Да</option>
+                            </select>
+
+                            @if($errors->has('set_noindex'))
+                                <span class="text-danger">{{ $errors->first('set_noindex') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Установить NOFOLLOW</label>
+                            <select class="form-control form-control-border {{ $errors->has('set_nofollow') ? 'is-invalid' : '' }}"
+                                    name="translation[{{$language->id}}][set_nofollow]">
+                                <option value="0">Нет</option>
+                                <option value="1">Да</option>
+                            </select>
+
+                            @if($errors->has('set_nofollow'))
+                                <span class="text-danger">{{ $errors->first('set_nofollow') }}</span>
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             @endif

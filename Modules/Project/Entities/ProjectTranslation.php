@@ -16,7 +16,10 @@ class ProjectTranslation extends Model {
         'meta_h1',
         'meta_title',
         'meta_keywords',
-        'meta_description'
+        'meta_description',
+        'set_404',
+        'set_noindex',
+        'set_nofollow',
     ];
 
     /**
@@ -42,6 +45,9 @@ class ProjectTranslation extends Model {
                     'meta_h1' => $translation['meta_h1'] ?? null,
                     'meta_keywords' => $translation['meta_keywords'] ?? null,
                     'meta_description' => $translation['meta_description'] ?? null,
+                    'set_404' => $translation['set_404'] ?? 0,
+                    'set_noindex' => $translation['set_noindex'] ?? 0,
+                    'set_nofollow' => $translation['set_nofollow'] ?? 0,
                 ]);
 
                 if($translationItem->save()) {
@@ -79,6 +85,9 @@ class ProjectTranslation extends Model {
                     'meta_h1' => $translation['meta_h1'] ?? null,
                     'meta_keywords' => $translation['meta_keywords'] ?? null,
                     'meta_description' => $translation['meta_description'] ?? null,
+                    'set_404' => $translation['set_404'] ?? 0,
+                    'set_noindex' => $translation['set_noindex'] ?? 0,
+                    'set_nofollow' => $translation['set_nofollow'] ?? 0,
                 ]);
 
                 if($translationItem->save()) {
