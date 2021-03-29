@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="works_slide_header text-center">
                     <div class="section_title">
-                        <h1>{{ $service->translation->name }}</h1>
+                        <h1>{{ isset($seo->h1) && !empty($seo->h1) ? $seo->h1 : $service->translation->name }}</h1>
                     </div>
                 </div>
             </div>

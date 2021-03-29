@@ -18,6 +18,10 @@
     <link rel="profile" href="https://gmpg.org/xfn/11" />
     <link rel="canonical" href="{{ $siteurl }}" />
 
+    @if(isset($seo->robots) && !empty($seo->robots))
+        <meta name="robots" content="{{ $seo->robots }}" />
+    @endif
+
     <!-- Open Graph (OG) meta tags are snippets of code that control how URLs are displayed when shared on social media  -->
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:type" content="website" />

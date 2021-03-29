@@ -74,6 +74,20 @@ class FrontController extends Controller
             $result->description = trim($page->translation->meta_description);
         }
 
+        $result->robots = '';
+
+        if(isset($page->translation->set_noindex) && !empty($page->translation->set_noindex)) {
+            $result->robots .= 'noindex';
+        } else {
+            $result->robots .= 'index';
+        }
+
+        if(isset($page->translation->set_nofollow) && !empty($page->translation->set_nofollow)) {
+            $result->robots .= ',nofollow';
+        } else {
+            $result->robots .= ',follow';
+        }
+
         return $result;
     }
 

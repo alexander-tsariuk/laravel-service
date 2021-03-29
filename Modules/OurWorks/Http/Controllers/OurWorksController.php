@@ -134,14 +134,15 @@ class OurWorksController extends DashboardController
             $validator = Validator::make($request->all(), [
                 'prefix' => 'required|unique:our_works,id,'.$id,
                 'status' => 'required',
-                'translation.*.name'
+                'translation.*.name' => 'required'
             ], [
                 'required' => "Поле :attribute обязательно к заполнению!",
                 'unique' => "Значение поля :attribute должно быть уникальным!",
             ]);
 
             if($validator->fails()) {
-                return redirect()->back()->withErrors($validator->errors())->withInput();
+                return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
+                    ->with('errorMessage', "При обновлении данных элемента произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
             $item = OurWorkModel::updateItem($id, $request->all());
@@ -155,7 +156,8 @@ class OurWorksController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return redirect()->back()->withErrors($exception->getMessage(), 'global')->withInput();
+            return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
+                ->with('errorMessage', $exception->getMessage());
         }
 
         return response()->redirectToRoute('dashboard.ourservice.index')

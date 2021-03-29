@@ -12,7 +12,14 @@ class OurWorkTranslation extends Model {
     protected $fillable = [
         'rowId',
         'name',
-        'languageId'
+        'languageId',
+        'meta_title',
+        'meta_h1',
+        'meta_keywords',
+        'meta_description',
+        'set_404',
+        'set_noindex',
+        'set_nofollow',
     ];
 
     /**
@@ -33,6 +40,13 @@ class OurWorkTranslation extends Model {
                     'rowId' => $itemId,
                     'languageId' => $languageId,
                     'name' => $translation['name'],
+                    'meta_title' => $translation['meta_title'] ?? null,
+                    'meta_h1' => $translation['meta_h1'] ?? null,
+                    'meta_keywords' => $translation['meta_keywords'] ?? null,
+                    'meta_description' => $translation['meta_description'] ?? null,
+                    'set_404' => $translation['set_404'] ?? 0,
+                    'set_noindex' => $translation['set_noindex'] ?? 0,
+                    'set_nofollow' => $translation['set_nofollow'] ?? 0,
                 ]);
 
                 if($translationItem->save()) {
@@ -65,6 +79,13 @@ class OurWorkTranslation extends Model {
                     'rowId' => $itemId,
                     'languageId' => $translationItem->languageId,
                     'name' => $translation['name'],
+                    'meta_title' => $translation['meta_title'] ?? null,
+                    'meta_h1' => $translation['meta_h1'] ?? null,
+                    'meta_keywords' => $translation['meta_keywords'] ?? null,
+                    'meta_description' => $translation['meta_description'] ?? null,
+                    'set_404' => $translation['set_404'],
+                    'set_noindex' => $translation['set_noindex'],
+                    'set_nofollow' => $translation['set_nofollow'],
                 ]);
 
                 if($translationItem->save()) {
