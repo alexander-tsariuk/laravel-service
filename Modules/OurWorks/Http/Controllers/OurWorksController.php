@@ -17,7 +17,7 @@ class OurWorksController extends DashboardController
     {
         parent::__construct();
 
-        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.index'), 'Наши работы');
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourservice.index'), 'Наши работы');
     }
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class OurWorksController extends DashboardController
     {
         $this->pageData['languages'] = LanguageModel::getList()->get();
 
-        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.create'), 'Новый элемент');
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourservice.create'), 'Новый элемент');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Новый элемент';
@@ -90,7 +90,7 @@ class OurWorksController extends DashboardController
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
-        return response()->redirectToRoute('dashboard.ourwork.edit', ['itemId' => $item->id])
+        return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $item->id])
             ->with('successMessage', 'Элемент раздела "Наши работы" успешно создан!');
     }
     /**
@@ -114,7 +114,7 @@ class OurWorksController extends DashboardController
 
         $this->pageData['languages'] = LanguageModel::getList()->get();
 
-        Breadcrumbs::setBreadcrumb(route('dashboard.ourwork.edit', ['itemId' => $id]), 'Редактирование элемента');
+        Breadcrumbs::setBreadcrumb(route('dashboard.ourservice.edit', ['itemId' => $id]), 'Редактирование элемента');
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Редактирование элемента';
@@ -158,7 +158,7 @@ class OurWorksController extends DashboardController
             return redirect()->back()->withErrors($exception->getMessage(), 'global')->withInput();
         }
 
-        return response()->redirectToRoute('dashboard.ourwork.index')
+        return response()->redirectToRoute('dashboard.ourservice.index')
             ->with('successMessage', 'Элемент раздела "Наши работы" успешно обновлён!');
     }
 

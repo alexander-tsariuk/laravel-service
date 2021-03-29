@@ -1,4 +1,8 @@
-<?php
+<?php            // SEO
+            $table->string('meta_title')->nullable();
+            $table->string('meta_h1')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->string('meta_description')->nullable();
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

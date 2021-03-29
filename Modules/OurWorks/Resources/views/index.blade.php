@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-2">
-            <a href="{{ route('dashboard.ourwork.create') }}" class="btn btn-block btn-primary">Добавить</a>
+            <a href="{{ route('dashboard.ourservice.create') }}" class="btn btn-block btn-primary">Добавить</a>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->translation->name }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
-                                    <td>{!! tableActions($item->id, 'ourwork') !!}</td>
+                                    <td>{!! tableActions($item->id, 'ourservice') !!}</td>
                                 </tr>
                             @endforeach
                         @else

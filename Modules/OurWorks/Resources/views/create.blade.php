@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <form id="editItem" action="{{ route('dashboard.ourwork.store') }}" method="POST">
+            <form id="editItem" action="{{ route('dashboard.ourservice.store') }}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -71,7 +71,7 @@
                     <!-- /.card -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Сохранить</button>
-                        <a href="{{ route('dashboard.ourwork.index') }}" class="btn btn-default float-right">Отмена</a>
+                        <a href="{{ route('dashboard.ourservice.index') }}" class="btn btn-default float-right">Отмена</a>
                     </div>
                 </div>
             </form>

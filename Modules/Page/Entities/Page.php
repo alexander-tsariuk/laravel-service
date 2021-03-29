@@ -99,4 +99,11 @@ class Page extends Model {
 
         return $uploader->upload($directory);
     }
+
+
+    protected function getByPrefix(string $prefix) {
+        return $this->where('prefix', $prefix)
+            ->where('status', 1)
+            ->first();
+    }
 }
