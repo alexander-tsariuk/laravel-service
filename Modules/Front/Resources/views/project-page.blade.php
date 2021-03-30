@@ -12,7 +12,7 @@
     <section class="brand_archo_section mb-135 mt-4">
         <div class="container">
             <div class="section_title text-center mb-96">
-                <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s" style="visibility: visible; animation-duration: 1.2s; animation-delay: 0.2s; animation-name: fadeInUp;">{{ $project->translation->name }}</h1>
+                <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s" style="visibility: visible; animation-duration: 1.2s; animation-delay: 0.2s; animation-name: fadeInUp;">{{ isset($seo->h1) && !empty($seo->h1) ? $seo->h1 : $project->translation->name }}</h1>
             </div>
         </div>
     </section>
