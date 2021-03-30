@@ -1,6 +1,14 @@
 @extends('front::layouts.master')
 
 @section('content')
+    <div class="hero-section section overlay"
+         style="background-image: url('/storage{{$service->image}}'); min-height: 800px;height: auto !important;">
+        <div class="container">
+            <div class="row">
+                <div class="hero-content text-center col-12"></div>
+            </div>
+        </div>
+    </div>
     <section class="portfolio_section mb-140">
         <div class="container-fluid">
             <div class="container">

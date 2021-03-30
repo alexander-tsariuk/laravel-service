@@ -81,7 +81,6 @@
 
 @include('front::layouts.parts.master__top-nav')
 
-@include('front::layouts.parts.master__top-slider')
 
 @yield('content')
 

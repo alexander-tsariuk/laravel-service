@@ -4,6 +4,7 @@ namespace Modules\Slider\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Dashboard\Helpers\Upload;
+use PHPUnit\Util\Exception;
 
 class Slider extends Model {
     protected $table = 'slider';
@@ -107,6 +108,26 @@ class Slider extends Model {
 
         if(!$item->save()) {
             throw new \Exception("Изображение было загружено, но при обновлении слайда произошла ошибка. Обратитесь к администратору!");
+        }
+
+        return $uploadedFile;
+    }
+
+    protected function deleteImage(int $itemId, string $directory) {
+        $uploader = new Upload($directory ?? '');
+
+        $item = parent::find($itemId);
+
+        if(!$item){
+            throw new \Exception("Выбранный элемент не найден!");
+        }
+
+        $uploadedFile = $uploader->delete($item->image);
+
+        $item->image = null;
+
+        if(!$item->save()) {
+            throw new \Exception("При удалении изображения произошла ошибка!");
         }
 
         return $uploadedFile;

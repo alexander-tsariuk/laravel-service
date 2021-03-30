@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function() {
         Route::post('/create', 'OurWorksController@store')->name('dashboard.ourservice.store');
 
         Route::post('/upload-image/{itemId}', 'OurWorksController@uploadImage')->name('dashboard.ourservice.uploadImage');
+        Route::post('/delete-image/{itemId}', 'OurWorksController@deleteImage')->name('dashboard.ourservice.deleteImage');
 
         Route::get('/edit/{itemId}', 'OurWorksController@edit')->name('dashboard.ourservice.edit');
         Route::put('/edit/{itemId}', 'OurWorksController@update')->name('dashboard.ourservice.update');

@@ -117,4 +117,24 @@ class OurWork extends Model {
     protected function getActiveList() {
         return $this->orderBy('id', 'DESC')->where('status', 1)->get();
     }
+
+    protected function deleteImage(int $itemId, string $directory) {
+        $uploader = new Upload($directory ?? '');
+
+        $item = parent::find($itemId);
+
+        if(!$item){
+            throw new \Exception("Выбранный элемент не найден!");
+        }
+
+        $uploadedFile = $uploader->delete($item->image);
+
+        $item->image = null;
+
+        if(!$item->save()) {
+            throw new \Exception("При удалении изображения произошла ошибка!");
+        }
+
+        return $uploadedFile;
+    }
 }

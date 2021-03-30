@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function() {
         Route::post('/create', 'SliderController@store')->name('dashboard.slider.store');
 
         Route::post('/upload-image/{itemId}', 'SliderController@uploadImage')->name('dashboard.slider.uploadImage');
+        Route::post('/delete-image/{itemId}', 'SliderController@deleteImage')->name('dashboard.slider.deleteImage');
 
 
         Route::get('/edit/{itemId}', 'SliderController@edit')->name('dashboard.slider.edit');

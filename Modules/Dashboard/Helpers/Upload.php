@@ -35,6 +35,18 @@ class Upload {
         return "/{$directory}/{$fileName}";
     }
 
+    public function delete(string $imagePath) {
+        if(!$this->directory) {
+            throw new \Exception("Некорректно задана директория для загрузки изображения!");
+        }
+
+        if(Storage::exists("/public/{$imagePath}")) {
+            Storage::delete("/public/{$imagePath}");
+        }
+
+        return true;
+    }
+
 
 
 

@@ -211,4 +211,40 @@ class SliderController extends DashboardController
 
         return $response;
     }
+    /**
+     * Удаление изображений слайда
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
+    public function deleteImage(Request $request, int $id) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make([
+                'id' => $id
+            ], [
+                'id' => 'required|integer'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = SliderModel::deleteImage($id, 'slider');
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['messages'] = 'Изображение успешно удалено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
+    }
 }

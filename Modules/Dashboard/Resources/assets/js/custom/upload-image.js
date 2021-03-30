@@ -15,6 +15,30 @@ $(function($) {
         });
     }
 
+    var $deleteImage = $('input[name="deleteImage"]');
+
+    if($deleteImage.length) {
+        $deleteImage.on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/admin/' + $(this).data('object') + '/delete-image/' + $(this).data('id'),
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    if(response.success === true) {
+                        $('div#image-area').empty();
+                        $('input.upload-file').removeClass('d-none');
+                        $('input.deleteImage').addClass('d-none');
+                        toastr.success("Изображение успешно удалено!");
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+        });
+    }
+
 });
 
 function sendFileImage(route, itemId, fileObject) {
@@ -37,8 +61,10 @@ function sendFileImage(route, itemId, fileObject) {
                 toastr.error(response.message);
             } else {
                 if($imageArea.length) {
-                    $imageArea.empty().append('<img src="/storage/'+response.file+'" class="img-fluid" style="max-width: 200px;"/>');
+                    $imageArea.empty().append('<img src="/storage/'+response.file+'" class="img-fluid" style="max-width: 300px;"/>');
                 }
+                $('input.upload-file').addClass('d-none');
+                $('input.deleteImage').removeClass('d-none');
 
                 toastr.success(response.messages);
             }

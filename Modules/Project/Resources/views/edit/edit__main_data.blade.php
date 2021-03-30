@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <label for="status">Изображение</label>
-            <div class="img-bordered mb-3" id="image-area" style="min-height: 200px">
+            <div class="mb-3" id="image-area" style="min-height: 200px">
                 @if(isset($item->image) && !empty($item->image))
                     <img src="/storage/{{ $item->image }}" class="img-fluid" style="max-width: 200px;"/>
                 @endif
@@ -48,9 +48,18 @@
             <input
                 type="file"
                 name="uploadingImage"
-                class="upload-file"
+                class="upload-file {{ isset($item->image) && !empty($item->image) ? 'd-none' : '' }}"
                 data-object="project"
                 data-id="{{$item->id}}"
+            />
+
+            <input
+                type="button"
+                name="deleteImage"
+                class="btn btn-danger deleteImage {{ !isset($item->image) || empty($item->image) ? 'd-none' : '' }}"
+                data-object="project"
+                data-id="{{$item->id}}"
+                value="Удалить изображение"
             />
 
             @if($errors->has('status'))
