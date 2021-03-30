@@ -23,7 +23,7 @@ class Page extends Model {
 
     public function translation() {
         return $this->hasOne(PageTranslation::class, 'rowId', 'id')
-            ->where('languageId', $_COOKIE['langId'] ?? current(session('langId')));
+            ->where('languageId', $_COOKIE['langId']);
     }
 
     /**

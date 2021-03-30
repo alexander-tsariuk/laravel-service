@@ -188,7 +188,7 @@ class OurWorksController extends DashboardController
 
         try {
             $validator = Validator::make($request->all(), [
-                'uploadingFile' => 'required|mimes:jpg,png,jpeg'
+                'uploadingFile' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4096'
             ]);
 
             if($validator->fails()) {
