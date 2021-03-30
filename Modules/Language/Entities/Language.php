@@ -56,4 +56,16 @@ class Language extends Model {
         return $item;
     }
 
+    protected function getMainLanguage() {
+        return $this->where('default', 1)->where('status', 1)->first();
+    }
+
+    protected function getLanguageByPrefix(string $langPrefix) {
+        return $this->where('status', 1)->where('prefix', trim($langPrefix))->first();
+    }
+
+    protected function existsByPrefix(string $langPrefix) {
+        return $this->where('prefix', trim($langPrefix))
+            ->exists();
+    }
 }

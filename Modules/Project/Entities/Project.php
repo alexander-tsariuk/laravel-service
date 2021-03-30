@@ -24,7 +24,7 @@ class Project extends Model {
 
     public function translation() {
         return $this->hasOne(ProjectTranslation::class, 'rowId', 'id')
-            ->where('languageId', 1);
+            ->where('languageId', $_COOKIE['langId'] ?? current(session('langId')));
     }
 
     /**

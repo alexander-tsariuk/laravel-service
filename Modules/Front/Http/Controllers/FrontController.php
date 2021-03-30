@@ -19,6 +19,9 @@ class FrontController extends Controller
         $this->pageData['sitename'] = isset($this->pageData['settings']['general']['sitename']) && !empty($this->pageData['settings']['general']['sitename']) ? trim($this->pageData['settings']['general']['sitename']->content) : '';
         $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
         $this->pageData['slides'] = SliderModel::getActiveList();
+
+        $this->pageData['langCode'] = $_COOKIE['langCode'] ?? current(session('langCode'));
+        $this->pageData['langId'] = $_COOKIE['langId'] ?? current(session('langId'));
     }
 
     public function index()
@@ -32,7 +35,7 @@ class FrontController extends Controller
 
     private function getSeoDataForMainPage(array $settings) : object {
         $result = new \stdClass();
-        $lang = 'ru';
+        $lang = $_COOKIE['langCode'] ?? current(session('langCode'));
 
         if(isset($settings['mainpage_seo']) && !empty($settings['mainpage_seo'])) {
             if(isset($settings['mainpage_seo']['title_'.$lang]) && !empty($settings['mainpage_seo']['title_'.$lang]->content)) {

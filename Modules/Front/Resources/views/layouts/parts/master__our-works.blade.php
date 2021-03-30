@@ -4,7 +4,7 @@
     <div class="container">
         <div class="works_slide_header text-center">
             <div class="section_title">
-                <h2>Наши <span>работы</span></h2>
+                <h2>{!! __('front::mainpage.our_works', [], $langCode) !!}</h2>
             </div>
         </div>
     </div>
@@ -31,9 +31,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="view_all_works text-center">
-        <a href="#">Все работы</a>
     </div>
 </section>
 <!-- product section end -->

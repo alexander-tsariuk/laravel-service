@@ -31,8 +31,8 @@
             </ul>
 
             <div id="prev-next-btns">
-                <div id="prev-btn"></div>
-                <div id="next-btn"></div>
+                <i class="fas fa-angle-left" aria-hidden="true" style="color: #000;"></i>
+                <i class="fa fa-angle-right" aria-hidden="true" style="color: #000;"></i>
             </div>
         </div>
     </section>

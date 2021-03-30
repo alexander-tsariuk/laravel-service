@@ -57,6 +57,10 @@
 			}
 	</script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/fontawesome-free/css/all.min.css') }}">
+
     <!-- vendor css (Bootstrap & Icon Font) -->
     <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/elegant-icons.min.css') }}" />
