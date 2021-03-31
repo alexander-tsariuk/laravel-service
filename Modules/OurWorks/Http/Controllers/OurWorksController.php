@@ -46,6 +46,8 @@ class OurWorksController extends DashboardController
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Новый элемент';
 
+        $this->pageData['services'] = OurWorkModel::getListWithExclude();
+
         return view('ourworks::create', $this->pageData);
     }
 
@@ -118,6 +120,7 @@ class OurWorksController extends DashboardController
 
         $this->pageData['breadcrumbs'] = Breadcrumbs::getBreadcrumbs();
         $this->pageData['title'] = 'Редактирование элемента';
+        $this->pageData['services'] = OurWorkModel::getListWithExclude($id);
 
         return view('ourworks::edit', $this->pageData);
     }

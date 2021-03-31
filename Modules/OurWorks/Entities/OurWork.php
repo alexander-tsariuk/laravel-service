@@ -16,7 +16,8 @@ class OurWork extends Model {
     protected $fillable = [
         'prefix',
         'status',
-        'image'
+        'image',
+        'parentId'
     ];
 
     public function translations() {
@@ -136,5 +137,14 @@ class OurWork extends Model {
         }
 
         return $uploadedFile;
+    }
+
+    protected function getListWithExclude($excludedId = null) {
+        $query = $this->orderBy('id', 'DESC');
+        if(!empty($excludedId)) {
+            $query = $query->where('id', '!=', $excludedId);
+        }
+
+        return $query->get();
     }
 }

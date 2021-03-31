@@ -17,6 +17,18 @@
                 <span class="text-danger">{{ $errors->first('prefix') }}</span>
             @endif
         </div>
+
+        <div class="form-group">
+            <label for="parentId">Родительский элемент</label>
+            <select class="form-control form-control-border {{ $errors->has('prefix') ? 'is-invalid' : '' }}" name="parentId">
+                <option value="0">Не выбрано</option>
+                @if(isset($services) && !empty($services))
+                    @foreach($services as $service)
+                        <option value="{{ $service->id }}" {{$item->parentId == $service->id ? 'selected' : ''}}>{{ $service->translation->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
     </div>
     <div class="card-body">
         <div class="form-group">
