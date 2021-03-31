@@ -60,7 +60,7 @@ class Slider extends Model {
      * @return mixed
      */
     protected function getActiveList() {
-        return $this->orderBy('id', 'DESC')->get();
+        return $this->orderBy('id', 'DESC')->limit(10)->get();
     }
 
     /**

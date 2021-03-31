@@ -68,6 +68,30 @@
                                                 <span class="text-danger">{{ $errors->first('heading_text') }}</span>
                                             @endif
                                         </div>
+                                        <div class="form-group">
+                                            <label for="name">Ссылка</label>
+                                            <input
+                                                type="text"
+                                                class="form-control form-control-border {{ $errors->has('link') ? 'is-invalid' : '' }}"
+                                                name="translation[{{$language->id}}][link]"
+                                                required
+                                            />
+                                            @if($errors->has('link'))
+                                                <span class="text-danger">{{ $errors->first('link') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Текст ссылки</label>
+                                            <input
+                                                type="text"
+                                                class="form-control form-control-border {{ $errors->has('text_of_link') ? 'is-invalid' : '' }}"
+                                                name="translation[{{$language->id}}][text_of_link]"
+                                                required
+                                            />
+                                            @if($errors->has('text_of_link'))
+                                                <span class="text-danger">{{ $errors->first('text_of_link') }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 @endforeach
                             @endif

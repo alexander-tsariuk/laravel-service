@@ -11,7 +11,9 @@ class SlideTranslation extends Model {
         'heading_text',
         'description',
         'rowId',
-        'languageId'
+        'languageId',
+        'link',
+        'text_of_link',
     ];
 
     /**
@@ -33,6 +35,8 @@ class SlideTranslation extends Model {
                     'languageId' => $languageId,
                     'heading_text' => $translation['heading_text'],
                     'description' => $translation['description'] ?? null,
+                    'link' => $translation['link'] ?? null,
+                    'text_of_link' => $translation['text_of_link'] ?? null,
                 ]);
 
                 if($translationItem->save()) {
@@ -67,6 +71,8 @@ class SlideTranslation extends Model {
                     'languageId' => $translationItem->languageId,
                     'heading_text' => $translation['heading_text'],
                     'description' => $translation['description'] ?? null,
+                    'link' => $translation['link'] ?? null,
+                    'text_of_link' => $translation['text_of_link'] ?? null,
                 ]);
 
                 if($translationItem->save()) {

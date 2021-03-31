@@ -17,9 +17,12 @@
                                                     <p class="wow fadeInUp" data-wow-delay="0.2s"
                                                        data-wow-duration="1.2s">{{ $slide->translation->description }}</p>
                                                 @endif
-                                                <a class="btn btn-link wow fadeInUp" data-wow-delay="0.3s"
-                                                   data-wow-duration="1.3s"
-                                                   href="#">Discover Now</a>
+
+                                                @if(isset($slide->translation->link) && !empty($slide->translation->link) && isset($slide->translation->text_of_link) && !empty($slide->translation->text_of_link))
+                                                    <a class="btn btn-link wow fadeInUp" data-wow-delay="0.3s"
+                                                    data-wow-duration="1.3s"
+                                                    href="{{ $slide->translation->link }}">{{ $slide->translation->text_of_link }}</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
