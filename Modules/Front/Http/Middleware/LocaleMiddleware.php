@@ -5,6 +5,7 @@ namespace Modules\Front\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Modules\Front\Http\Controllers\FrontController;
 use Modules\Language\Entities\Language as LanguageModel;
 
 class LocaleMiddleware
@@ -80,9 +81,15 @@ class LocaleMiddleware
 
         $routeParameters = $request->route()->parameters();
 
-        if($_COOKIE['langCode'] == $routeParameters['prefix']) {
+        if(isset($routeParameters['prefix']) && isset($routeParameters['subPrefix']) && $_COOKIE['langCode'] == $routeParameters['prefix']) {
             $request->route()->setParameter('prefix', $request->route()->parameter('subPrefix'));
             $request->route()->setParameter('subPrefix', "");
+        } elseif(isset($routeParameters['prefix']) && !isset($routeParameters['subPrefix']) && $_COOKIE['langCode'] == $routeParameters['prefix']) {
+            $request->route()->forgetParameter('prefix');
+            $request->route()->setAction(array_merge($request->route()->getAction(), [
+                'uses' => 'Modules\Front\Http\Controllers\FrontController@index',
+                'controller' => 'Modules\Front\Http\Controllers\FrontController@index',
+            ]));
         }
 
         if($locale) {
