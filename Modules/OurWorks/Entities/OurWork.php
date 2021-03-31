@@ -116,7 +116,13 @@ class OurWork extends Model {
     }
 
     protected function getActiveList() {
-        return $this->orderBy('id', 'DESC')->where('status', 1)->get();
+        return $this->orderBy('id', 'DESC')
+            ->where('status', 1)
+            ->whereIn('parentId', [
+                null,
+                0
+            ])
+            ->get();
     }
 
     protected function deleteImage(int $itemId, string $directory) {
