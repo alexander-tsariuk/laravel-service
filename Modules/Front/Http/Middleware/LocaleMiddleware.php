@@ -78,11 +78,21 @@ class LocaleMiddleware
     {
         $locale = self::getLocale();
 
-        if($locale) App::setLocale($locale);
-        //если метки нет - устанавливаем основной язык $mainLanguage
-        else App::setLocale(self::$mainLang);
+        $routeParameters = $request->route()->parameters();
 
-        $request->route()->parameters();
+        if($_COOKIE['langCode'] == $routeParameters['prefix']) {
+            $request->route()->setParameter('prefix', $request->route()->parameter('subPrefix'));
+            $request->route()->setParameter('subPrefix', "");
+        }
+
+        if($locale) {
+            App::setLocale($locale);
+        }
+        //если метки нет - устанавливаем основной язык $mainLanguage
+        else {
+            App::setLocale(self::$mainLang);
+        }
+
 
         return $next($request); //пропускаем дальше - передаем в следующий посредник
     }

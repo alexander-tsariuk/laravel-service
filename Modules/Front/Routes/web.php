@@ -14,7 +14,7 @@
 //Route::group(['prefix?' => ])
 if (!strpos(Request::url(),"admin")) {
 
-    Route::group(['langPrefix' => \Modules\Front\Http\Middleware\LocaleMiddleware::getLocale()], function () {
+    Route::group(['langPrefix' => \Modules\Front\Http\Middleware\LocaleMiddleware::getLocale(), 'middleware' => 'locale'], function () {
 
         Route::get('/', 'FrontController@index')->name('home');
 
