@@ -23,7 +23,7 @@
                     @foreach($projects as $project)
                         <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
                             <figure class="portfolio_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                                <a href="{{ route('front.render.page', ['prefix' => $project->prefix]) }}">
+                                <a href="{{$_COOKIE['mainLangCode'] != $_COOKIE['langCode'] ? "/{$_COOKIE['langCode']}" : null}}{{ route('front.render.page', ['prefix' => $project->prefix], false) }}">
                                     <img src="/storage{{ $project->image }}" alt="{{ $project->translation->name }}">
                                 </a>
                                 <div class="portfolio_text">
@@ -36,7 +36,7 @@
                     @foreach($subServices as $subService)
                         <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
                             <figure class="portfolio_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                                <a href="{{ route('front.render.page', ['prefix' => $service->prefix, 'subPrefix' => $subService->prefix]) }}">
+                                <a href="{{$_COOKIE['mainLangCode'] != $_COOKIE['langCode'] ? "/{$_COOKIE['langCode']}" : null}}{{ route('front.render.page', ['prefix' => $service->prefix, 'subPrefix' => $subService->prefix],false) }}">
                                     <img src="/storage{{ $subService->image }}" alt="{{ $subService->translation->name }}">
                                 </a>
                                 <div class="portfolio_text">

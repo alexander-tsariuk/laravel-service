@@ -29,6 +29,9 @@ class LocaleMiddleware
             abort(404);
         }
 
+        setcookie('mainLangCode', $mainLang->prefix, time() + 60 * 60 * 60);
+        setcookie('mainLangId', $mainLang->id, time() + 60 * 60 * 60);
+
         $uri = \request()->getRequestUri(); //получаем URI
 
         $segmentsURI = explode('/', $uri); //делим на части по разделителю "/"
@@ -81,6 +84,23 @@ class LocaleMiddleware
 
         $routeParameters = $request->route()->parameters();
 
+        if(isset($routeParameters['lang']) && !empty($routeParameters['lang']) && strlen($routeParameters['lang']) > 2) {
+            $prefix = $request->route()->parameter('lang');
+            $secondPrefix = $request->route()->parameter('prefix');
+
+            $request->route()->forgetParameter('lang');
+            $request->route()->forgetParameter('prefix');
+
+            $request->route()->setParameter('prefix', $prefix);
+            $request->route()->setParameter('subPrefix', $secondPrefix);
+            $request->route()->setParameter('lang', "");
+
+            $request->route()->setAction(array_merge($request->route()->getAction(), [
+                'uses' => 'Modules\Front\Http\Controllers\FrontController@renderPage',
+                'controller' => 'Modules\Front\Http\Controllers\FrontController@renderPage',
+            ]));
+        }
+
         if(isset($routeParameters['prefix']) && isset($routeParameters['subPrefix']) && $_COOKIE['langCode'] == $routeParameters['prefix']) {
             $request->route()->setParameter('prefix', $request->route()->parameter('subPrefix'));
             $request->route()->setParameter('subPrefix', "");
@@ -90,6 +110,10 @@ class LocaleMiddleware
                 'uses' => 'Modules\Front\Http\Controllers\FrontController@index',
                 'controller' => 'Modules\Front\Http\Controllers\FrontController@index',
             ]));
+        }
+
+        if($request->route()->hasParameter('lang')) {
+            $request->route()->forgetParameter('lang');
         }
 
         if($locale) {
