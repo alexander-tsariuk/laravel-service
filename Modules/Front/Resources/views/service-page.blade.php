@@ -23,7 +23,7 @@
                     @foreach($projects as $project)
                         <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
                             <figure class="portfolio_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                                <a href="{{ route('front.project.page', ['prefix' => $project->prefix]) }}">
+                                <a href="{{ route('front.render.page', ['prefix' => $project->prefix]) }}">
                                     <img src="/storage{{ $project->image }}" alt="{{ $project->translation->name }}">
                                 </a>
                                 <div class="portfolio_text">
@@ -32,11 +32,20 @@
                             </figure>
                         </div>
                     @endforeach
+                @elseif(isset($subServices) && !empty($subServices))
+                    @foreach($subServices as $subService)
+                        <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
+                            <figure class="portfolio_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+                                <a href="{{ route('front.render.page', ['prefix' => $service->prefix, 'subPrefix' => $subService->prefix]) }}">
+                                    <img src="/storage{{ $subService->image }}" alt="{{ $subService->translation->name }}">
+                                </a>
+                                <div class="portfolio_text">
+                                    <h3>{{ $subService->translation->name }}</h3>
+                                </div>
+                            </figure>
+                        </div>
+                    @endforeach
                 @endif
-            </div>
-            <div class="loding_bar text-center">
-                <i class="ion-load-a icons"></i>
-                <a href="#">loading</a>
             </div>
         </div>
     </section>

@@ -147,4 +147,30 @@ class OurWork extends Model {
 
         return $query->get();
     }
+
+    protected function getChildList($parentId) {
+        $query = $this->orderBy('id', 'DESC')
+            ->where('parentId', $parentId);
+
+        return $query->get();
+    }
+
+    protected function existsItem(string $firstPrefix, string $secondPrefix = '') : bool {
+        $firstItem = $this->where('prefix', $firstPrefix)->where('status', 1)->first();
+
+        if(!$firstItem || $firstItem->translation->set_404 == 1) {
+            return false;
+        }
+
+        if(!empty($secondPrefix)) {
+            $secondItem = $this->where('prefix', $secondPrefix)->where('status', 1)
+                ->where('parentId', $firstItem->id)->first();
+
+            if(!$secondItem || $secondItem->translation->set_404 == 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

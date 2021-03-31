@@ -136,4 +136,14 @@ class Project extends Model {
 
         return $uploadedFile;
     }
+
+    protected function existsItem(string $firstPrefix, string $secondPrefix = '') : bool {
+        $item = $this->where('prefix', $firstPrefix)->where('status', 1)->first();
+
+        if(!$item || $item->translation->set_404 == 1) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -5,6 +5,7 @@ namespace Modules\Front\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Modules\Dashboard\Entities\Setting as SettingModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
+use Modules\Page\Entities\Page;
 use Modules\Page\Entities\Page as PageModel;
 use Modules\Project\Entities\Project as ProjectModel;
 use Modules\Slider\Entities\Slider as SliderModel;
@@ -94,25 +95,41 @@ class FrontController extends Controller
         return $result;
     }
 
-    public function servicePage(string $servicePrefix) {
-        if(!$servicePrefix) {
+    public function renderPage(string $firstPrefix, string $secondPage = '') {
+        if(OurWorkModel::existsItem($firstPrefix, $secondPage)) {
+            return $this->renderServicePage($firstPrefix, $secondPage);
+        } elseif(ProjectModel::existsItem($firstPrefix)) {
+            return $this->renderProjectPage($firstPrefix);
+        } elseif(PageModel::existsItem($firstPrefix)) {
+            return $this->renderContentPage($firstPrefix);
+        }
+
+        abort(404);
+    }
+
+    private function renderServicePage(string $firstPrefix, string $secondPrefix = '') {
+        if(!$firstPrefix || (!$firstPrefix && !$secondPrefix)) {
             abort(404);
         }
 
-        $this->pageData['service'] = OurWorkModel::getByPrefix($servicePrefix);
-
-        if(!$this->pageData['service'] || (isset($this->pageData['service']) && $this->pageData['service']->translation->set_404 == 1)) {
-            abort(404);
+        if(!empty($secondPrefix)) {
+            $this->pageData['parentService'] = OurWorkModel::getByPrefix($firstPrefix);
+            $this->pageData['service'] = OurWorkModel::getByPrefix($secondPrefix);
+            $this->pageData['projects'] = ProjectModel::getList()
+                ->where('serviceId', $this->pageData['service']->id)
+                ->where('status', 1)
+                ->get();
+        } else {
+            $this->pageData['service'] = OurWorkModel::getByPrefix($firstPrefix);
+            $this->pageData['subServices'] = OurWorkModel::getChildList($this->pageData['service']->id);
         }
 
         $this->pageData['seo'] = $this->getSeoData($this->pageData['service']);
 
-        $this->pageData['projects'] = ProjectModel::getList()->where('status', 1)->get();
-
         return view('front::service-page', $this->pageData);
     }
 
-    public function projectPage(string $projectPrefix) {
+    private function renderProjectPage(string $projectPrefix) {
         if(!$projectPrefix) {
             abort(404);
         }
@@ -128,7 +145,7 @@ class FrontController extends Controller
         return view('front::project-page', $this->pageData);
     }
 
-    public function contentPage(string $pagePrefix) {
+    private function renderContentPage(string $pagePrefix) {
         if(!$pagePrefix) {
             abort(404);
         }

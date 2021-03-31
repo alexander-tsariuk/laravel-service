@@ -82,6 +82,8 @@ class LocaleMiddleware
         //если метки нет - устанавливаем основной язык $mainLanguage
         else App::setLocale(self::$mainLang);
 
+        $request->route()->parameters();
+
         return $next($request); //пропускаем дальше - передаем в следующий посредник
     }
 }
