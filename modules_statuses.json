@@ -6,5 +6,6 @@
     "Page": true,
     "User": true,
     "Front": true,
-    "Project": true
+    "Project": true,
+    "Menu": true
 }
