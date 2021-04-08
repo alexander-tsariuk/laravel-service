@@ -15,7 +15,6 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->bigInteger('parentId')->unsigned()->nullable();
             $table->string('name');
             $table->string('code')->unique();
             $table->tinyInteger('status')->default(0);
@@ -25,6 +24,7 @@ class CreateMenusTable extends Migration
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('menuId')->unsigned();
+            $table->bigInteger('parentId')->unsigned()->nullable();
             $table->string('url');
             $table->string('label');
             $table->bigInteger('languageId')->unsigned();

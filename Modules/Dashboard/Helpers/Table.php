@@ -35,13 +35,22 @@ if(!function_exists('tableDefault')) {
 }
 
 if(!function_exists('tableActions')) {
-    function tableActions(int $id, string $route) {
+    function tableActions(int $id, string $route, array $additionalButtons = []) {
         $editUrl = route('dashboard.'.$route.'.edit', ['itemId' => $id]);
 
         $html = "<div class=\"btn-group btn-group-sm\">";
         $html .= "<a href=\"{$editUrl}\" class=\"btn btn-info\" title=\"Редактировать\"><i class=\"fas fa-pen\"></i></a>";
         $html .= "<a href=\"#\" class=\"delete-item btn btn-danger\" data-id=\"{$id}\" data-route=\"{$route}\" title='Удалить'>";
         $html .= "<i class=\"fas fa-trash\"></i></a>";
+
+        if(isset($additionalButtons) && !empty($additionalButtons)) {
+            foreach ($additionalButtons as $additionalButton) {
+                $html .= "<a href=\"{$additionalButton['href']}\" class=\"btn {$additionalButton['colorClass']}\" title=\"{$additionalButton['title']}\">";
+                $html .= "<i class=\"{$additionalButton['iconClass']}\"></i></a>";
+            }
+        }
+
+
         $html .= "</div>";
 
         return $html;

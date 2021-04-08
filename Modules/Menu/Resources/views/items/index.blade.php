@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-2">
-            <a href="{{ route('dashboard.menu.create') }}" class="btn btn-block btn-primary">Добавить</a>
+{{--            <a href="{{ route('dashboard.menu.create') }}" class="btn btn-block btn-primary">Добавить</a>--}}
         </div>
     </div>
 
@@ -27,17 +27,13 @@
                         <tbody>
                         @if(isset($items) && !empty($items))
                             @foreach($items as $item)
-                                @php
-                                    $additionalButtons[0]['href'] = route('dashboard.menu.items.index', ['itemId' => $item->id]);
-                                @endphp
-
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->code }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
                                     <td>
-                                        {!! tableActions($item->id, 'menu', $additionalButtons) !!}
+                                        {!! tableActions($item->id, 'menu') !!}
                                     </td>
                                 </tr>
                             @endforeach

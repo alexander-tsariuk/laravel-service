@@ -70,6 +70,14 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('dashboard.menu.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
+                'dashboard.menu.index',
+            ]) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-bars"></i>
+                <p>Меню сайта</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('dashboard.user.index') }}" class="nav-link {{ in_array(request()->route()->getName(), [
                 'dashboard.user.index',
                 'dashboard.user.create',
