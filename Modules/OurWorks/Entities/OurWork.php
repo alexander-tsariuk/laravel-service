@@ -26,7 +26,7 @@ class OurWork extends Model {
 
     public function translation() {
         return $this->hasOne(OurWorkTranslation::class, 'rowId', 'id')
-            ->where('languageId', $_COOKIE['langId']);
+            ->where('languageId', config()->get('app.localeId'));
     }
 
     /**

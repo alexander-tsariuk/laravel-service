@@ -31,6 +31,8 @@ class LocaleMiddleware
 
         setcookie('mainLangCode', $mainLang->prefix, time() + 60 * 60 * 60);
         setcookie('mainLangId', $mainLang->id, time() + 60 * 60 * 60);
+        config()->set('app.langId', $mainLang->id);
+
 
         $uri = \request()->getRequestUri(); //получаем URI
 
@@ -48,6 +50,7 @@ class LocaleMiddleware
 
                 setcookie('langCode', $lang->prefix, time() + 60 * 60 * 60);
                 setcookie('langId', $lang->id, time() + 60 * 60 * 60);
+                config()->set('app.localeId', $lang->id);
 
                 return current($segmentsURI);
             } else {
@@ -56,6 +59,7 @@ class LocaleMiddleware
 
                 setcookie('langCode', $mainLang->prefix, time() + 60 * 60 * 60);
                 setcookie('langId', $mainLang->id, time() + 60 * 60 * 60);
+                config()->set('app.localeId', $mainLang->id);
 
                 return $mainLang->prefix;
             }
@@ -65,6 +69,7 @@ class LocaleMiddleware
 
             setcookie('langCode', $mainLang->prefix, time() + 60 * 60 * 60);
             setcookie('langId', $mainLang->id, time() + 60 * 60 * 60);
+            config()->set('app.localeId', $mainLang->id);
 
             return $mainLang->prefix;
         }
@@ -123,7 +128,6 @@ class LocaleMiddleware
         else {
             App::setLocale(self::$mainLang);
         }
-
 
         return $next($request); //пропускаем дальше - передаем в следующий посредник
     }

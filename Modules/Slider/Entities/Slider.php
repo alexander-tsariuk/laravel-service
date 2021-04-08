@@ -25,7 +25,7 @@ class Slider extends Model {
 
     public function translation() {
         return $this->hasOne(SlideTranslation::class, 'rowId', 'id')
-            ->where('languageId', $_COOKIE['langId']);
+            ->where('languageId', config()->get('app.localeId'));
     }
 
     /**

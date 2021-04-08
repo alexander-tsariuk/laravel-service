@@ -82,6 +82,8 @@ return [
 
     'locale' => 'ru',
 
+    'localeId' => 1,
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

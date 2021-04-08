@@ -21,12 +21,14 @@ class FrontController extends Controller
         $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
         $this->pageData['slides'] = SliderModel::getActiveList();
 
-        $this->pageData['langCode'] = $_COOKIE['langCode'] ?? current(session('langCode'));
-        $this->pageData['langId'] = $_COOKIE['langId'] ?? current(session('langId'));
+
     }
 
     public function index()
     {
+        $this->pageData['langCode'] = app()->getLocale();
+        $this->pageData['langId'] = config()->get('app.localeId');
+
         $this->pageData['ourWorks'] = OurWorkModel::getActiveList();
 
         $this->pageData['seo'] = $this->getSeoDataForMainPage($this->pageData['settings']);
@@ -36,7 +38,7 @@ class FrontController extends Controller
 
     private function getSeoDataForMainPage(array $settings) : object {
         $result = new \stdClass();
-        $lang = $_COOKIE['langCode'] ?? current(session('langCode'));
+        $lang = $this->pageData['langCode'];
 
         if(isset($settings['mainpage_seo']) && !empty($settings['mainpage_seo'])) {
             if(isset($settings['mainpage_seo']['title_'.$lang]) && !empty($settings['mainpage_seo']['title_'.$lang]->content)) {
@@ -58,7 +60,7 @@ class FrontController extends Controller
 
     private function getSeoData($page) : object {
         $result = new \stdClass();
-        $lang = 'ru';
+        $lang = $this->pageData['langCode'];
 
         if(isset($page->translation->meta_title) && !empty($page->translation->meta_title)) {
             $result->title = trim($page->translation->meta_title);
@@ -96,6 +98,9 @@ class FrontController extends Controller
     }
 
     public function renderPage(string $firstPrefix, string $secondPage = '') {
+        $this->pageData['langCode'] = app()->getLocale();
+        $this->pageData['langId'] = config()->get('app.localeId');
+
         if(OurWorkModel::existsItem($firstPrefix, $secondPage)) {
             return $this->renderServicePage($firstPrefix, $secondPage);
         } elseif(ProjectModel::existsItem($firstPrefix)) {
