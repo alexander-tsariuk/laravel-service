@@ -172,8 +172,7 @@
                             </div>
                             <div class="copyright_right">
                                 <p>
-                                    ©2021 Asore. made with <i class="ion-heart"></i> by
-                                    <a href="https://hasthemes.com">HasThemes</a>
+                                    текст в футере
                                 </p>
                             </div>
                         </div>
