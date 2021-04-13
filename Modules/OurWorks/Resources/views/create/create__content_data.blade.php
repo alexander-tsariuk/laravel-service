@@ -28,11 +28,11 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][name]"
-                                value=""
+                                value="{{ old("translation.".$language->id.".name") }}"
                                 required
                             />
-                            @if($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @if($errors->has('translation.'.$language->id.'.name'))
+                                <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.name') }}</span>
                             @endif
                         </div>
                     </div>

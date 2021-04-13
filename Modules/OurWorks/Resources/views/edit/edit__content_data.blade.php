@@ -31,8 +31,8 @@
                                 value="{{ $item->preparedTranslations[$language->id]->name ?? null }}"
                                 required
                             />
-                            @if($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @if($errors->has('translation.'.$language->id.'.name'))
+                                <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.name') }}</span>
                             @endif
                         </div>
                     </div>

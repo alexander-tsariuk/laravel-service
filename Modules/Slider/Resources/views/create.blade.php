@@ -11,7 +11,7 @@
                             <label for="status">Статус</label>
                             <select class="custom-select form-control-border {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                 <option value="0">Неактивен</option>
-                                <option value="1">Активен</option>
+                                <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Активен</option>
                             </select>
                             @if($errors->has('status'))
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
@@ -49,7 +49,7 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('heading_text') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][heading_text]"
-                                                value=""
+                                                value="{{ old('translation.'.$language->id.'.heading_text') }}"
                                                 required
                                             />
                                             @if($errors->has('heading_text'))
@@ -63,7 +63,7 @@
                                                 cols="2"
                                                 class="form-control form-control-border {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][description]"
-                                            ></textarea>
+                                            >{{ old('translation.'.$language->id.'.description') }}</textarea>
                                             @if($errors->has('heading_text'))
                                                 <span class="text-danger">{{ $errors->first('heading_text') }}</span>
                                             @endif
@@ -75,6 +75,7 @@
                                                 class="form-control form-control-border {{ $errors->has('link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][link]"
                                                 required
+                                                value="{{ old('translation.'.$language->id.'.link') }}"
                                             />
                                             @if($errors->has('link'))
                                                 <span class="text-danger">{{ $errors->first('link') }}</span>
@@ -87,6 +88,7 @@
                                                 class="form-control form-control-border {{ $errors->has('text_of_link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][text_of_link]"
                                                 required
+                                                value="{{ old('translation.'.$language->id.'.text_of_link') }}"
                                             />
                                             @if($errors->has('text_of_link'))
                                                 <span class="text-danger">{{ $errors->first('text_of_link') }}</span>

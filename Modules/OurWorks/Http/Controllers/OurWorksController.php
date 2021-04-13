@@ -5,11 +5,13 @@ namespace Modules\OurWorks\Http\Controllers;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\OurWorks\Entities\OurWorkTranslation as OurWorkTranslationModel;
+use PHPUnit\Util\Exception;
 
 class OurWorksController extends DashboardController
 {
@@ -62,12 +64,12 @@ class OurWorksController extends DashboardController
             $validator = Validator::make($request->all(), [
                 'prefix' => 'required|unique:our_works',
                 'status' => 'required',
-                'translation.*.name' => 'required|min:3|max:255',
+                'translation.*.name' => 'required|unique:our_work_translations'
             ], [
-                'required' => "Поле :attribute обязательно к заполнению!",
-                'unique' => "Значение поля :attribute должно быть уникальным!",
-                'min' => 'Минимальная длина поля :attribute :min символов!',
-                'max' => 'Максимальная длина поля :attribute :max символов!',
+                'required' => "Поле \":attribute\" обязательно к заполнению!",
+                'unique' => "Значение поля \":attribute\" должно быть уникальным!",
+                'min' => 'Минимальная длина поля \":attribute\" :min символов!',
+                'max' => 'Максимальная длина поля \":attribute\" :max символов!',
             ], [
                 'prefix' => 'Алиас',
                 'status' => 'Статус',
@@ -75,7 +77,7 @@ class OurWorksController extends DashboardController
             ]);
 
             if($validator->fails()) {
-                return redirect()->back()->withErrors($validator->errors())->withInput();
+                return response()->redirectToRoute('dashboard.ourservice.create')->withErrors($validator->errors())->withInput();
             }
 
             $item = OurWorkModel::createItem($request->all());
@@ -89,6 +91,7 @@ class OurWorksController extends DashboardController
             }
 
         } catch (\Exception $exception) {
+            session()->push('errorMessage', $exception->getMessage());
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
 
@@ -135,17 +138,25 @@ class OurWorksController extends DashboardController
     {
         try {
             $validator = Validator::make($request->all(), [
-                'prefix' => 'required|unique:our_works,id,'.$id,
+                'prefix' => 'required|unique:our_works,prefix,'.$id,
                 'status' => 'required',
-                'translation.*.name' => 'required'
+                'translation.*.name' => 'required|unique:our_work_translations,rowId,'.$id
             ], [
-                'required' => "Поле :attribute обязательно к заполнению!",
-                'unique' => "Значение поля :attribute должно быть уникальным!",
+                'required' => "Поле \":attribute\" обязательно к заполнению!",
+                'unique' => "Значение поля \":attribute\" должно быть уникальным!",
+                'min' => 'Минимальная длина поля \":attribute\" :min символов!',
+                'max' => 'Максимальная длина поля \":attribute\" :max символов!',
+            ], [
+                'prefix' => 'Алиас',
+                'status' => 'Статус',
+                'translation.*.name' => 'Название работы',
             ]);
 
             if($validator->fails()) {
-                return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
-                    ->with('errorMessage', "При обновлении данных элемента произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
+                return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])->withErrors($validator->errors())->withInput();
+
+//                return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
+//                    ->with('errorMessage', "При обновлении данных элемента произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
             $item = OurWorkModel::updateItem($id, $request->all());
@@ -159,8 +170,8 @@ class OurWorksController extends DashboardController
             }
 
         } catch (\Exception $exception) {
-            return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
-                ->with('errorMessage', $exception->getMessage());
+            return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
+
         }
 
         return response()->redirectToRoute('dashboard.ourservice.index')

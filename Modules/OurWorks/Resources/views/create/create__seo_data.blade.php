@@ -29,6 +29,7 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('meta_title') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][meta_title]"
+                                value="{{ old("translation.".$language->id.".meta_title") }}"
                             />
                             @if($errors->has('meta_title'))
                                 <span class="text-danger">{{ $errors->first('meta_title') }}</span>
@@ -40,6 +41,7 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('meta_h1') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][meta_h1]"
+                                value="{{ old("translation.".$language->id.".meta_h1") }}"
                             />
                             @if($errors->has('meta_h1'))
                                 <span class="text-danger">{{ $errors->first('meta_h1') }}</span>
@@ -51,6 +53,7 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('meta_keywords') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][meta_keywords]"
+                                value="{{ old("translation.".$language->id.".meta_keywords") }}"
                             />
                             @if($errors->has('meta_keywords'))
                                 <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
@@ -62,7 +65,7 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('meta_description') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][meta_description]"
-                                value="{{ $item->preparedTranslations[$language->id]->meta_description ?? null }}"
+                                value="{{ old("translation.".$language->id.".meta_description") }}"
                             />
                             @if($errors->has('meta_description'))
                                 <span class="text-danger">{{ $errors->first('meta_description') }}</span>
@@ -73,7 +76,7 @@
                             <select class="form-control form-control-border {{ $errors->has('set_404') ? 'is-invalid' : '' }}"
                                     name="translation[{{$language->id}}][set_404]">
                                 <option value="0">Нет</option>
-                                <option value="1">Да</option>
+                                <option value="1" {{ old("translation.".$language->id.".set_404") == 1 ? 'selected' : '' }}>Да</option>
                             </select>
 
                             @if($errors->has('set_404'))
@@ -85,7 +88,7 @@
                             <select class="form-control form-control-border {{ $errors->has('set_noindex') ? 'is-invalid' : '' }}"
                                     name="translation[{{$language->id}}][set_noindex]">
                                 <option value="0">Нет</option>
-                                <option value="1">Да</option>
+                                <option value="1" {{ old("translation.".$language->id.".set_noindex") == 1 ? 'selected' : '' }}>Да</option>
                             </select>
 
                             @if($errors->has('set_noindex'))
@@ -97,7 +100,7 @@
                             <select class="form-control form-control-border {{ $errors->has('set_nofollow') ? 'is-invalid' : '' }}"
                                     name="translation[{{$language->id}}][set_nofollow]">
                                 <option value="0">Нет</option>
-                                <option value="1">Да</option>
+                                <option value="1" {{ old("translation.".$language->id.".set_nofollow") == 1 ? 'selected' : '' }}>Да</option>
                             </select>
 
                             @if($errors->has('set_nofollow'))

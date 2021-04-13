@@ -21,6 +21,10 @@ class FrontController extends Controller
         $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
         $this->pageData['slides'] = SliderModel::getActiveList();
 
+        $this->pageData['menu'] = [
+            'services' => OurWorkModel::getList()->where('status', 1)->where('parentId', null)->get(),
+            'projects' => ProjectModel::getList()->where('status', 1)->get(),
+        ];
 
     }
 
@@ -127,6 +131,18 @@ class FrontController extends Controller
         } else {
             $this->pageData['service'] = OurWorkModel::getByPrefix($firstPrefix);
             $this->pageData['subServices'] = OurWorkModel::getChildList($this->pageData['service']->id);
+            $this->pageData['projects'] = ProjectModel::getList()
+                ->where('serviceId', $this->pageData['service']->id)
+                ->where('status', 1)
+                ->get();
+        }
+
+        if(!count($this->pageData['projects'])) {
+            unset($this->pageData['projects']);
+        }
+
+        if(isset($this->pageData['subServices']) && !count($this->pageData['subServices'])) {
+            unset($this->pageData['subServices']);
         }
 
         $this->pageData['seo'] = $this->getSeoData($this->pageData['service']);

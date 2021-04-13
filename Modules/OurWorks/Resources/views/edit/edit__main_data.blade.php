@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label for="parentId">Родительский элемент</label>
-            <select class="form-control form-control-border {{ $errors->has('prefix') ? 'is-invalid' : '' }}" name="parentId">
+            <select class="form-control form-control-border {{ $errors->has('parentId') ? 'is-invalid' : '' }}" name="parentId">
                 <option value="0">Не выбрано</option>
                 @if(isset($services) && !empty($services))
                     @foreach($services as $service)

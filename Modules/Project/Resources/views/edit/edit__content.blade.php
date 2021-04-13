@@ -29,7 +29,7 @@
                                 type="text"
                                 class="form-control form-control-border {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][name]"
-                                value="{{ $item->preparedTranslations[$language->id]->name ?? null }}"
+                                value="{{ old('translation.'.$language->id.'.name') ?? $item->preparedTranslations[$language->id]->name ?? null }}"
                                 required
                             />
                             @if($errors->has('name'))
@@ -43,7 +43,7 @@
                                 cols="2"
                                 class="summernote form-control form-control-border {{ $errors->has('content') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][content]"
-                            >{{ $item->preparedTranslations[$language->id]->content ?? null }}</textarea>
+                            >{{ old('translation.'.$language->id.'.content') ?? $item->preparedTranslations[$language->id]->content ?? null }}</textarea>
                             @if($errors->has('content'))
                                 <span class="text-danger">{{ $errors->first('content') }}</span>
                             @endif

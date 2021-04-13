@@ -1,6 +1,10 @@
 @extends('dashboard::layouts.master')
 
 @section('content')
+{{--    @if($errors->any())--}}
+{{--        {{ dd($errors) }}--}}
+{{--    @endif--}}
+
     <div class="row">
         <div class="col-12">
             <form id="editItem" action="{{ route('dashboard.ourservice.store') }}" method="POST">

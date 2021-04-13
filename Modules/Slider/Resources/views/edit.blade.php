@@ -12,7 +12,7 @@
                             <label for="status">Статус</label>
                             <select class="custom-select form-control-border {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                 <option value="0" {{ !$item->status ? 'selected' : '' }}>Неактивен</option>
-                                <option value="1" {{ !empty($item->status) && $item->status == 1 ? 'selected' : '' }}>Активен</option>
+                                <option value="1" {{ !empty($item->status) && $item->status == 1 || old('status') == 1 ? 'selected' : '' }}>Активен</option>
                             </select>
                             @if($errors->has('status'))
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
@@ -45,8 +45,8 @@
                                 value="Удалить изображение"
                             />
 
-                            @if($errors->has('status'))
-                                <span class="text-danger">{{ $errors->first('status') }}</span>
+                            @if($errors->has('uploadingImage'))
+                                <span class="text-danger">{{ $errors->first('uploadingImage') }}</span>
                             @endif
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('heading_text') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][heading_text]"
-                                                value="{{ $item->preparedTranslations[$language->id]->heading_text ?? null }}"
+                                                value="{{ old('translation.'.$language->id.'.heading_text') ?? $item->preparedTranslations[$language->id]->heading_text ?? null }}"
                                                 required
                                             />
                                             @if($errors->has('heading_text'))
@@ -95,7 +95,7 @@
                                                 cols="2"
                                                 class="form-control form-control-border {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][description]"
-                                            >{{ $item->preparedTranslations[$language->id]->description ?? null }}</textarea>
+                                            >{{ old('translation.'.$language->id.'.description') ?? $item->preparedTranslations[$language->id]->description ?? null }}</textarea>
                                             @if($errors->has('description'))
                                                 <span class="text-danger">{{ $errors->first('description') }}</span>
                                             @endif
@@ -106,7 +106,7 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][link]"
-                                                value="{{ $item->preparedTranslations[$language->id]->link ?? null }}"
+                                                value="{{ old('translation.'.$language->id.'.link') ?? $item->preparedTranslations[$language->id]->link ?? null }}"
                                                 required
                                             />
                                             @if($errors->has('link'))
@@ -119,7 +119,7 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('text_of_link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][text_of_link]"
-                                                value="{{ $item->preparedTranslations[$language->id]->text_of_link ?? null }}"
+                                                value="{{ old('translation.'.$language->id.'.text_of_link') ?? $item->preparedTranslations[$language->id]->text_of_link ?? null }}"
                                                 required
                                             />
                                             @if($errors->has('text_of_link'))

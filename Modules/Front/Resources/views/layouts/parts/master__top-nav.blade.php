@@ -74,6 +74,30 @@
                                             <a class="active" href="{{ route('home') }}">Главная</a>
                                         @endif
                                     </li>
+                                    <li>
+                                        <a class="" href="#">{{ __('front::label.services') }}</a>
+                                        @if(isset($menu['services']) && !empty($menu['services']))
+                                            <ul class="sub_menu">
+                                                @foreach($menu['services'] as $serviceMenu)
+                                                    <li>
+                                                        <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix]) }}">{{ $serviceMenu->translation->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                    <li>
+                                        <a class="" href="#">{{ __('front::label.projects') }}</a>
+                                        @if(isset($menu['services']) && !empty($menu['services']))
+                                            <ul class="sub_menu">
+                                                @foreach($menu['projects'] as $projectMenu)
+                                                    <li>
+                                                        <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix]) }}">{{ $projectMenu->translation->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

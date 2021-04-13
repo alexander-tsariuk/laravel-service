@@ -32,6 +32,7 @@
                             </figure>
                         </div>
                     @endforeach
+{{--                @endif--}}
                 @elseif(isset($subServices) && !empty($subServices))
                     @foreach($subServices as $subService)
                         <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
