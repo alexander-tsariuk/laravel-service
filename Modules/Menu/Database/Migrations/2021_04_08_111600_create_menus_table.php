@@ -26,6 +26,12 @@ class CreateMenusTable extends Migration
             $table->bigInteger('menuId')->unsigned();
             $table->bigInteger('parentId')->unsigned()->nullable();
             $table->string('url');
+            $table->tinyInteger('status')->default(0);
+        });
+
+        Schema::create('menu_item_translations', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('menuItemId')->unsigned();
             $table->string('label');
             $table->bigInteger('languageId')->unsigned();
         });
@@ -40,5 +46,6 @@ class CreateMenusTable extends Migration
     {
         Schema::dropIfExists('menus');
         Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('menu_item_translations');
     }
 }

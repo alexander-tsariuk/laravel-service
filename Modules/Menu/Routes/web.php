@@ -22,6 +22,15 @@ Route::prefix('admin')->group(function() {
         Route::put('/edit/{itemId}', 'MenuController@update')->name('dashboard.menu.update');
 
 
-        Route::get('/{itemId}/items', 'MenuController@itemsIndex')->name('dashboard.menu.items.index');
+        Route::group(['prefix' => '{itemId}'], function () {
+            Route::get('/items', 'MenuItemsController@index')->name('dashboard.menu.items.index');
+
+            Route::get('/items/create', 'MenuItemsController@create')->name('dashboard.menu.items.create');
+            Route::post('/items/create', 'MenuItemsController@store')->name('dashboard.menu.items.store');
+
+            Route::get('/items/edit/{elementId}', 'MenuItemsController@edit')->name('dashboard.menu.items.edit');
+            Route::put('/items/edit/{elementId}', 'MenuItemsController@update')->name('dashboard.menu.items.update');
+        });
+
     });
 });

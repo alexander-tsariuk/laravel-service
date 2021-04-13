@@ -21,16 +21,7 @@
                                 <span class="text-danger">{{ $errors->first('status') }}</span>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label for="code">Код меню
-                                <br><code>Только латинские символы</code>
-                            </label>
-                            <input type="text" class="custom-select form-control-border {{ $errors->has('code') ? 'is-invalid' : '' }}" name="code" required value="{{ $item->code }}">
 
-                            @if($errors->has('code'))
-                                <span class="text-danger">{{ $errors->first('code') }}</span>
-                            @endif
-                        </div>
                         <div class="form-group">
                             <label for="name">
                                 Название меню
@@ -40,6 +31,17 @@
 
                             @if($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="code">Код меню
+                                <br><code>Только латинские символы</code>
+                            </label>
+                            <input type="text" class="custom-select form-control-border {{ $errors->has('code') ? 'is-invalid' : '' }}" name="code" required value="{{ $item->code }}">
+
+                            @if($errors->has('code'))
+                                <span class="text-danger">{{ $errors->first('code') }}</span>
                             @endif
                         </div>
                     </div>

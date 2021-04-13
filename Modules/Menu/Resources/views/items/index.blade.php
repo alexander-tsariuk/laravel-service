@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-2">
-{{--            <a href="{{ route('dashboard.menu.create') }}" class="btn btn-block btn-primary">Добавить</a>--}}
+            <a href="{{ route('dashboard.menu.items.create', ['itemId' => $itemId]) }}" class="btn btn-block btn-primary">Добавить</a>
         </div>
     </div>
 
@@ -29,11 +29,18 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->code }}</td>
+                                    <td>{{ $item->translation->label }}</td>
+                                    <td>{{ env('APP_URL') }}{{ $item->url }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
                                     <td>
-                                        {!! tableActions($item->id, 'menu') !!}
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('dashboard.menu.items.edit', ['itemId' => $itemId, 'elementId' => $item->id]) }}" class="btn btn-info" title="Редактировать">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="#" class="delete-item btn btn-danger" data-id="{$id}" data-route="{$route}" title='Удалить'>
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
