@@ -154,9 +154,6 @@ class OurWorksController extends DashboardController
 
             if($validator->fails()) {
                 return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])->withErrors($validator->errors())->withInput();
-
-//                return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $id])
-//                    ->with('errorMessage', "При обновлении данных элемента произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
             $item = OurWorkModel::updateItem($id, $request->all());

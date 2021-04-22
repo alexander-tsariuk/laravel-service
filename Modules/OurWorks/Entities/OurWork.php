@@ -67,6 +67,10 @@ class OurWork extends Model {
     protected function createItem(array $insertData) {
         $item = new OurWork();
 
+        if(isset($insertData['parentId']) || empty($insertData['parentId'])) {
+            $insertData['parentId'] = null;
+        }
+
         $item = $item->fill($insertData);
 
         $item->save();
@@ -86,6 +90,10 @@ class OurWork extends Model {
 
         if(!$item) {
             throw new \Exception("Элемент с таким идентификатором не был найден!");
+        }
+
+        if(isset($insertData['parentId']) || empty($insertData['parentId'])) {
+            $insertData['parentId'] = null;
         }
 
         $item = $item->fill($insertData);
