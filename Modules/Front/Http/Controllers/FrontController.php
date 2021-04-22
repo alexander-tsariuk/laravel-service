@@ -22,7 +22,10 @@ class FrontController extends Controller
         $this->pageData['slides'] = SliderModel::getActiveList();
 
         $this->pageData['menu'] = [
-            'services' => OurWorkModel::getList()->where('status', 1)->where('parentId', null)->get(),
+            'services' => OurWorkModel::getList()->where('status', 1)
+                ->where('parentId', null)
+                ->orWhere('parentId', 0)
+                ->get(),
             'projects' => ProjectModel::getList()->where('status', 1)->get(),
         ];
 
