@@ -23,5 +23,8 @@ Route::prefix('admin')->group(function() {
 
         Route::post('/upload-image/{directory}', 'PageController@uploadImage')->name('dashboard.page.uploadImage');
 
+
+        Route::delete('/delete/{itemId}', 'PageController@destroy')->name('dashboard.page.delete');
+
     });
 });

@@ -13,5 +13,7 @@ Route::prefix('admin')->group(function() {
 
         Route::get('/edit/{itemId}', 'ProjectController@edit')->name('dashboard.project.edit');
         Route::put('/edit/{itemId}', 'ProjectController@update')->name('dashboard.project.update');
+
+        Route::delete('/delete/{itemId}', 'ProjectController@destroy')->name('dashboard.project.delete');
     });
 });

@@ -24,5 +24,7 @@ Route::prefix('admin')->group(function() {
 
         Route::get('/edit/{itemId}', 'SliderController@edit')->name('dashboard.slider.edit');
         Route::put('/edit/{itemId}', 'SliderController@update')->name('dashboard.slider.update');
+
+        Route::delete('/delete/{itemId}', 'SliderController@destroy')->name('dashboard.slider.delete');
     });
 });

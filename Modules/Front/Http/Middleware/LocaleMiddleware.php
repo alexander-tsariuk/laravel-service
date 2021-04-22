@@ -31,6 +31,10 @@ class LocaleMiddleware
 
         setcookie('mainLangCode', $mainLang->prefix, time() + 60 * 60 * 60);
         setcookie('mainLangId', $mainLang->id, time() + 60 * 60 * 60);
+
+        config('app.defaultLocale', $mainLang->prefix);
+        config('app.defaultLocaleId', $mainLang->id);
+
         config()->set('app.langId', $mainLang->id);
 
 

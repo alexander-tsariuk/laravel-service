@@ -23,6 +23,9 @@ Route::prefix('admin')->group(function() {
 
         Route::get('/edit/{itemId}', 'OurWorksController@edit')->name('dashboard.ourservice.edit');
         Route::put('/edit/{itemId}', 'OurWorksController@update')->name('dashboard.ourservice.update');
+
+        Route::delete('/delete/{itemId}', 'OurWorksController@destroy')->name('dashboard.ourservice.destroy');
+
     });
 });
 

@@ -168,12 +168,38 @@ class SliderController extends DashboardController
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        dd($id);
+        $response = [
+            'success' => true,
+            'message' => null
+        ];
+
+        try {
+            if(!is_numeric($id) || empty($id)) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            $item = SliderModel::find($id);
+
+            if(!$item) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            if(!$item->delete()) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            } else {
+                $response['message'] = "Выбранный элемент успешно удалён!";
+            }
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -211,6 +237,7 @@ class SliderController extends DashboardController
 
         return $response;
     }
+
     /**
      * Удаление изображений слайда
      * @param Request $request

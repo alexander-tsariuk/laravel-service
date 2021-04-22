@@ -105,6 +105,8 @@
 {{--            <b>Version</b> 3.1.0-rc--}}
 {{--        </div>--}}
     </footer>
+
+    @include('dashboard::layouts.modals.master__delete_modal')
 </div>
 <!-- ./wrapper -->
 
@@ -171,6 +173,53 @@
     </script>
 @endif
 
+@yield('footer-scripts')
+
+
+<script>
+    $(function () {
+        var $deleteBtn = $('a.delete-item');
+        var $deleteModal = $('#modal-delete-item');
+
+        var deletingRoute = "";
+
+        $deleteBtn.on('click', function (e) {
+            e.preventDefault();
+
+            var id = $(this).data('id'),
+                route = $(this).data('route');
+
+            deletingRoute = '/admin/' + route + '/delete/' + id;
+
+            $deleteModal.find('#confirmDelete').attr('data-id', id);
+            $deleteModal.modal('show');
+        });
+
+        $deleteModal.find('#confirmDelete').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: deletingRoute,
+                method: 'DELETE',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if(response.success === true) {
+                        toastr.success(response.message);
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+
+            $deleteModal.modal('hide');
+        });
+    });
+</script>
 
 </body>
 </html>

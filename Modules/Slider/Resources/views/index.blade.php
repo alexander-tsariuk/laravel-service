@@ -51,5 +51,9 @@
         </div>
     </div>
 
-    @include('dashboard::layouts.modals.master__delete_modal')
+@endsection
+
+@section('footerScripts')
+
+
 @endsection

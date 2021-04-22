@@ -175,7 +175,33 @@ class ProjectController extends DashboardController
      */
     public function destroy($id)
     {
-        //
+        $response = [
+            'success' => true,
+            'message' => null
+        ];
+
+        try {
+            if(!is_numeric($id) || empty($id)) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            $item = ProjectModel::find($id);
+
+            if(!$item) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            if(!$item->delete()) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            } else {
+                $response['message'] = "Выбранный элемент успешно удалён!";
+            }
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
+        }
+
+        return response()->json($response);
     }
 
     /**

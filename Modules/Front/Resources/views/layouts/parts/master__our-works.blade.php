@@ -15,12 +15,12 @@
                     <div class="work_slider_inner swiper-wrapper">
                         @foreach($ourWorks as $ourWork)
                             <div class="works_slick_list swiper-slide">
-                                <a href="{{$_COOKIE['mainLangCode'] != $_COOKIE['langCode'] ? "/{$_COOKIE['langCode']}" : null}}{{ route('front.render.page', ['prefix' => $ourWork->prefix], false) }}">
+                                <a href="{{ config()->get('app.defaultLocale') != config()->get('app.locale') ? "/".config()->get('app.locale') : null}}{{ route('front.render.page', ['prefix' => $ourWork->prefix], false) }}">
                                     <img src="/storage{{$ourWork->image}}" alt="" />
                                 </a>
                                 <div class="work_slick_text">
                                     <h2 class="title">
-                                        <a class="title-link" href="{{$_COOKIE['mainLangCode'] != $_COOKIE['langCode'] ? "/{$_COOKIE['langCode']}" : null}}{{ route('front.render.page', [
+                                        <a class="title-link" href="{{config()->get('app.defaultLocale') != config()->get('app.locale') ? "/".config()->get('app.locale') : null}}{{ route('front.render.page', [
                                             'prefix' => $ourWork->prefix,
                                             ], false) }}">{{ $ourWork->translation->name }}</a>
                                     </h2>

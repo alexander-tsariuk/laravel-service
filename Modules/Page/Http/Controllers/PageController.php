@@ -151,11 +151,29 @@ class PageController extends DashboardController
     public function destroy($id)
     {
         $response = [
-            'success' => false
+            'success' => true,
+            'message' => null
         ];
 
-        if(is_numeric($id) && !empty($id)) {
-            $response['success'] = PageModel::deleteItem($id);
+        try {
+            if(!is_numeric($id) || empty($id)) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            $item = PageModel::find($id);
+
+            if(!$item) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            }
+
+            if(!$item->delete()) {
+                throw new \Exception("При удалении элемента произошла ошибка. Повторите попытку или обратитесь к администратору!");
+            } else {
+                $response['message'] = "Выбранный элемент успешно удалён!";
+            }
+        } catch (\Exception $exception) {
+            $response['message'] = $exception->getMessage();
+            $response['success'] = false;
         }
 
         return response()->json($response);
