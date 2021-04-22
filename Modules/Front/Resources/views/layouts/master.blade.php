@@ -97,13 +97,11 @@
 <!--footer area start-->
 <footer class="footer_widgets">
     <div class="container">
-        <div class="section_title text-center position-relative mb-66">
-            <h2>Drop Us <span>A Line</span></h2>
-        </div>
+        @include('front::layouts.parts.master__contact-form')
+
         <div class="row">
             <div class="col-12">
                 <div class="footer_inner position-relative">
-
                     <div class="main_footer d-flex justify-content-between">
                         <div class="footer_widget_list footer_menu mb-lm-30px">
                             <ul>
