@@ -130,37 +130,6 @@
                             </ul>
                         </div>
                         <div class="footer_widget_list newsletter_subscribe">
-                            <p>Sign up for get our newsletter</p>
-                            <!-- News letter area -->
-                            <div id="mc_embed_signup" class="subscribe-form">
-                                <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank"
-                                      name="mc-embedded-subscribe-form" method="post"
-                                      action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef">
-                                    <div id="mc_embed_signup_scroll" class="mc-form">
-                                        <input class="email" type="email" required="" placeholder="Your Mail*"
-                                               name="EMAIL" value="" />
-                                        <div class="mc-news" aria-hidden="true">
-                                            <input type="text" value="" tabindex="-1"
-                                                   name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" />
-                                        </div>
-                                        <div class="clear">
-                                            <button id="mc-embedded-subscribe" class="border-0" type="submit"
-                                                    name="subscribe" value=""><i class="ei ei-arrow_right"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- News letter area  End -->
-                            <!-- mailchimp-alerts Start -->
-                            <div class="mailchimp-alerts text-centre">
-                                <div class="mailchimp-submitting"></div>
-                                <!-- mailchimp-submitting end -->
-                                <div class="mailchimp-success"></div>
-                                <!-- mailchimp-success end -->
-                                <div class="mailchimp-error"></div>
-                                <!-- mailchimp-error end -->
-                            </div>
-                            <!-- mailchimp-alerts end -->
                         </div>
                     </div>
                     <div class="footer_bottom d-flex justify-content-between align-items-center">
