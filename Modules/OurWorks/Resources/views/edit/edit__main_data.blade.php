@@ -17,6 +17,13 @@
                 <span class="text-danger">{{ $errors->first('prefix') }}</span>
             @endif
         </div>
+        <div class="form-group">
+            <label for="position">Позиция</label>
+            <input type="text" class="custom-select form-control-border {{ $errors->has('position') ? 'is-invalid' : '' }}" name="position" required value="{{ old('position') ?? $item->position }}">
+            @if($errors->has('position'))
+                <span class="text-danger">{{ $errors->first('position') }}</span>
+            @endif
+        </div>
 
         <div class="form-group">
             <label for="parentId">Родительский элемент</label>

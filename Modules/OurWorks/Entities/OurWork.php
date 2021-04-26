@@ -17,7 +17,8 @@ class OurWork extends Model {
         'prefix',
         'status',
         'image',
-        'parentId'
+        'parentId',
+        'position'
     ];
 
     public function translations() {
@@ -70,6 +71,10 @@ class OurWork extends Model {
         if(isset($insertData['parentId']) || empty($insertData['parentId'])) {
             $insertData['parentId'] = null;
         }
+
+        $maxSort = parent::max('position');
+
+        $insertData['position'] = $maxSort + 1;
 
         $item = $item->fill($insertData);
 
@@ -125,12 +130,7 @@ class OurWork extends Model {
 
     protected function getActiveList() {
         return $this->orderBy('id', 'DESC')
-            ->where('status', 1)
-            ->whereIn('parentId', [
-                null,
-                0
-            ])
-            ->get();
+            ->where('status', 1);
     }
 
     protected function deleteImage(int $itemId, string $directory) {

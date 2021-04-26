@@ -15,7 +15,7 @@
                             <div class="col-lg-6 col-md-8 col-sm-12 form_input_list">
                                 <input name="name" placeholder="Ваше имя" type="text">
                             </div>
-                            <div class="col-lg-6 col-md-8 col-sm-12 form_input_list">
+                            <div class="col-lg-6 col-md-884484 col-sm-12 form_input_list">
                                 <input name="email" placeholder="Ваш e-mail" type="email">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form_input_list">

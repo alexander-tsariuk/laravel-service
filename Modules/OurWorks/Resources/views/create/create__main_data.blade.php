@@ -10,6 +10,7 @@
                 <span class="text-danger">{{ $errors->first('status') }}</span>
             @endif
         </div>
+
         <div class="form-group">
             <label for="prefix">Алиас</label>
             <input type="text" class="custom-select form-control-border {{ $errors->has('prefix') ? 'is-invalid' : '' }}" name="prefix" required value="{{ old('prefix') }}">

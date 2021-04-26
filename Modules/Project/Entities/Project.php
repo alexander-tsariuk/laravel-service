@@ -108,7 +108,7 @@ class Project extends Model {
     }
 
     protected function getActiveList() {
-        return $this->orderBy('id', 'DESC')->where('status', 1)->get();
+        return $this->orderBy('id', 'DESC')->where('status', 1);
     }
 
     protected function getByPrefix(string $prefix) {

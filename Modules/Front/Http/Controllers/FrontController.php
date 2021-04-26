@@ -36,7 +36,12 @@ class FrontController extends Controller
         $this->pageData['langCode'] = app()->getLocale();
         $this->pageData['langId'] = config()->get('app.localeId');
 
-        $this->pageData['ourWorks'] = OurWorkModel::getActiveList();
+        $this->pageData['services'] = OurWorkModel::getActiveList()
+            ->where('parentId', null)
+            ->limit(9)
+            ->get();
+
+        $this->pageData['ourWorks'] = ProjectModel::getActiveList()->limit(3)->get();
 
         $this->pageData['seo'] = $this->getSeoDataForMainPage($this->pageData['settings']);
 

@@ -20,6 +20,7 @@
                             <th style="width: 10px">#</th>
                             <th>Название</th>
                             <th>Статус</th>
+                            <th>Позиция</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -30,6 +31,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->translation->name }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
+                                    <td>{{ $item->position }}</td>
                                     <td>{!! tableActions($item->id, 'ourservice') !!}</td>
                                 </tr>
                             @endforeach
