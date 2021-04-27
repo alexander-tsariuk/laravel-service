@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="services_position_img wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s" style="visibility: visible; animation-duration: 1.2s; animation-delay: 0.2s; animation-name: fadeInUp;">
-                            <img src="assets/img/bg/img1.png" alt="">
+                            <img src="{{ Module::asset('front:img/bg/img1.png') }}" alt="">
                         </div>
                         <div class="services_list">
                             <div class="single_services d-flex wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s" style="visibility: visible; animation-duration: 1.2s; animation-delay: 0.2s; animation-name: fadeInUp;">
