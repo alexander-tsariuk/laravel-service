@@ -84,16 +84,17 @@
 
 @yield('content')
 
-<section class="team_members_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                {!! isset($settings['mainpage']['map_code']) && !empty($settings['mainpage']['map_code']->content) ? trim($settings['mainpage']['map_code']->content) : '' !!}
+@if($displayMap)
+    <section class="team_members_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    {!! isset($settings['mainpage']['map_code']) && !empty($settings['mainpage']['map_code']->content) ? trim($settings['mainpage']['map_code']->content) : '' !!}
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
+@endif
 <!--footer area start-->
 <footer class="footer_widgets">
     <div class="container">

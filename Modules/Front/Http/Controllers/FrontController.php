@@ -185,6 +185,11 @@ class FrontController extends Controller
             abort(404);
         }
 
+        $this->pageData['displayMap'] = true;
+        if($pagePrefix != 'contact') {
+            $this->pageData['displayMap'] = false;
+        }
+
         $this->pageData['seo'] = $this->getSeoData($this->pageData['page']);
 
         return view('front::content-page', $this->pageData);
