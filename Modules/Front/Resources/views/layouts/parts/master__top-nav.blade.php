@@ -101,6 +101,23 @@
                                 </ul>
                             </nav>
                         </div>
+                        <div class="main_menu d-none d-lg-block float-right">
+                            <nav>
+                                <ul class="d-flex">
+                                    <li>
+                                        <a href="#">RU</a>
+                                        <ul class="sub_menu">
+                                            <li>
+                                                <a href="#">RU</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">UA</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                         <div class="main_header_right d-flex align-items-center">
                             <div class="canvas_open">
                                 <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
