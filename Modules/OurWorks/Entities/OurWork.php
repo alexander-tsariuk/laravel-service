@@ -129,7 +129,7 @@ class OurWork extends Model {
     }
 
     protected function getActiveList() {
-        return $this->orderBy('id', 'DESC')
+        return $this->orderBy('position', 'ASC')
             ->where('status', 1);
     }
 
