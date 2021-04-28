@@ -36,7 +36,7 @@
         slidesPerView: 3,
         spaceBetween: 10,
         autoplay: {
-            delay: 5000,
+            delay: 7000,
             disableOnInteraction: false,
         },
         scrollbar: {
@@ -76,7 +76,7 @@
         slidesPerView: 1,
         spaceBetween: 10,
         autoplay: {
-            delay: 5000,
+            delay: 7000,
             disableOnInteraction: false,
         },
         navigation: {
@@ -96,7 +96,7 @@
         slidesPerView: 3,
         spaceBetween: 30,
         autoplay: {
-            delay: 5000,
+            delay: 7000,
             disableOnInteraction: false,
         },
 
@@ -152,7 +152,7 @@
         slidesPerView: 1,
         spaceBetween: 0,
         autoplay: {
-            delay: 5000,
+            delay: 7000,
             disableOnInteraction: false,
         },
 

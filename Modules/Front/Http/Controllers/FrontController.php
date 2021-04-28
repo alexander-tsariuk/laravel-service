@@ -20,6 +20,7 @@ class FrontController extends Controller
         $this->pageData['sitename'] = isset($this->pageData['settings']['general']['sitename']) && !empty($this->pageData['settings']['general']['sitename']) ? trim($this->pageData['settings']['general']['sitename']->content) : '';
         $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
         $this->pageData['slides'] = SliderModel::getActiveList();
+        $this->pageData['displayMap'] = false;
 
         $this->pageData['menu'] = [
             'services' => OurWorkModel::getList()->where('status', 1)
@@ -43,6 +44,7 @@ class FrontController extends Controller
 
         $this->pageData['ourWorks'] = ProjectModel::getActiveList()->limit(3)->get();
 
+        $this->pageData['displayMap'] = true;
         $this->pageData['seo'] = $this->getSeoDataForMainPage($this->pageData['settings']);
 
         return view('front::index', $this->pageData);
@@ -185,9 +187,8 @@ class FrontController extends Controller
             abort(404);
         }
 
-        $this->pageData['displayMap'] = true;
-        if($pagePrefix != 'contact') {
-            $this->pageData['displayMap'] = false;
+       if($pagePrefix == 'contact') {
+            $this->pageData['displayMap'] = true;
         }
 
         $this->pageData['seo'] = $this->getSeoData($this->pageData['page']);

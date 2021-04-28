@@ -74,7 +74,6 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][link]"
-                                                required
                                                 value="{{ old('translation.'.$language->id.'.link') }}"
                                             />
                                             @if($errors->has('link'))
@@ -87,7 +86,6 @@
                                                 type="text"
                                                 class="form-control form-control-border {{ $errors->has('text_of_link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][text_of_link]"
-                                                required
                                                 value="{{ old('translation.'.$language->id.'.text_of_link') }}"
                                             />
                                             @if($errors->has('text_of_link'))

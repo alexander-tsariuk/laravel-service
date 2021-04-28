@@ -14,7 +14,7 @@
                 @foreach($services as $service)
                     <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">
                         <figure class="portfolio_thumb wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                            <a href="{{$_COOKIE['mainLangCode'] != $_COOKIE['langCode'] ? "/{$_COOKIE['langCode']}" : null}}{{ route('front.render.page', ['prefix' => $service->prefix], false) }}">
+                            <a href="{{config()->get('app.defaultLocale') != config()->get('app.locale')  ? "/".config()->get('app.locale') : null}}{{ route('front.render.page', ['prefix' => $service->prefix], false) }}">
                                 <img src="/storage{{ $service->image }}" alt="{{ $service->translation->name }}">
                             </a>
                             <div class="portfolio_text">

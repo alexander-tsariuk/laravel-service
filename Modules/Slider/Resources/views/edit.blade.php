@@ -107,7 +107,6 @@
                                                 class="form-control form-control-border {{ $errors->has('link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][link]"
                                                 value="{{ old('translation.'.$language->id.'.link') ?? $item->preparedTranslations[$language->id]->link ?? null }}"
-                                                required
                                             />
                                             @if($errors->has('link'))
                                                 <span class="text-danger">{{ $errors->first('link') }}</span>
@@ -120,7 +119,6 @@
                                                 class="form-control form-control-border {{ $errors->has('text_of_link') ? 'is-invalid' : '' }}"
                                                 name="translation[{{$language->id}}][text_of_link]"
                                                 value="{{ old('translation.'.$language->id.'.text_of_link') ?? $item->preparedTranslations[$language->id]->text_of_link ?? null }}"
-                                                required
                                             />
                                             @if($errors->has('text_of_link'))
                                                 <span class="text-danger">{{ $errors->first('text_of_link') }}</span>
