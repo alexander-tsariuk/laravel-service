@@ -100,6 +100,7 @@
 <footer class="footer_widgets">
     <div class="container">
         @include('front::layouts.parts.master__contact-form')
+        @include('front::layouts.parts.master__seo_text')
 
         <div class="row">
             <div class="col-12">

@@ -43,10 +43,21 @@
                                 class="form-control form-control-border {{ $errors->has('short_description') ? 'is-invalid' : '' }}"
                                 name="translation[{{$language->id}}][short_description]"
                                 value="{{ $item->preparedTranslations[$language->id]->short_description ?? null }}"
-                                required
                             />
                             @if($errors->has('translation.'.$language->id.'.short_description'))
                                 <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.short_description') }}</span>
+                            @endif
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="translation[{{$language->id}}][seo_text]">SEO текст</label>
+                            <textarea
+                                class="summernote form-control form-control-border {{ $errors->has('seo_text') ? 'is-invalid' : '' }}"
+                                name="translation[{{$language->id}}][seo_text]"
+                            >{{ $item->preparedTranslations[$language->id]->seo_text ?? null }}</textarea>
+                            @if($errors->has('translation.'.$language->id.'.seo_text'))
+                                <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.seo_text') }}</span>
                             @endif
                         </div>
                     </div>

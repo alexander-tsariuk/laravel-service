@@ -20,7 +20,8 @@ class OurWorkTranslation extends Model {
         'set_404',
         'set_noindex',
         'set_nofollow',
-        'short_description'
+        'short_description',
+        'seo_text'
     ];
 
     /**
@@ -49,6 +50,7 @@ class OurWorkTranslation extends Model {
                     'set_noindex' => $translation['set_noindex'] ?? 0,
                     'set_nofollow' => $translation['set_nofollow'] ?? 0,
                     'short_description' => $translation['short_description'] ?? null,
+                    'seo_text' => $translation['seo_text'] ?? null,
                 ]);
 
                 if($translationItem->save()) {
@@ -89,6 +91,7 @@ class OurWorkTranslation extends Model {
                     'set_noindex' => $translation['set_noindex'],
                     'set_nofollow' => $translation['set_nofollow'],
                     'short_description' => $translation['short_description'] ?? null,
+                    'seo_text' => $translation['seo_text'] ?? null,
                 ]);
 
                 if($translationItem->save()) {
