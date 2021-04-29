@@ -35,6 +35,20 @@
                                 <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.name') }}</span>
                             @endif
                         </div>
+
+                        <div class="form-group">
+                            <label for="translation[{{$language->id}}][short_description]">Краткое описание</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-border {{ $errors->has('short_description') ? 'is-invalid' : '' }}"
+                                name="translation[{{$language->id}}][short_description]"
+                                value="{{ $item->preparedTranslations[$language->id]->short_description ?? null }}"
+                                required
+                            />
+                            @if($errors->has('translation.'.$language->id.'.short_description'))
+                                <span class="text-danger">{{ $errors->first('translation.'.$language->id.'.short_description') }}</span>
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             @endif

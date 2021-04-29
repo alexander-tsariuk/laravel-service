@@ -248,26 +248,26 @@
 
 
     /*blog Isotope activation*/
-    $('.blog_page_gallery,.portfolio_page_gallery').imagesLoaded(function () {
-        // init Isotope
-        var $grid = $('.blog_page_gallery,.portfolio_page_gallery').isotope({
-            itemSelector: '.gird_item',
-            percentPosition: true,
-            masonry: {
-                columnWidth: '.gird_item'
-            }
-        });
-
-        // filter items on button click
-        $('.blog_messonry_button,.portfolio_messonry_button').on('click', 'button', function () {
-            var filterValue = $(this).attr('data-filter');
-            $grid.isotope({ filter: filterValue });
-
-            $(this).siblings('.active').removeClass('active');
-            $(this).addClass('active');
-        });
-
-    });
+    // $('.blog_page_gallery,.portfolio_page_gallery').imagesLoaded(function () {
+    //     // init Isotope
+    //     var $grid = $('.blog_page_gallery,.portfolio_page_gallery').isotope({
+    //         itemSelector: '.gird_item',
+    //         percentPosition: true,
+    //         masonry: {
+    //             columnWidth: '.gird_item'
+    //         }
+    //     });
+    //
+    //     // filter items on button click
+    //     $('.blog_messonry_button,.portfolio_messonry_button').on('click', 'button', function () {
+    //         var filterValue = $(this).attr('data-filter');
+    //         $grid.isotope({ filter: filterValue });
+    //
+    //         $(this).siblings('.active').removeClass('active');
+    //         $(this).addClass('active');
+    //     });
+    //
+    // });
 
 
 
@@ -276,7 +276,38 @@
 
 
 
+    $('a.projects-load').on('click', function (e) {
+        e.preventDefault();
 
+        let page = Number($(this).data('page')),
+            service = Number($(this).data('service'));
+
+        $.ajax({
+            url: '/ajax/projects/load-more',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                currentPage: page,
+                service: service,
+                lang: $('html').attr('lang'),
+                _token: $('[name="_token"]').val()
+            },
+            success: function (response) {
+                if(response.success === true) {
+                    $('#projects-container').append(response.items);
+
+                    if(response.hideButton === true) {
+                        $('a.projects-load').addClass('hidden');
+                    }
+
+                    $('a.projects-load').attr('data-page', response.nextPage);
+
+                } else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    });
 
 
 

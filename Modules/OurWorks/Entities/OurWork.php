@@ -129,8 +129,7 @@ class OurWork extends Model {
     }
 
     protected function getActiveList() {
-        return $this->orderBy('position', 'ASC')
-            ->where('status', 1);
+        return $this->orderByRaw('LENGTH(position) asc')->orderBy('position', 'ASC')->where('status', 1);
     }
 
     protected function deleteImage(int $itemId, string $directory) {

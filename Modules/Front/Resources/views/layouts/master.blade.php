@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="ru">
+<html class="no-js" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8" />
@@ -78,6 +78,7 @@
 </head>
 
 <body>
+{{ csrf_field() }}
 
 @include('front::layouts.parts.master__top-nav')
 

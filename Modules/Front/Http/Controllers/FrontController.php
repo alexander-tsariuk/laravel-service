@@ -3,6 +3,7 @@
 namespace Modules\Front\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Entities\Setting as SettingModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Page\Entities\Page;
@@ -13,6 +14,8 @@ use Modules\Slider\Entities\Slider as SliderModel;
 class FrontController extends Controller
 {
     public $pageData;
+
+    private $projectsPerPage = 9;
 
     public function __construct() {
         $this->pageData['settings'] = SettingModel::getList();
@@ -137,7 +140,7 @@ class FrontController extends Controller
             $this->pageData['projects'] = ProjectModel::getList()
                 ->where('serviceId', $this->pageData['service']->id)
                 ->where('status', 1)
-                ->get();
+                ->paginate($this->projectsPerPage);
         } else {
             $this->pageData['service'] = OurWorkModel::getByPrefix($firstPrefix);
             $this->pageData['subServices'] = OurWorkModel::getChildList($this->pageData['service']->id);
@@ -194,6 +197,69 @@ class FrontController extends Controller
         $this->pageData['seo'] = $this->getSeoData($this->pageData['page']);
 
         return view('front::content-page', $this->pageData);
+    }
+
+
+    public function ajaxProjectsLoad() {
+        $result = [
+            'success' => true,
+            'message' => null,
+            'items' => null,
+            'hideButton' => false,
+            'nextPage' => 0
+        ];
+
+        try {
+            $validation = Validator::make(request()->all(), [
+                'currentPage' => 'required|integer',
+                'service' => 'required|integer',
+                'lang' => 'required|max:2'
+            ], [
+                'required' => "Поле \":attribute\" обязательно к заполнению",
+                'integer' => "Поле \":attribute\" должно иметь числовое значение",
+                'max' => "Максимальная длина поля \":attribute\" должна иметь не более :max символом",
+            ]);
+
+            if($validation->fails()) {
+                throw new \Exception("При загрузке списка проектов произошла ошибка!");
+            }
+
+            $loadingPage = (int)request()->get('currentPage');
+
+            $result['nextPage'] = $loadingPage + 1;
+
+            $projects = ProjectModel::getList()
+                ->where('serviceId', request()->get('service'))
+                ->where('status', 1)
+                ->offset($this->projectsPerPage * $loadingPage)
+                ->take($this->projectsPerPage)
+                ->get();
+
+            $html = "";
+
+            $count = ProjectModel::getList()
+                ->where('serviceId', request()->get('service'))
+                ->where('status', 1)
+                ->count();
+
+            if($this->projectsPerPage * $loadingPage + 1 >= $count ) {
+                $result['hideButton'] = true;
+            }
+
+            app()->setLocale(request()->get('lang'));
+
+            foreach ($projects as $project) {
+                $html .= view("front::ajax.projects.row", ['project' => $project])->render();
+            }
+
+            $result['items'] = $html;
+
+        } catch (\Exception $exception) {
+            $result['success'] = false;
+            $result['message'] = $exception->getMessage();
+        }
+
+        return response()->json($result);
     }
 
 }

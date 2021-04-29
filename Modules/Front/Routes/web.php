@@ -21,4 +21,6 @@ if (!strpos(Request::url(),"admin")) {
         Route::get('/{prefix}/{subPrefix?}', 'FrontController@renderPage')->name('front.render.page')->middleware('locale');
     });
 
+
+    Route::post('/ajax/projects/load-more', 'FrontController@ajaxProjectsLoad')->name('ajax.projects.load-more');
 }
