@@ -309,6 +309,12 @@
         });
     });
 
+    $('form#contact-form').on('submit', function(e) {
+        e.preventDefault();
+
+        alert('submit form');
+    });
+
 
 
 })(jQuery);
