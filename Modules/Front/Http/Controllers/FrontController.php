@@ -3,13 +3,16 @@
 namespace Modules\Front\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Modules\ContactUs\Entities\ContactUs as ContactUsModel;
 use Modules\Dashboard\Entities\Setting as SettingModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Page\Entities\Page;
 use Modules\Page\Entities\Page as PageModel;
 use Modules\Project\Entities\Project as ProjectModel;
 use Modules\Slider\Entities\Slider as SliderModel;
+use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -260,6 +263,59 @@ class FrontController extends Controller
         }
 
         return response()->json($result);
+    }
+
+    public function ajaxSendMessage(Request $request) {
+        $response = [
+            'success' => true,
+            'message' => ''
+        ];
+
+        try {
+            $validate = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255',
+                'phone' => 'required',
+                'lang' => 'required'
+            ], [
+                'required' => __('front::mainpage.contact.required', [], $request->get('lang')),
+                'min' => __('front::mainpage.contact.min', [], $request->get('lang')),
+                'max' => __('front::mainpage.contact.max', [], $request->get('lang')),
+            ], [
+                'name' => 'Ваше имя',
+                'phone' => 'Номер телефона',
+            ]);
+
+            if($validate->fails()) {
+                throw new \Exception($validate->errors()->first());
+            }
+
+            $to_name = "администратор сайта";
+            $to_email = env('MAIL_FROM_ADDRESS');
+
+            $data = array(
+                'subject'=> "Поступила новая заявка с сайта ".env("APP_NAME"),
+                'request' => $request->all(),
+            );
+
+            Mail::send('front::emails.contact_us', $data, function($message) use ($to_name, $to_email, $data) {
+                $message->to($to_email, $to_name)->subject($data['subject']);
+                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+            });
+
+            ContactUsModel::createItem([
+                'name' => $request->get('name'),
+                'phone' => $request->get('phone'),
+                'comment' => $request->get('message', null)
+            ]);
+
+            $response['message'] = __('front::mainpage.contact.success', [], $request->get('lang'));
+
+        } catch(\Exception $exception) {
+            $response['success'] = false;
+            $response['message'] = $exception->getMessage();
+        }
+
+        return response()->json($response);
     }
 
 }

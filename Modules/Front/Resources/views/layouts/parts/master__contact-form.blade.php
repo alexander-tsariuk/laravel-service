@@ -10,7 +10,9 @@
                 <div class="contact-form">
 
                     <!--Contact Form-->
-                    <form id="contact-form">
+                    <form id="contact-form" method="POST" action="{{ route('ajax.contact.send') }}">
+                        @csrf
+                        <input type="hidden" name="lang" value="{{ app()->getLocale() }}"/>
                         <div class="row">
                             <div class="col-lg-6 col-md-8 col-sm-12 form_input_list">
                                 <input name="name" placeholder="{{ __('front::contact-form.your_name', [], app()->getLocale()) }}" type="text" required>

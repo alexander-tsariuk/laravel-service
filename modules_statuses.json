@@ -7,5 +7,6 @@
     "User": true,
     "Front": true,
     "Project": true,
-    "Menu": true
+    "Menu": true,
+    "ContactUs": true
 }

@@ -23,4 +23,5 @@ if (!strpos(Request::url(),"admin")) {
 
 
     Route::post('/ajax/projects/load-more', 'FrontController@ajaxProjectsLoad')->name('ajax.projects.load-more');
+    Route::post('/ajax/contact/send', 'FrontController@ajaxSendMessage')->name('ajax.contact.send');
 }
