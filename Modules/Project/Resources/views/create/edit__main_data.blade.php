@@ -14,6 +14,19 @@
             @endif
         </div>
         <div class="form-group">
+            <label for="position">Позиция</label>
+            <input
+                type="text"
+                class="custom-select form-control-border {{ $errors->has('position') ? 'is-invalid' : '' }}"
+                name="position"
+                value="{{ old('position') }}"
+            />
+
+            @if($errors->has('prefix'))
+                <span class="text-danger">{{ $errors->first('prefix') }}</span>
+            @endif
+        </div>
+        <div class="form-group">
             <label for="prefix">Алиас</label>
             <input
                 type="text"

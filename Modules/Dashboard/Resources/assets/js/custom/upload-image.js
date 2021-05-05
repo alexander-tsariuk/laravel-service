@@ -39,6 +39,7 @@ $(function($) {
         });
     }
 
+    $(".dropzone").dropzone({ url: "/file/post" });
 });
 
 function sendFileImage(route, itemId, fileObject) {

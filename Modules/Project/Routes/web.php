@@ -15,5 +15,8 @@ Route::prefix('admin')->group(function() {
         Route::put('/edit/{itemId}', 'ProjectController@update')->name('dashboard.project.update');
 
         Route::delete('/delete/{itemId}', 'ProjectController@destroy')->name('dashboard.project.delete');
+
+        Route::post('/gallery-image/{itemId}', 'ProjectController@uploadGalleryImage')->name('dashboard.project.uploadGalleryImage');
+
     });
 });

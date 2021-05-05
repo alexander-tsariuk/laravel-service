@@ -19,6 +19,7 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Название</th>
+                            <th>Позиция</th>
                             <th>Статус</th>
                             <th></th>
                         </tr>
@@ -29,6 +30,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->translation->name }}</td>
+                                    <td>{{ $item->position }}</td>
                                     <td>{!! tableStatus($item->status) !!}</td>
                                     <td>{!! tableActions($item->id, 'project') !!}</td>
                                 </tr>

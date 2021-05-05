@@ -37,6 +37,18 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="short_description">Краткое описание</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-border {{ $errors->has('short_description') ? 'is-invalid' : '' }}"
+                                name="translation[{{$language->id}}][short_description]"
+                                value="{{ old('translation.'.$language->id.'.short_description') }}"
+                            />
+                            @if($errors->has('short_description'))
+                                <span class="text-danger">{{ $errors->first('short_description') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label for="name">Описание</label>
                             <textarea
                                 rows="2"

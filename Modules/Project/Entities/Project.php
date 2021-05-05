@@ -15,7 +15,8 @@ class Project extends Model {
         'prefix',
         'status',
         'image',
-        'serviceId'
+        'serviceId',
+        'position',
     ];
 
     public function translations() {
@@ -58,6 +59,14 @@ class Project extends Model {
      */
     protected function createItem(array $insertData) {
         $item = new Project();
+
+        if(!isset($insertData['position']) || empty((int)$insertData['position'])) {
+            $maxPosition = parent::select('position')->max('position');
+
+            $maxPosition += 1;
+
+            $insertData['position'] = $maxPosition;
+        }
 
         $item = $item->fill($insertData);
 
@@ -108,7 +117,7 @@ class Project extends Model {
     }
 
     protected function getActiveList() {
-        return $this->orderBy('id', 'DESC')->where('status', 1);
+        return $this->orderBy('position', 'ASC')->where('status', 1);
     }
 
     protected function getByPrefix(string $prefix) {

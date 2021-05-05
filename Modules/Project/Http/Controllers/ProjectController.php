@@ -276,4 +276,41 @@ class ProjectController extends DashboardController
 
         return $response;
     }
+
+
+    /**
+     * Загрузка изображений галереи проекта
+     * @param Request $request
+     * @param int $id
+     * @return array
+     */
+    public function uploadGalleryImage(Request $request, int $id) {
+        $response = [
+            'success' => false,
+            'messages' => null
+        ];
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'file' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4096'
+            ]);
+
+            if($validator->fails()) {
+                return $response['messages'][] = $validator->errors()->getMessages();
+            }
+
+            $uploadedFile = ProjectModel::uploadImage($id, $request->all());
+
+            if(!empty($uploadedFile)) {
+                $response['success'] = true;
+                $response['file'] = $uploadedFile;
+                $response['messages'] = 'Изображение успешно загружено!';
+            }
+
+        } catch (\Exception $exception) {
+            $response['messages'][] = $exception->getMessage();
+        }
+
+        return $response;
+    }
 }
