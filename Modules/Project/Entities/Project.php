@@ -18,6 +18,7 @@ class Project extends Model {
         'image',
         'serviceId',
         'position',
+        'showInMenu'
     ];
 
     public function images() {

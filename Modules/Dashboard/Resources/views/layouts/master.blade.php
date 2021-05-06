@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/dropzone/basic.css') }}">
     <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/dropzone/min/dropzone.min.css') }}">
 
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:css/project.css') }}">
+
 </head>
 <!--
 `body` tag options:

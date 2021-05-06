@@ -17,6 +17,7 @@ Route::prefix('admin')->group(function() {
         Route::delete('/delete/{itemId}', 'ProjectController@destroy')->name('dashboard.project.delete');
 
         Route::post('/gallery-image/{itemId}', 'ProjectController@uploadGalleryImage')->name('dashboard.project.uploadGalleryImage');
+        Route::delete('/gallery-image/delete/{imageId}', 'ProjectController@deleteGalleryImage')->name('dashboard.project.deleteGalleryImage');
 
     });
 });

@@ -278,7 +278,6 @@ class ProjectController extends DashboardController
         return $response;
     }
 
-
     /**
      * Загрузка изображений галереи проекта
      * @param Request $request
@@ -313,6 +312,32 @@ class ProjectController extends DashboardController
 
         } catch (\Exception $exception) {
             $response['error'] = $exception->getMessage();
+        }
+
+        return response()->json($response);
+    }
+
+    public function deleteGalleryImage(int $id) {
+        $response = [
+            'success' => true,
+            'message' => null
+        ];
+
+        try {
+            $projectImage = ProjectImagesModel::find($id);
+
+            if(!$projectImage) {
+                throw new \Exception("Не удалось удалить изображение. Повторите попытку или обратитесь к администратору!");
+            }
+
+            if(ProjectImagesModel::deleteImage($projectImage->id, 'project-images')) {
+                $response['message'] = "Выбранное изображение успешно удалено!";
+            } else{
+                throw new \Exception("Не удалось удалить изображение. Повторите попытку или обратитесь к администратору!");
+            }
+        } catch (\Exception $exception) {
+            $response['success'] = false;
+            $response['message'] = $exception->getMessage();
         }
 
         return response()->json($response);

@@ -45,11 +45,9 @@ class ProjectImages extends Model {
             throw new \Exception("Выбранный элемент не найден!");
         }
 
-        $uploadedFile = $uploader->delete($item->image);
+        $uploadedFile = $uploader->delete($item->path);
 
-        $item->image = null;
-
-        if(!$item->save()) {
+        if(!$item->delete()) {
             throw new \Exception("При удалении изображения произошла ошибка!");
         }
 

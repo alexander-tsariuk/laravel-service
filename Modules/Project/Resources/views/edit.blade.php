@@ -18,10 +18,6 @@
 
 @section('footer-scripts')
     <script>
-
-
-
-
         // Dropzone.autoDiscover = false;
         Dropzone.options.dUpload= {
             url: "{{ route('dashboard.project.uploadGalleryImage', ['itemId' => $item->id]) }}",
@@ -45,7 +41,31 @@
                     $('.gallery-items').append($item);
                 }
             }
-        }
+        };
+
+        $(function () {
+            $(document).on('click', 'a.deleteGalleryImage', function (e) {
+                e.preventDefault();
+
+                var _this = $(this);
+                let imageId = $(this).attr('data-image');
+
+                $.ajax({
+                    url: '/admin/project/gallery-image/delete/' + imageId,
+                    method: 'DELETE',
+                    success: function (data) {
+                        if(data.success === true) {
+                            toastr.success(data.message);
+
+                            _this.parents('.gallery-item').remove();
+
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    }
+                })
+            });
+        });
     </script>
 
 @endsection

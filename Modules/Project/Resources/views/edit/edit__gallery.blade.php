@@ -13,6 +13,9 @@
                     @foreach($item->images as $itemImage)
                         <div class="col-3 gallery-item border-right">
                             <img src="/storage{{ $itemImage->path }}" class="img-fluid">
+
+
+                            <a href="#" class="deleteGalleryImage btn btn-danger mt-2" data-image="{{ $itemImage->id }}">Удалить</a>
                         </div>
                     @endforeach
                 @endif

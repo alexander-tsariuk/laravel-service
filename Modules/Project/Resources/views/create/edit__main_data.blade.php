@@ -27,6 +27,16 @@
             @endif
         </div>
         <div class="form-group">
+            <label for="showInMenu">Показать в меню</label>
+            <select class="custom-select form-control-border {{ $errors->has('showInMenu') ? 'is-invalid' : '' }}" name="showInMenu">
+                <option value="0">Нет</option>
+                <option value="1" {{ old('showInMenu') == 1 ? 'selected' : ''}}>Да</option>
+            </select>
+            @if($errors->has('showInMenu'))
+                <span class="text-danger">{{ $errors->first('showInMenu') }}</span>
+            @endif
+        </div>
+        <div class="form-group">
             <label for="prefix">Алиас</label>
             <input
                 type="text"

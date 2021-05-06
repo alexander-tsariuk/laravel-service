@@ -33,7 +33,7 @@ class FrontController extends Controller
                 ->where('parentId', null)
                 ->orWhere('parentId', 0)
                 ->get(),
-            'projects' => ProjectModel::getList()->where('status', 1)->get(),
+            'projects' => ProjectModel::getList()->where('status', 1)->where('showInMenu', 1)->get(),
         ];
 
     }
