@@ -9,13 +9,13 @@
 
         <div class="container-fluid">
             <div class="row gallery-items mt-2 pt-2 border-top" >
-                    @if(isset($item->images) && !empty($item->images))
-                        @foreach($item->images as $itemImage)
-                            <div class="col-3 gallery-item border-right">
-                                <img src="/storage{{ $itemImage->path }}" class="img-fluid">
-                            </div>
-                        @endforeach
-                    @endif
+                @if(isset($item->images) && !empty($item->images))
+                    @foreach($item->images as $itemImage)
+                        <div class="col-3 gallery-item border-right">
+                            <img src="/storage{{ $itemImage->path }}" class="img-fluid">
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

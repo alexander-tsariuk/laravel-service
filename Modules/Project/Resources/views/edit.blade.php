@@ -18,6 +18,10 @@
 
 @section('footer-scripts')
     <script>
+
+
+
+
         // Dropzone.autoDiscover = false;
         Dropzone.options.dUpload= {
             url: "{{ route('dashboard.project.uploadGalleryImage', ['itemId' => $item->id]) }}",
@@ -31,6 +35,15 @@
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(file, response){
+                if(response.success) {
+                    var $item = "<div class=\"col-3 gallery-item border-right\">" +
+                        "<img src='/storage"+response.success+"' class='img-fluid'>"+
+                        "</div>";
+
+                    $('.gallery-items').append($item);
+                }
             }
         }
     </script>
