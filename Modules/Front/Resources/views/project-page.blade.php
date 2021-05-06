@@ -38,13 +38,17 @@
                         <div class="project_details_desc">
                             <div class="project_desc_list">{!! $project->translation->content !!}</div>
 
-                            <div class="project_desc_popou d-flex justify-content-between mt-5">
-                                <div class="popou_thumb_list wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                                    <a class="port_popup" href="https://htmldemo.hasthemes.com/asore/asore/assets/img/others/single-post2.jpg">
-                                        <img class="w-100" src="https://htmldemo.hasthemes.com/asore/asore/assets/img/others/single-post2.jpg" alt="">
-                                    </a>
+                            @if(isset($project->images) && !empty($project->images))
+                                <div class="project_desc_popou d-flex justify-content-between mt-5">
+                                    @foreach($project->images as $projectImage)
+                                        <div class="popou_thumb_list wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+                                            <a class="port_popup" href="/storage{{ $projectImage->path }}">
+                                                <img class="w-100" src="/storage{{ $projectImage->path }}" alt="{{ $project->translation->name }} Фото {{ $loop->index }}">
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
