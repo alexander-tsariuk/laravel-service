@@ -25,7 +25,9 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{{ Module::asset('dashboard:plugins/toastr/toastr.css') }}"/>
-    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/dropzone/dropzone.css') }}">
+
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/dropzone/basic.css') }}">
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/dropzone/min/dropzone.min.css') }}">
 
 </head>
 <!--
@@ -118,6 +120,9 @@
 <script src="{{ Module::asset('dashboard:plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ Module::asset('dashboard:plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ Module::asset('dashboard:plugins/dropzone/dropzone.js') }}"></script>
+
 <!-- AdminLTE -->
 <script src="{{ Module::asset('dashboard:js/adminlte.js') }}"></script>
 
@@ -132,9 +137,6 @@
 <script src="{{ Module::asset('dashboard:js/table.js') }}"></script>
 
 <script src="{{ Module::asset('dashboard:plugins/summernote/summernote-bs4.min.js') }}"></script>
-
-<script src="{{ Module::asset('dashboard:plugins/dropzone/dropzone.js') }}"></script>
-
 
 <script src="{{ Module::asset('dashboard:js/custom/upload-image.js') }}"></script>
 

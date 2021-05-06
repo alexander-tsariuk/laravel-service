@@ -18,16 +18,21 @@
 
 @section('footer-scripts')
     <script>
-        $(function () {
-            let projectId = $('input[name="projectId"]').val();
-
-            $('#dropzone').dropzone({
-                url: '/admin/project/gallery-image/' + projectId,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        });
+        // Dropzone.autoDiscover = false;
+        Dropzone.options.dUpload= {
+            url: "{{ route('dashboard.project.uploadGalleryImage', ['itemId' => $item->id]) }}",
+            paramName: 'uploadingFile',
+            autoProcessQueue: true,
+            uploadMultiple: true,
+            parallelUploads: 5,
+            maxFiles: 5,
+            maxFilesize: 1,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }
     </script>
 
 @endsection

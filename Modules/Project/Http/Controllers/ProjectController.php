@@ -11,6 +11,7 @@ use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Project\Entities\Project as ProjectModel;
+use Modules\Project\Entities\ProjectImages as ProjectImagesModel;
 use Modules\Project\Entities\ProjectTranslation as ProjectTranslationModel;
 
 class ProjectController extends DashboardController
@@ -287,30 +288,33 @@ class ProjectController extends DashboardController
     public function uploadGalleryImage(Request $request, int $id) {
         $response = [
             'success' => false,
-            'messages' => null
         ];
 
         try {
             $validator = Validator::make($request->all(), [
-                'file' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4096'
+                'uploadingFile.*' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4096'
             ]);
 
             if($validator->fails()) {
-                return $response['messages'][] = $validator->errors()->getMessages();
+                return response()->json([
+                    'error' => $validator->errors()->first()
+                ]);
             }
 
-            $uploadedFile = ProjectModel::uploadImage($id, $request->all());
+            $uploadingFiles = $request->uploadingFile;
+
+            foreach ($uploadingFiles as $uploadingFile) {
+                $uploadedFile = ProjectImagesModel::uploadImages($id, $uploadingFile);
+            }
 
             if(!empty($uploadedFile)) {
-                $response['success'] = true;
-                $response['file'] = $uploadedFile;
-                $response['messages'] = 'Изображение успешно загружено!';
+                $response['success'] = $uploadedFile;
             }
 
         } catch (\Exception $exception) {
-            $response['messages'][] = $exception->getMessage();
+            $response['error'] = $exception->getMessage();
         }
 
-        return $response;
+        return response()->json($response);
     }
 }

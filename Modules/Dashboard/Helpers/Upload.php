@@ -35,6 +35,26 @@ class Upload {
         return "/{$directory}/{$fileName}";
     }
 
+    public function uploadMultiple($itemId, $file) {
+        if(!$this->directory) {
+            throw new \Exception("Некорректно задана директория для загрузки изображения!");
+        }
+
+        $directory = "{$this->directory}/{$itemId}";
+
+        if(!Storage::exists("/public/{$directory}")) {
+            Storage::makeDirectory("/public/{$directory}");
+        }
+
+        $extension = $file->extension();
+
+        $fileName = Str::random(32).time().".".$extension;
+
+        $file->storeAs('/public/', $directory.'/'.$fileName);
+
+        return "/{$directory}/{$fileName}";
+    }
+
     public function delete(string $imagePath) {
         if(!$this->directory) {
             throw new \Exception("Некорректно задана директория для загрузки изображения!");

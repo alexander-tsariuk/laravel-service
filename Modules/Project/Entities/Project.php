@@ -8,7 +8,8 @@ use Modules\Dashboard\Helpers\Upload;
 class Project extends Model {
     protected $with = [
         'translations',
-        'translation'
+        'translation',
+        'images'
     ];
 
     protected $fillable = [
@@ -18,6 +19,10 @@ class Project extends Model {
         'serviceId',
         'position',
     ];
+
+    public function images() {
+        return $this->hasMany(ProjectImages::class, 'projectId', 'id');
+    }
 
     public function translations() {
         return $this->hasMany(ProjectTranslation::class, 'rowId', 'id');
