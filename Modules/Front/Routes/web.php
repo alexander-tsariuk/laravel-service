@@ -14,9 +14,9 @@
 //Route::group(['prefix?' => ])
 if (!strpos(Request::url(),"admin")) {
 
-    Route::prefix('{lang?}')->group(function () {
+    Route::prefix('{lang?}')->group(['middleware' => 'HtmlMinifier'], function () {
 
-        Route::get('/', 'FrontController@index')->name('home')->middleware('locale');
+        Route::get('/', 'FrontController@index')->name('front.home')->middleware('locale');
 
         Route::get('/{prefix}/{subPrefix?}', 'FrontController@renderPage')->name('front.render.page')->middleware('locale');
     });

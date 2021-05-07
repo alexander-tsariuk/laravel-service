@@ -5,6 +5,7 @@ namespace Modules\Dashboard\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class Upload {
 
@@ -15,7 +16,7 @@ class Upload {
         $this->directory = $directory;
     }
 
-    public function upload($itemId) {
+    public function upload($itemId, $sizes = []) {
         if(!$this->directory) {
             throw new \Exception("Некорректно задана директория для загрузки изображения!");
         }
@@ -27,12 +28,27 @@ class Upload {
         }
 
         $extension = request()->uploadingFile->extension();
+        $fileName = Str::random(32).time();
 
-        $fileName = Str::random(32).time().".".$extension;
+        // создаем изображение
+        $image = Image::make(request()->uploadingFile->getRealPath());
 
-        request()->uploadingFile->storeAs('/public/', $directory.'/'.$fileName);
+        $image->resize(isset($sizes['width']) ? $sizes['width'] : null, isset($sizes['height']) ? $sizes['height'] : null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
 
-        return "/{$directory}/{$fileName}";
+        $image->encode('jpg');
+
+        $imagePath = Storage::disk('public')->path("/{$directory}/{$fileName}".".{$extension}");
+        $imagePath = preg_replace("#(\/\/)#", "/", $imagePath);
+
+        $image->save($imagePath, 75);
+
+        // webp
+        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
+
+        return "/{$directory}/{$fileName}.{$extension}";
     }
 
     public function uploadMultiple($itemId, $file) {
@@ -52,6 +68,8 @@ class Upload {
 
         $file->storeAs('/public/', $directory.'/'.$fileName);
 
+        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
+
         return "/{$directory}/{$fileName}";
     }
 
@@ -67,6 +85,17 @@ class Upload {
         return true;
     }
 
+    public function makeWebp(string $imagePath, string $extension) {
+        $source = Storage::disk('public')->get($imagePath.'.'.$extension);
+
+        $image = Image::make($source)->encode('webp', 90);
+
+        $imagePath = Storage::disk('public')->path($imagePath.'.webp');
+
+        $imagePath = preg_replace("#(\/\/)#", "/", $imagePath);
+
+        return $image->save($imagePath);
+    }
 
 
 

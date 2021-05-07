@@ -11,10 +11,10 @@
                     <div id="menu" class="text-left">
                         <ul class="offcanvas_main_menu">
                             <li class="menu-item-has-children active">
-                                @if(request()->route()->getName() == 'home')
+                                @if(request()->route()->getName() == 'front.home')
                                     <a href="#">Главная</a>
                                 @else
-                                    <a href="{{ route('home') }}">Главная</a>
+                                    <a href="{{ route('front.home') }}">Главная</a>
                                 @endif
                             </li>
                             <li class="menu-item-has-children">
@@ -59,7 +59,7 @@
                 <div class="col-12">
                     <div class="header_container d-flex justify-content-between align-items-center">
                         <div class="header_logo">
-                            <a class="sticky_none" href="{{ request()->route()->getName() == 'home' ? '#' : route('home') }}">
+                            <a class="sticky_none" href="{{ request()->route()->getName() == 'front.home' ? '#' : route('front.home') }}">
                                 <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
                             </a>
                         </div>
@@ -68,10 +68,10 @@
                             <nav>
                                 <ul class="d-flex">
                                     <li>
-                                        @if(request()->route()->getName() == 'home')
+                                        @if(request()->route()->getName() == 'front.home')
                                             <a class="active" href="#">Главная</a>
                                         @else
-                                            <a class="active" href="{{ route('home') }}">Главная</a>
+                                            <a class="active" href="{{ route('front.home') }}">Главная</a>
                                         @endif
                                     </li>
                                     <li>
@@ -105,15 +105,18 @@
                             <nav>
                                 <ul class="d-flex">
                                     <li>
-                                        <a href="#">RU</a>
-                                        <ul class="sub_menu">
-                                            <li>
-                                                <a href="#">RU</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">UA</a>
-                                            </li>
-                                        </ul>
+                                        <a href="javascript:void(0)">{{ strtoupper(app()->getLocale()) }}</a>
+                                        @if(isset($languages) && !empty($languages))
+                                            <ul class="sub_menu">
+                                                @foreach($languages as $language)
+                                                    @if($language->prefix !== app()->getLocale())
+                                                        <li>
+                                                            <a href="{{ generateLangLink(request()->getRequestUri(), strtolower($language->prefix)) }}">{{ strtoupper($language->prefix) }}</a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                     </li>
                                 </ul>
                             </nav>

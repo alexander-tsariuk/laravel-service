@@ -2,11 +2,14 @@
 
 namespace Modules\Front\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Modules\ContactUs\Entities\ContactUs as ContactUsModel;
 use Modules\Dashboard\Entities\Setting as SettingModel;
+use Modules\Language\Entities\Language;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Page\Entities\Page;
 use Modules\Page\Entities\Page as PageModel;
@@ -21,11 +24,18 @@ class FrontController extends Controller
     private $projectsPerPage = 9;
 
     public function __construct() {
-        $this->pageData['settings'] = SettingModel::getList();
+        if(Cache::has('front.settings')) {
+            $this->pageData['settings'] = Cache::get('front.settings');
+        } else {
+            $this->pageData['settings'] = Cache::rememberForever('front.settings', function () {
+                return SettingModel::getList();
+            });
+        }
 
         $this->pageData['sitename'] = isset($this->pageData['settings']['general']['sitename']) && !empty($this->pageData['settings']['general']['sitename']) ? trim($this->pageData['settings']['general']['sitename']->content) : '';
         $this->pageData['siteurl'] = isset($this->pageData['settings']['general']['url']) && !empty($this->pageData['settings']['general']['url']) ? trim($this->pageData['settings']['general']['url']->content) : '';
-        $this->pageData['slides'] = SliderModel::getActiveList();
+
+
         $this->pageData['displayMap'] = false;
 
         $this->pageData['menu'] = [
@@ -36,22 +46,63 @@ class FrontController extends Controller
             'projects' => ProjectModel::getList()->where('status', 1)->where('showInMenu', 1)->get(),
         ];
 
+        if(Cache::has('front.languages')) {
+            $this->pageData['languages'] = Cache::get('front.languages');
+        } else {
+            $this->pageData['languages'] = Cache::rememberForever('front.languages', function () {
+                return Language::getList()->where('status', 1)->get();
+            });
+        }
+
+
     }
 
     public function index()
     {
+
+        if(Cache::has('front.slides')) {
+            $this->pageData['slides'] = Cache::get('front.slides');
+        } else {
+            $this->pageData['slides'] = Cache::rememberForever('front.slides', function () {
+                return SliderModel::getActiveList();
+            });
+        }
+
         $this->pageData['langCode'] = app()->getLocale();
         $this->pageData['langId'] = config()->get('app.localeId');
 
-        $this->pageData['services'] = OurWorkModel::getActiveList()
-            ->where('parentId', null)
-            ->limit(9)
-            ->get();
+        if(Cache::has('front.mainpage.services')) {
+            $this->pageData['services'] = Cache::get('front.mainpage.services');
+        } else {
+            $this->pageData['services'] = Cache::rememberForever('front.mainpage.services', function () {
+                return OurWorkModel::getActiveList()
+                    ->where('parentId', null)
+                    ->limit(9)
+                    ->get();
+            });
+        }
 
-        $this->pageData['ourWorks'] = ProjectModel::getActiveList()->limit(3)->get();
+        if(Cache::has('front.mainpage.ourWorks')) {
+            $this->pageData['ourWorks'] = Cache::get('front.mainpage.ourWorks');
+        } else {
+            $this->pageData['ourWorks'] = Cache::rememberForever('front.mainpage.ourWorks', function () {
+                return ProjectModel::getActiveList()->limit(3)->get();
+            });
+        }
 
         $this->pageData['displayMap'] = true;
-        $this->pageData['seo'] = $this->getSeoDataForMainPage($this->pageData['settings']);
+
+
+        if(Cache::has('seo.mainpage')) {
+            $this->pageData['seo'] = Cache::get('seo.mainpage');
+        } else {
+            $this->pageData['seo'] = Cache::rememberForever('seo.mainpage', function () {
+                return $this->getSeoDataForMainPage($this->pageData['settings']);
+            });
+
+        }
+
+
 
         return view('front::index', $this->pageData);
     }

@@ -5,6 +5,7 @@ namespace Modules\Slider\Http\Controllers;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Modules\Dashboard\Helpers\Breadcrumbs;
 use Modules\Language\Entities\Language as LanguageModel;
@@ -85,6 +86,9 @@ class SliderController extends DashboardController
             if(!SlideTranslationModel::createTranslations($item->id, $request->get('translation'))) {
                 throw new \Exception("При создании переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
+
+            Cache::forget('front.slides');
+
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
@@ -158,6 +162,7 @@ class SliderController extends DashboardController
             if(!SlideTranslationModel::updateTranslations($id, $request->get('translation'))) {
                 throw new \Exception("При обновлении переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
+            Cache::forget('front.slides');
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
@@ -194,6 +199,7 @@ class SliderController extends DashboardController
             } else {
                 $response['message'] = "Выбранный элемент успешно удалён!";
             }
+            Cache::forget('front.slides');
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
@@ -223,7 +229,7 @@ class SliderController extends DashboardController
                 return $response['messages'][] = $validator->errors()->getMessages();
             }
 
-            $uploadedFile = SliderModel::uploadImage($id, $request->all());
+            $uploadedFile = SliderModel::uploadImage($id, $request->all(), ['width' => 1920]);
 
             if(!empty($uploadedFile)) {
                 $response['success'] = true;
@@ -234,6 +240,7 @@ class SliderController extends DashboardController
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        Cache::forget('front.slides');
 
         return $response;
     }
@@ -271,6 +278,7 @@ class SliderController extends DashboardController
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        Cache::forget('front.slides');
 
         return $response;
     }

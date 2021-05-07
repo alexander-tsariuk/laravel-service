@@ -31,6 +31,9 @@ class SettingsController extends \App\Http\Controllers\DashboardController {
             if(!empty($request->get('data'))) {
                 SettingModel::updateItems($request->get('data'));
             }
+
+            cache()->forget('front.settings');
+
         } catch (\Exception $exception) {
             return back()->with('errorMessage', $exception->getMessage());
         }

@@ -4,8 +4,7 @@
             <ul id="slidewrapper">
                 @foreach($slides as $slide)
                     <li class="slide">
-                        <section class="hero_banner_section d-flex slide-item"
-                                 data-bgimg="/storage{{ $slide->image }}">
+                        <section class="hero_banner_section d-flex slide-item" data-bgimg="/storage{{ $slide->image }}">
                             <div class="container align-self-center">
                                 <div class="row">
                                     <div class="col-12">

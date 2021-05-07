@@ -4,6 +4,7 @@ namespace Modules\Dashboard\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Symfony\Component\Finder\Finder;
 
 class DashboardServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class DashboardServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        $this->registerCommands("Modules\Dashboard\Console");
     }
 
     /**
@@ -108,5 +111,24 @@ class DashboardServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    /**
+     * Register commands
+     *
+     * @param string $namespace
+     */
+    protected function registerCommands($namespace = '')
+    {
+        $finder = new Finder(); // from Symfony\Component\Finder;
+        $finder->files()->name('*.php')->in(__DIR__ . '/../Console');
+
+        $classes = [];
+        foreach ($finder as $file) {
+            $class = $namespace.'\\'.$file->getBasename('.php');
+            array_push($classes, $class);
+        }
+
+        $this->commands($classes);
     }
 }

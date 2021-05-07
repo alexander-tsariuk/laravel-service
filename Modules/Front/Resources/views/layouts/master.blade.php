@@ -207,8 +207,8 @@
 <script src="{{Module::asset("front:js/plugins/jquery-waypoints.js")}}"></script>
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-<!-- <script src="{{Module::asset("front:js/vendor/vendor.min.js")}}"></script>
-<script src="{{Module::asset("front:js/plugins/plugins.min.js")}}"></script> -->
+{{--<!-- <script src="{{Module::asset("front:js/vendor/vendor.min.js")}}"></script>--}}
+{{--<script src="{{Module::asset("front:js/plugins/plugins.min.js")}}"></script> -->--}}
 
 <!-- Main Js -->
 <script src="{{Module::asset("front:js/main.js")}}"></script>

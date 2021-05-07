@@ -4,6 +4,7 @@ namespace Modules\Language\Http\Controllers;
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,8 @@ class LanguageController extends DashboardController
                 throw new \Exception("Не удалось создать языковую версию. Повторите попытку позже или обратитесь к администратору.");
             }
 
+            cache()->forget('front.languages');
+
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
@@ -151,6 +154,7 @@ class LanguageController extends DashboardController
             if(!$updated) {
                 throw new \Exception("Не удалось обновить данные языковой версии. Повторите попытку позже или обратитесь к администратору");
             }
+            cache()->forget('front.languages');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
@@ -173,6 +177,7 @@ class LanguageController extends DashboardController
         if(is_numeric($id) && !empty($id)) {
             $response['success'] = LanguageModel::deleteItem($id);
         }
+        cache()->forget('front.mainpage.language');
 
         return response()->json($response);
     }

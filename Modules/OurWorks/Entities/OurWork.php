@@ -112,10 +112,10 @@ class OurWork extends Model {
      * @param array $insertData
      * @return string
      */
-    protected function uploadImage(int $itemId, array $insertData) {
+    protected function uploadImage(int $itemId, array $insertData, array $sizes = []) {
         $uploader = new Upload($insertData['directory'] ?? '');
 
-        $uploadedFile = $uploader->upload($itemId);
+        $uploadedFile = $uploader->upload($itemId, $sizes);
 
         $item = parent::find($itemId);
 

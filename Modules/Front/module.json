@@ -8,6 +8,8 @@
         "Modules\\Front\\Providers\\FrontServiceProvider"
     ],
     "aliases": {},
-    "files": [],
+    "files": [
+        "Helpers/FrontHelper.php"
+    ],
     "requires": []
 }

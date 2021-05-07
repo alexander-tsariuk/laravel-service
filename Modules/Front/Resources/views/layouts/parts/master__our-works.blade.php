@@ -16,7 +16,7 @@
                         @foreach($ourWorks as $ourWork)
                             <div class="works_slick_list swiper-slide">
                                 <a href="{{ config()->get('app.defaultLocale') != config()->get('app.locale') ? "/".config()->get('app.locale') : null}}{{ route('front.render.page', ['prefix' => $ourWork->prefix], false) }}">
-                                    <img src="/storage{{$ourWork->image}}" alt="" />
+                                    <img src="/storage{{$ourWork->image}}" alt="{{ $ourWork->translation->name }}" loading="lazy"/>
                                 </a>
                                 <div class="work_slick_text">
                                     <h2 class="title">
