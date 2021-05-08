@@ -74,6 +74,15 @@
                                             <a class="active" href="{{ route('front.home') }}">Главная</a>
                                         @endif
                                     </li>
+                                    @if(isset($menu['top_menu']) && !empty($menu['top_menu']))
+                                        @if(isset($menu['top_menu']->items) && !empty($menu['top_menu']->items))
+                                            @foreach($menu['top_menu']->items as $menuItem)
+                                                <li>
+                                                    <a href="{{ $menuItem->url }}">{{ $menuItem->translation->label }}</a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    @endif
                                     <li>
                                         <a class="" href="#">{{ __('front::label.services') }}</a>
                                         @if(isset($menu['services']) && !empty($menu['services']))
@@ -88,7 +97,7 @@
                                     </li>
                                     <li>
                                         <a class="" href="#">{{ __('front::label.projects') }}</a>
-                                        @if(isset($menu['services']) && !empty($menu['services']))
+                                        @if(isset($menu['projects']) && !empty($menu['projects']))
                                             <ul class="sub_menu">
                                                 @foreach($menu['projects'] as $projectMenu)
                                                     <li>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Modules\ContactUs\Entities\ContactUs as ContactUsModel;
 use Modules\Dashboard\Entities\Setting as SettingModel;
 use Modules\Language\Entities\Language;
+use Modules\Menu\Entities\Menu;
 use Modules\OurWorks\Entities\OurWork as OurWorkModel;
 use Modules\Page\Entities\Page;
 use Modules\Page\Entities\Page as PageModel;
@@ -44,7 +45,12 @@ class FrontController extends Controller
                 ->orWhere('parentId', 0)
                 ->get(),
             'projects' => ProjectModel::getList()->where('status', 1)->where('showInMenu', 1)->get(),
+            'top_menu' => Menu::where('code', 'top-menu')->first(),
+            'bottom_menu' => Menu::where('code', 'bottom-menu')->first(),
         ];
+
+
+//        dd($this->pageData['menu']);
 
         if(Cache::has('front.languages')) {
             $this->pageData['languages'] = Cache::get('front.languages');

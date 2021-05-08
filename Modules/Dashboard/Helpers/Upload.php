@@ -46,7 +46,7 @@ class Upload {
         $image->save($imagePath, 75);
 
         // webp
-        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
+//        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
 
         return "/{$directory}/{$fileName}.{$extension}";
     }
@@ -68,7 +68,7 @@ class Upload {
 
         $file->storeAs('/public/', $directory.'/'.$fileName);
 
-        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
+//        $this->makeWebp('/'.$directory.'/'.$fileName, $extension);
 
         return "/{$directory}/{$fileName}";
     }

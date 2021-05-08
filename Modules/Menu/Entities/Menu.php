@@ -12,6 +12,15 @@ class Menu extends Model {
         'status'
     ];
 
+    protected $with = [
+        'items'
+    ];
+
+    public function items() {
+        return $this->hasMany(MenuItems::class, 'menuId', 'id')
+            ->where('status', '=', 1);
+    }
+
     /**
      * Список элементов
      * @return mixed
