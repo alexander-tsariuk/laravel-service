@@ -2,8 +2,9 @@
 
 namespace Modules\Front\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Illuminate\Routing\Controller;
+//use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -24,11 +25,13 @@ class FrontController extends Controller
 
     private $projectsPerPage = 9;
 
-    public function __construct() {
-        if(Cache::has('front.settings')) {
-            $this->pageData['settings'] = Cache::get('front.settings');
+    private function getMainData() {
+        $lang = app()->getLocale();
+
+        if(Cache::has('front.settings.'.$lang)) {
+            $this->pageData['settings'] = Cache::get('front.settings.'.$lang);
         } else {
-            $this->pageData['settings'] = Cache::rememberForever('front.settings', function () {
+            $this->pageData['settings'] = Cache::rememberForever('front.settings.'.$lang, function () {
                 return SettingModel::getList();
             });
         }
@@ -50,26 +53,24 @@ class FrontController extends Controller
         ];
 
 
-//        dd($this->pageData['menu']);
-
-        if(Cache::has('front.languages')) {
-            $this->pageData['languages'] = Cache::get('front.languages');
+        if(Cache::has('front.languages.'.$lang)) {
+            $this->pageData['languages'] = Cache::get('front.languages.'.$lang);
         } else {
-            $this->pageData['languages'] = Cache::rememberForever('front.languages', function () {
+            $this->pageData['languages'] = Cache::rememberForever('front.languages.'.$lang, function () {
                 return Language::getList()->where('status', 1)->get();
             });
         }
-
-
     }
 
     public function index()
     {
+        $this->getMainData();
+        $lang = app()->getLocale();
 
-        if(Cache::has('front.slides')) {
-            $this->pageData['slides'] = Cache::get('front.slides');
+        if(Cache::has('front.slides.'.$lang)) {
+            $this->pageData['slides'] = Cache::get('front.slides.'.$lang);
         } else {
-            $this->pageData['slides'] = Cache::rememberForever('front.slides', function () {
+            $this->pageData['slides'] = Cache::rememberForever('front.slides.'.$lang, function () {
                 return SliderModel::getActiveList();
             });
         }
@@ -77,10 +78,10 @@ class FrontController extends Controller
         $this->pageData['langCode'] = app()->getLocale();
         $this->pageData['langId'] = config()->get('app.localeId');
 
-        if(Cache::has('front.mainpage.services')) {
-            $this->pageData['services'] = Cache::get('front.mainpage.services');
+        if(Cache::has('front.mainpage.services.'.$lang)) {
+            $this->pageData['services'] = Cache::get('front.mainpage.services.'.$lang);
         } else {
-            $this->pageData['services'] = Cache::rememberForever('front.mainpage.services', function () {
+            $this->pageData['services'] = Cache::rememberForever('front.mainpage.services.'.$lang, function () {
                 return OurWorkModel::getActiveList()
                     ->where('parentId', null)
                     ->limit(9)
@@ -88,10 +89,10 @@ class FrontController extends Controller
             });
         }
 
-        if(Cache::has('front.mainpage.ourWorks')) {
-            $this->pageData['ourWorks'] = Cache::get('front.mainpage.ourWorks');
+        if(Cache::has('front.mainpage.ourWorks.'.$lang)) {
+            $this->pageData['ourWorks'] = Cache::get('front.mainpage.ourWorks.'.$lang);
         } else {
-            $this->pageData['ourWorks'] = Cache::rememberForever('front.mainpage.ourWorks', function () {
+            $this->pageData['ourWorks'] = Cache::rememberForever('front.mainpage.ourWorks.'.$lang, function () {
                 return ProjectModel::getActiveList()->limit(3)->get();
             });
         }
@@ -99,16 +100,13 @@ class FrontController extends Controller
         $this->pageData['displayMap'] = true;
 
 
-        if(Cache::has('seo.mainpage')) {
-            $this->pageData['seo'] = Cache::get('seo.mainpage');
+        if(Cache::has('seo.mainpage.'.$lang)) {
+            $this->pageData['seo'] = Cache::get('seo.mainpage.'.$lang);
         } else {
-            $this->pageData['seo'] = Cache::rememberForever('seo.mainpage', function () {
+            $this->pageData['seo'] = Cache::rememberForever('seo.mainpage.'.$lang, function () {
                 return $this->getSeoDataForMainPage($this->pageData['settings']);
             });
-
         }
-
-
 
         return view('front::index', $this->pageData);
     }
@@ -175,6 +173,8 @@ class FrontController extends Controller
     }
 
     public function renderPage(string $firstPrefix, string $secondPage = '') {
+        $this->getMainData();
+
         $this->pageData['langCode'] = app()->getLocale();
         $this->pageData['langId'] = config()->get('app.localeId');
 

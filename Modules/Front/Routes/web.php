@@ -11,9 +11,9 @@
 |
 */
 
-//Route::group(['prefix?' => ])
-if (!strpos(Request::url(),"admin")) {
+$pos = strpos(Request::url(),"admin");
 
+if ($pos == false) {
     Route::prefix('{lang?}')->group(function () {
 
         Route::get('/', 'FrontController@index')->name('front.home')->middleware('locale');

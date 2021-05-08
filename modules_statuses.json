@@ -1,11 +1,11 @@
 {
+    "Front": true,
     "Dashboard": true,
     "Slider": true,
     "Language": true,
     "OurWorks": true,
     "Page": true,
     "User": true,
-    "Front": true,
     "Project": true,
     "Menu": true,
     "ContactUs": true

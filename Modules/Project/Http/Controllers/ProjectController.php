@@ -90,11 +90,11 @@ class ProjectController extends DashboardController
             if(!ProjectTranslationModel::createTranslations($item->id, $request->get('translation'))) {
                 throw new \Exception("При создании переводов элемента \"Проект\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
-            cache()->forget('front.mainpage.ourWorks');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return response()->redirectToRoute('dashboard.project.edit', ['itemId' => $item->id])
             ->with('successMessage', 'Элемент раздела "Проект" успешно создан!');
@@ -161,11 +161,11 @@ class ProjectController extends DashboardController
             if(!ProjectTranslationModel::updateTranslations($id, $request->get('translation'))) {
                 throw new \Exception("При обновлении переводов элемента раздела \"Проект\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
-            cache()->forget('front.mainpage.ourWorks');
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors($exception->getMessage(), 'global')->withInput();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return response()->redirectToRoute('dashboard.project.index')
             ->with('successMessage', 'Элемент раздела "Проект" успешно обновлён!');
@@ -204,7 +204,7 @@ class ProjectController extends DashboardController
             $response['success'] = false;
         }
 
-        cache()->forget('front.mainpage.services');
+        $this->clearCache('front.mainpage.ourWorks');
         return response()->json($response);
     }
 
@@ -238,11 +238,11 @@ class ProjectController extends DashboardController
                 $response['file'] = $uploadedFile;
                 $response['messages'] = 'Изображение успешно загружено!';
             }
-            cache()->forget('front.mainpage.ourWorks');
 
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return $response;
     }
@@ -276,11 +276,11 @@ class ProjectController extends DashboardController
                 $response['success'] = true;
                 $response['messages'] = 'Изображение успешно удалено!';
             }
-            cache()->forget('front.mainpage.ourWorks');
 
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return $response;
     }
@@ -316,11 +316,10 @@ class ProjectController extends DashboardController
             if(!empty($uploadedFile)) {
                 $response['success'] = $uploadedFile;
             }
-            cache()->forget('front.mainpage.ourWorks');
-
         } catch (\Exception $exception) {
             $response['error'] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return response()->json($response);
     }
@@ -343,11 +342,11 @@ class ProjectController extends DashboardController
             } else{
                 throw new \Exception("Не удалось удалить изображение. Повторите попытку или обратитесь к администратору!");
             }
-            cache()->forget('front.mainpage.ourWorks');
         } catch (\Exception $exception) {
             $response['success'] = false;
             $response['message'] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.ourWorks');
 
         return response()->json($response);
     }

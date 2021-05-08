@@ -84,9 +84,9 @@ return [
 
     'localeId' => 1,
 
-    'defaultLocale' => 'ru',
+    'defaultLocale' => 'ua',
 
-    'defaultLocaleId' => 1,
+    'defaultLocaleId' => 2,
 
     /*
     |--------------------------------------------------------------------------

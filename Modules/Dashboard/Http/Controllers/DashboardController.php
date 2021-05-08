@@ -5,6 +5,8 @@ namespace Modules\Dashboard\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
+use Modules\Language\Entities\Language;
 
 class DashboardController extends \App\Http\Controllers\DashboardController
 {
@@ -18,5 +20,4 @@ class DashboardController extends \App\Http\Controllers\DashboardController
 
         return view('dashboard::index', $this->pageData);
     }
-
 }

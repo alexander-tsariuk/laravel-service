@@ -89,12 +89,11 @@ class OurWorksController extends DashboardController
             if(!OurWorkTranslationModel::createTranslations($item->id, $request->get('translation'))) {
                 throw new \Exception("При создании переводов элемента \"Наши работы\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
-            cache()->forget('front.mainpage.services');
-
         } catch (\Exception $exception) {
             session()->push('errorMessage', $exception->getMessage());
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
+        $this->clearCache('front.mainpage.services');
 
         return response()->redirectToRoute('dashboard.ourservice.edit', ['itemId' => $item->id])
             ->with('successMessage', 'Элемент раздела "Наши работы" успешно создан!');
@@ -166,12 +165,12 @@ class OurWorksController extends DashboardController
             if(!OurWorkTranslationModel::updateTranslations($id, $request->get('translation'))) {
                 throw new \Exception("При обновлении переводов элемента раздела \"Наши работы\" произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
-            cache()->forget('front.mainpage.services');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
 
         }
+        $this->clearCache('front.mainpage.services');
 
         return response()->redirectToRoute('dashboard.ourservice.index')
             ->with('successMessage', 'Элемент раздела "Наши работы" успешно обновлён!');
@@ -205,11 +204,11 @@ class OurWorksController extends DashboardController
             } else {
                 $response['message'] = "Выбранный элемент успешно удалён!";
             }
-            cache()->forget('front.mainpage.services');
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
         }
+        $this->clearCache('front.mainpage.services');
 
         return response()->json($response);
     }
@@ -245,10 +244,10 @@ class OurWorksController extends DashboardController
                 $response['messages'] = 'Изображение успешно загружено!';
             }
 
-            cache()->forget('front.mainpage.services');
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.services');
 
         return $response;
     }
@@ -283,10 +282,10 @@ class OurWorksController extends DashboardController
                 $response['messages'] = 'Изображение успешно удалено!';
             }
 
-            cache()->forget('front.mainpage.services');
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
+        $this->clearCache('front.mainpage.services');
 
         return $response;
     }

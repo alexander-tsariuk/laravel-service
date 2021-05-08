@@ -87,11 +87,11 @@ class SliderController extends DashboardController
                 throw new \Exception("При создании переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
 
-            Cache::forget('front.slides');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
+        $this->clearCache('front.slides');
 
         return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $item->id])
             ->with('successMessage', "Слайд был успешно добавлен!");
@@ -162,10 +162,10 @@ class SliderController extends DashboardController
             if(!SlideTranslationModel::updateTranslations($id, $request->get('translation'))) {
                 throw new \Exception("При обновлении переводов слайда произошла ошибка. Повторите попытку позже или обратитесь к администратору!");
             }
-            Cache::forget('front.slides');
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
+        $this->clearCache('front.slides');
 
         return response()->redirectToRoute('dashboard.slider.edit', ['itemId' => $id])
             ->with('successMessage', "Слайд был успешно обновлён!");
@@ -199,11 +199,11 @@ class SliderController extends DashboardController
             } else {
                 $response['message'] = "Выбранный элемент успешно удалён!";
             }
-            Cache::forget('front.slides');
         } catch (\Exception $exception) {
             $response['message'] = $exception->getMessage();
             $response['success'] = false;
         }
+        $this->clearCache('front.slides');
 
         return response()->json($response);
     }
@@ -240,7 +240,7 @@ class SliderController extends DashboardController
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
-        Cache::forget('front.slides');
+        $this->clearCache('front.slides');
 
         return $response;
     }
@@ -278,7 +278,7 @@ class SliderController extends DashboardController
         } catch (\Exception $exception) {
             $response['messages'][] = $exception->getMessage();
         }
-        Cache::forget('front.slides');
+        $this->clearCache('front.slides');
 
         return $response;
     }

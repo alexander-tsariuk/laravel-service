@@ -84,7 +84,7 @@ class LanguageController extends DashboardController
                 throw new \Exception("Не удалось создать языковую версию. Повторите попытку позже или обратитесь к администратору.");
             }
 
-            cache()->forget('front.languages');
+            $this->clearCache('front.languages');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
@@ -154,8 +154,7 @@ class LanguageController extends DashboardController
             if(!$updated) {
                 throw new \Exception("Не удалось обновить данные языковой версии. Повторите попытку позже или обратитесь к администратору");
             }
-            cache()->forget('front.languages');
-
+            $this->clearCache('front.languages');
         } catch (\Exception $exception) {
             return redirect()->back()->with('errorMessage', $exception->getMessage())->withInput();
         }
@@ -177,8 +176,7 @@ class LanguageController extends DashboardController
         if(is_numeric($id) && !empty($id)) {
             $response['success'] = LanguageModel::deleteItem($id);
         }
-        cache()->forget('front.mainpage.language');
-
+        $this->clearCache('front.languages');
         return response()->json($response);
     }
 }

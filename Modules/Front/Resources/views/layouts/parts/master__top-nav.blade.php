@@ -12,36 +12,56 @@
                         <ul class="offcanvas_main_menu">
                             <li class="menu-item-has-children active">
                                 @if(request()->route()->getName() == 'front.home')
-                                    <a href="#">Главная</a>
+                                    <a class="active">{{ __('front::mainpage.home') }}</a>
                                 @else
-                                    <a href="{{ route('front.home') }}">Главная</a>
+                                    <a href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ __('front::mainpage.home') }}</a>
                                 @endif
                             </li>
-                            <li class="menu-item-has-children">
-                                <a href="about.html">About</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="service.html">Service</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="portfolio.html">Portfolio</a>
-                                <ul class="sub-menu">
-                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                    <li>
-                                        <a href="single-portfolio.html">Single Portfolio</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-details.html">Blog details</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="contact.html">Contact</a>
-                            </li>
+
+
+                            @if(isset($menu['top_menu']) && !empty($menu['top_menu']))
+                                @if(isset($menu['top_menu']->items) && !empty($menu['top_menu']->items))
+                                    @foreach($menu['top_menu']->items as $menuItem)
+                                        <li class="menu-item-has-children">
+                                            <a href="{{ generateLangLink($menuItem->url, app()->getLocale()) }}">{{ $menuItem->translation->label }}</a>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            @endif
+
+                            @if(isset($menu['services']) && !empty($menu['services']))
+                                <li class="menu-item-has-children">
+                                    <a>{{ __('front::label.services') }}</a>
+                                    <ul class="sub-menu">
+                                        @foreach($menu['services'] as $serviceMenu)
+                                            <li>
+                                                <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix, 'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $serviceMenu->translation->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(isset($menu['projects']) && !empty($menu['projects']))
+                                <li class="menu-item-has-children">
+                                    <a class="" href="#">{{ __('front::label.projects') }}</a>
+                                    <ul class="sub-menu">
+                                        @foreach($menu['projects'] as $projectMenu)
+                                            <li>
+                                                <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix, 'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $projectMenu->translation->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                            @if(isset($languages) && !empty($languages))
+                                @foreach($languages as $language)
+                                    @if($language->prefix !== app()->getLocale())
+                                        <li>
+                                            <a href="{{ switchLocaleLinks(request()->getRequestUri(), strtolower($language->prefix)) }}">{{ strtoupper($language->prefix) }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -59,9 +79,14 @@
                 <div class="col-12">
                     <div class="header_container d-flex justify-content-between align-items-center">
                         <div class="header_logo">
-                            <a class="sticky_none" href="{{ request()->route()->getName() == 'front.home' ? '#' : route('front.home') }}">
+                            @if(request()->route()->getName() == 'front.home')
                                 <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
-                            </a>
+                            @else
+                                <a class="sticky_none" href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">
+                                    <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
+                                </a>
+                            @endif
+
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
@@ -69,44 +94,44 @@
                                 <ul class="d-flex">
                                     <li>
                                         @if(request()->route()->getName() == 'front.home')
-                                            <a class="active" href="#">Главная</a>
+                                            <a class="active">{{ __('front::mainpage.home') }}</a>
                                         @else
-                                            <a class="active" href="{{ route('front.home') }}">Главная</a>
+                                            <a href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ __('front::mainpage.home') }}</a>
                                         @endif
                                     </li>
                                     @if(isset($menu['top_menu']) && !empty($menu['top_menu']))
                                         @if(isset($menu['top_menu']->items) && !empty($menu['top_menu']->items))
                                             @foreach($menu['top_menu']->items as $menuItem)
                                                 <li>
-                                                    <a href="{{ $menuItem->url }}">{{ $menuItem->translation->label }}</a>
+                                                    <a href="{{ generateLangLink($menuItem->url, app()->getLocale()) }}">{{ $menuItem->translation->label }}</a>
                                                 </li>
                                             @endforeach
                                         @endif
                                     @endif
-                                    <li>
-                                        <a class="" href="#">{{ __('front::label.services') }}</a>
-                                        @if(isset($menu['services']) && !empty($menu['services']))
-                                            <ul class="sub_menu">
-                                                @foreach($menu['services'] as $serviceMenu)
-                                                    <li>
-                                                        <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix]) }}">{{ $serviceMenu->translation->name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                    <li>
-                                        <a class="" href="#">{{ __('front::label.projects') }}</a>
-                                        @if(isset($menu['projects']) && !empty($menu['projects']))
-                                            <ul class="sub_menu">
-                                                @foreach($menu['projects'] as $projectMenu)
-                                                    <li>
-                                                        <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix]) }}">{{ $projectMenu->translation->name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
+                                    @if(isset($menu['services']) && !empty($menu['services']))
+                                        <li>
+                                            <a>{{ __('front::label.services') }}</a>
+                                                <ul class="sub_menu">
+                                                    @foreach($menu['services'] as $serviceMenu)
+                                                        <li>
+                                                            <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix, 'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $serviceMenu->translation->name }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                        </li>
+                                    @endif
+                                    @if(isset($menu['projects']) && !empty($menu['projects']))
+                                        <li>
+                                            <a class="" href="#">{{ __('front::label.projects') }}</a>
+                                                <ul class="sub_menu">
+                                                    @foreach($menu['projects'] as $projectMenu)
+                                                        <li>
+                                                            <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix, 'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $projectMenu->translation->name }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                        </li>
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
@@ -120,7 +145,7 @@
                                                 @foreach($languages as $language)
                                                     @if($language->prefix !== app()->getLocale())
                                                         <li>
-                                                            <a href="{{ generateLangLink(request()->getRequestUri(), strtolower($language->prefix)) }}">{{ strtoupper($language->prefix) }}</a>
+                                                            <a href="{{ switchLocaleLinks(request()->getRequestUri(), strtolower($language->prefix)) }}">{{ strtoupper($language->prefix) }}</a>
                                                         </li>
                                                     @endif
                                                 @endforeach

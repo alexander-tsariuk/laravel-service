@@ -40,6 +40,7 @@ class MenuItems extends Model {
             'menuId' => $menuId,
             'parentId' => $insertData['parentId'] ?? null,
             'url' => $insertData['url'],
+            'status' => $insertData['status'] ?? 0
         ]);
 
         $item->save();

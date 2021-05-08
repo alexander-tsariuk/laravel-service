@@ -5,14 +5,18 @@
                 <div class="footer_widget_list footer_menu mb-lm-30px">
                     <ul>
                         <li>
-                            <a href="{{ route('front.home') }}">Главная</a>
+                            @if(request()->route()->getName() == 'front.home')
+                                <a class="active">{{ __('front::mainpage.home') }}</a>
+                            @else
+                                <a href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">Главная</a>
+                            @endif
                         </li>
 
                         @if(isset($menu['bottom_menu']) && !empty($menu['bottom_menu']))
                             @if(isset($menu['bottom_menu']->items) && !empty($menu['bottom_menu']->items))
                                 @foreach($menu['bottom_menu']->items as $menuItem)
                                     <li>
-                                        <a href="{{ $menuItem->url }}">{{ $menuItem->translation->label }}</a>
+                                        <a href="{{ generateLangLink($menuItem->url, app()->getLocale()) }}">{{ $menuItem->translation->label }}</a>
                                     </li>
                                 @endforeach
                             @endif
@@ -24,7 +28,7 @@
                         <ul>
                             @foreach($menu['services'] as $serviceMenu)
                                 <li>
-                                    <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix]) }}">{{ $serviceMenu->translation->name }}</a>
+                                    <a href="{{ route('front.render.page', ['prefix' => $serviceMenu->prefix,'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $serviceMenu->translation->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -36,7 +40,7 @@
                         <ul>
                             @foreach($menu['projects'] as $projectMenu)
                                 <li>
-                                    <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix]) }}">{{ $projectMenu->translation->name }}</a>
+                                    <a href="{{ route('front.render.page', ['prefix' => $projectMenu->prefix,'lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ $projectMenu->translation->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -48,7 +52,9 @@
             <div class="footer_bottom d-flex justify-content-between align-items-center">
                 <div class="footer_bottom_left d-flex align-items-end">
                     <div class="footer_logo">
-                        <a href="#"><img src="{{ Module::asset('front:img/logo/footer-logo.png') }}" alt="" /></a>
+                        <a href="{{ request()->route()->getName() == 'front.home' ? 'javascript::void(0)' : route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">
+                            <img src="{{ Module::asset('front:img/logo/footer-logo.png') }}" alt="" />
+                        </a>
                     </div>
                     <div class="copyright_right">
                         <p>

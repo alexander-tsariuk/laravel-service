@@ -3,6 +3,7 @@
 namespace Modules\Front\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Modules\Front\Http\Controllers\FrontController;
@@ -13,6 +14,14 @@ class LocaleMiddleware
     public static $mainLang;
 
     public static $languages;
+
+    private $app;
+
+
+    public function __construct(Application $application)
+    {
+        $this->app = $application;
+    }
 
     /*
      * Проверяет наличие корректной метки языка в текущем URL
@@ -29,13 +38,12 @@ class LocaleMiddleware
             abort(404);
         }
 
-        setcookie('mainLangCode', $mainLang->prefix, time() + 60 * 60 * 60);
-        setcookie('mainLangId', $mainLang->id, time() + 60 * 60 * 60);
-
-        config('app.defaultLocale', $mainLang->prefix);
-        config('app.defaultLocaleId', $mainLang->id);
+        config()->set('app.defaultLocale', $mainLang->prefix);
+        config()->set('app.defaultLocaleId', $mainLang->id);
 
         config()->set('app.langId', $mainLang->id);
+        config()->set('app.locale', $mainLang->prefix);
+
 
 
         $uri = \request()->getRequestUri(); //получаем URI
@@ -49,32 +57,22 @@ class LocaleMiddleware
             if (current($segmentsURI) != self::$mainLang) {
                 $lang = LanguageModel::getLanguageByPrefix(current($segmentsURI));
 
-                session('langCode', $lang->prefix);
-                session('langId', $lang->id);
-
-                setcookie('langCode', $lang->prefix, time() + 60 * 60 * 60);
-                setcookie('langId', $lang->id, time() + 60 * 60 * 60);
+                config()->set('app.locale', $lang->prefix);
                 config()->set('app.localeId', $lang->id);
+
+                \app()->setLocale($lang->prefix);
 
                 return current($segmentsURI);
             } else {
-                session('langCode', $mainLang->prefix);
-                session('langId', $mainLang->id);
-
-                setcookie('langCode', $mainLang->prefix, time() + 60 * 60 * 60);
-                setcookie('langId', $mainLang->id, time() + 60 * 60 * 60);
+                config()->set('app.locale', $mainLang->prefix);
                 config()->set('app.localeId', $mainLang->id);
-
+                \app()->setLocale($mainLang->prefix);
                 return $mainLang->prefix;
             }
         } else {
-            session('langCode', $mainLang->prefix);
-            session('langId', $mainLang->id);
-
-            setcookie('langCode', $mainLang->prefix, time() + 60 * 60 * 60);
-            setcookie('langId', $mainLang->id, time() + 60 * 60 * 60);
+            config()->set('app.locale', $mainLang->prefix);
             config()->set('app.localeId', $mainLang->id);
-
+            \app()->setLocale($mainLang->prefix);
             return $mainLang->prefix;
         }
     }
@@ -126,11 +124,15 @@ class LocaleMiddleware
         }
 
         if($locale) {
-            App::setLocale($locale);
+            $this->app->setLocale($locale);
+//            App::setLocale($locale);
+//            config()->set('app.locale', $locale);
         }
         //если метки нет - устанавливаем основной язык $mainLanguage
         else {
-            App::setLocale(self::$mainLang);
+            $this->app->setLocale(self::$mainLang);
+//            App::setLocale(self::$mainLang);
+//            config()->set('app.locale', self::$mainLang);
         }
 
         return $next($request); //пропускаем дальше - передаем в следующий посредник
