@@ -1,3 +1,4 @@
+@if($agent->isMobile())
 <!--offcanvas menu area start-->
 <div class="body_overlay"></div>
 <div class="offcanvas_menu">
@@ -70,6 +71,7 @@
     </div>
 </div>
 <!--offcanvas menu area end-->
+@endif
 
 <!--header area start-->
 <header class="header_section header_transparent sticky-header">
@@ -110,7 +112,7 @@
                                     @endif
                                     @if(isset($menu['services']) && !empty($menu['services']))
                                         <li>
-                                            <a>{{ __('front::label.services') }}</a>
+                                            <a class="">{{ __('front::label.services') }}</a>
                                                 <ul class="sub_menu">
                                                     @foreach($menu['services'] as $serviceMenu)
                                                         <li>

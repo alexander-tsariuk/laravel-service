@@ -16,7 +16,7 @@ $pos = strpos(Request::url(),"admin");
 if ($pos == false) {
     Route::prefix('{lang?}')->group(function () {
 
-        Route::get('/', 'FrontController@index')->name('front.home')->middleware('locale');
+//        Route::get('/', 'FrontController@index')->name('front.home')->middleware('locale');
 
         Route::get('/{prefix}/{subPrefix?}', 'FrontController@renderPage')->name('front.render.page')->middleware('locale');
     });

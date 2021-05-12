@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
+use Jenssegers\Agent\Agent;
 use Modules\ContactUs\Entities\ContactUs as ContactUsModel;
 use Modules\Dashboard\Entities\Setting as SettingModel;
 use Modules\Language\Entities\Language;

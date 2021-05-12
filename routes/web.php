@@ -14,3 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+
+$pos = strpos(Request::url(),"admin");
+
+if ($pos == false) {
+    Route::prefix('{lang?}')->group(function () {
+
+        Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('front.home')->middleware('locale');
+
+//        Route::get('/{prefix}/{subPrefix?}', 'FrontController@renderPage')->name('front.render.page')->middleware('locale');
+    });
+
+
+//    Route::post('/ajax/projects/load-more', 'FrontController@ajaxProjectsLoad')->name('ajax.projects.load-more');
+//    Route::post('/ajax/contact/send', 'FrontController@ajaxSendMessage')->name('ajax.contact.send');
+}

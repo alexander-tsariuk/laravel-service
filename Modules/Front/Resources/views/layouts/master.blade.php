@@ -57,24 +57,24 @@
 			}
 	</script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" async>
 
-    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ Module::asset('dashboard:plugins/fontawesome-free/css/all.min.css') }}" async>
 
     <!-- vendor css (Bootstrap & Icon Font) -->
-    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/elegant-icons.min.css') }}" />
-    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/bootstrap.min.css') }}" async/>
+    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/elegant-icons.min.css') }}" async/>
+    <link rel="stylesheet" href="{{ Module::asset('front:css/vendor/ionicons.min.css') }}" async/>
 
     <!-- plugins css (All Plugins Files) -->
-    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/animate.css') }}" />
-    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/magnific-popup.css') }}" />
+    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/animate.css') }}" async/>
+    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/swiper-bundle.min.css') }}" async/>
+    <link rel="stylesheet" href="{{ Module::asset('front:css/plugins/magnific-popup.css') }}" async/>
 
     <!-- Main Style -->
-    <link rel="stylesheet" href="{{ Module::asset('front:css/style.css') }}" />
+    <link rel="stylesheet" href="{{ Module::asset('front:css/style.css') }}" preload/>
 
-    <link rel="stylesheet" href="{{ Module::asset('front:css/slider.css') }}" />
+    <link rel="stylesheet" href="{{ Module::asset('front:css/slider.css') }}" preload/>
 </head>
 
 <body>
