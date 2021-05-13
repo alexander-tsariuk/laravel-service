@@ -38,6 +38,9 @@ class SettingsController extends \App\Http\Controllers\DashboardController {
             return back()->with('errorMessage', $exception->getMessage());
         }
 
+        $this->clearCache('front.settings');
+        $this->clearCache('seo.mainpage');
+
         return response()->redirectToRoute('dashboard.settings.index')->with('successMessage', 'Настройки успешно сохранены!');
     }
 

@@ -62,6 +62,8 @@ class FrontController extends Controller
                 return Language::getList()->where('status', 1)->get();
             });
         }
+
+        $this->pageData['agent'] = new Agent();
     }
 
     public function index()

@@ -1,4 +1,4 @@
-<section class="portfolio_section mb-140">
+<section class="portfolio_section section-pdding-top section-pdding-bottom">
     <div class="container-fluid">
         <div class="container">
             <div class="works_slide_header text-center">
@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div class="row no-gutters portfolio_page_gallery" style="position: relative; height: 1369.17px;">
+        <div class="row no-gutters portfolio_page_gallery" style="position: relative;">
             @if(isset($services) && !empty($services))
                 @foreach($services as $service)
                     <div class="col-lg-4 col-md-6 col-sm-6 gird_item entertaiment life technology">

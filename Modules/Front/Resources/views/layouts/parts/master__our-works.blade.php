@@ -1,6 +1,6 @@
 @if(isset($ourWorks) && !empty($ourWorks))
 <!-- product section start -->
-<section class="works_slide_section section-pdding-top section-pdding-bottom">
+<section class="works_slide_section section-pdding-bottom">
     <div class="container">
         <div class="works_slide_header text-center">
             <div class="section_title">

@@ -480,8 +480,16 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (max-width: 767px) {
   .section-pdding-top {
-    padding-top: 77px;
+    /*padding-top: 77px;*/
   }
+
+    .works_slide_section {
+        margin-top: 5rem;
+    }
+
+    .service_section {
+        margin-top: 8rem;
+    }
 }
 
 .section-pdding-bottom {

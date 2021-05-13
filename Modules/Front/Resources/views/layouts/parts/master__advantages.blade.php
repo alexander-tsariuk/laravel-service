@@ -1,4 +1,4 @@
-<section class="service_section mb-137">
+<section class="service_section section-pdding-bottom">
     <div class="container">
         <div class="section_title text-center mb-67">
             <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
