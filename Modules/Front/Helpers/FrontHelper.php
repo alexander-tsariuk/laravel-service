@@ -38,3 +38,15 @@ if(!function_exists('switchLocaleLinks')) {
         }
     }
 }
+
+if(!function_exists('isMainPage')) {
+    function isMainPage() {
+        $request = request();
+
+        if(preg_match("#^\/$|(^\/[a-z]{2}+)$#", $request->getRequestUri())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

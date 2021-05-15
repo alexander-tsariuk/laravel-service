@@ -1,8 +1,13 @@
 @extends('front::layouts.master')
 
 @section('content')
-    <div class="hero_banner_section hero_banner2 hero-overlay  d-flex align-items-center"
-         style="background-image: url('/storage{{$service->image}}'); min-height: 800px;height: auto !important;">
+    @if($agent->isMobile())
+        <div class="hero_banner_section hero_banner2 hero-overlay  d-flex align-items-center"
+             style="background-image: url('/storage{{$service->image}}'); min-height: 400px;height: auto !important;">
+    @else
+          <div class="hero_banner_section hero_banner2 hero-overlay  d-flex align-items-center"
+               style="background-image: url('/storage{{$service->image}}'); min-height: 800px;height: auto !important;">
+    @endif
         <div class="container">
 
             <div class="row">

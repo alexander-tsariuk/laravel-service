@@ -32,7 +32,7 @@
 
                             @if(isset($menu['services']) && !empty($menu['services']))
                                 <li class="menu-item-has-children">
-                                    <a>{{ __('front::label.services') }}</a>
+                                    <a class="" href="javascript:void(0);">{{ __('front::label.services') }}</a>
                                     <ul class="sub-menu">
                                         @foreach($menu['services'] as $serviceMenu)
                                             <li>
@@ -44,7 +44,7 @@
                             @endif
                             @if(isset($menu['projects']) && !empty($menu['projects']))
                                 <li class="menu-item-has-children">
-                                    <a class="" href="#">{{ __('front::label.projects') }}</a>
+                                    <a class="" href="javascript:void(0);">{{ __('front::label.projects') }}</a>
                                     <ul class="sub-menu">
                                         @foreach($menu['projects'] as $projectMenu)
                                             <li>
@@ -74,14 +74,14 @@
 @endif
 
 <!--header area start-->
-<header class="header_section header_transparent sticky-header">
+<header class="header_section header_transparent sticky-header sticky">
     <div class="main_header">
         <div class="container-fluid bottom-line-shape">
             <div class="row">
                 <div class="col-12">
                     <div class="header_container d-flex justify-content-between align-items-center">
                         <div class="header_logo">
-                            @if(request()->route()->getName() == 'front.home')
+                            @if(isMainPage())
                                 <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
                             @else
                                 <a class="sticky_none" href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">
@@ -95,7 +95,7 @@
                             <nav>
                                 <ul class="d-flex">
                                     <li>
-                                        @if(request()->route()->getName() == 'front.home')
+                                        @if(isMainPage())
                                             <a class="active">{{ __('front::mainpage.home') }}</a>
                                         @else
                                             <a href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">{{ __('front::mainpage.home') }}</a>

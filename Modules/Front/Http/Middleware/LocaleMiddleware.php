@@ -108,10 +108,10 @@ class LocaleMiddleware
             ]));
         }
 
-        if(isset($routeParameters['prefix']) && isset($routeParameters['subPrefix']) && $_COOKIE['langCode'] == $routeParameters['prefix']) {
+        if(isset($routeParameters['prefix']) && isset($routeParameters['subPrefix']) && app()->getLocale() == $routeParameters['prefix']) {
             $request->route()->setParameter('prefix', $request->route()->parameter('subPrefix'));
             $request->route()->setParameter('subPrefix', "");
-        } elseif(isset($routeParameters['prefix']) && !isset($routeParameters['subPrefix']) && $_COOKIE['langCode'] == $routeParameters['prefix']) {
+        } elseif(isset($routeParameters['prefix']) && !isset($routeParameters['subPrefix']) && app()->getLocale() == $routeParameters['prefix']) {
             $request->route()->forgetParameter('prefix');
             $request->route()->setAction(array_merge($request->route()->getAction(), [
                 'uses' => 'Modules\Front\Http\Controllers\FrontController@index',

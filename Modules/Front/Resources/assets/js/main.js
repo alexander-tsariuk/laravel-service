@@ -18,9 +18,9 @@
             screensize = $(window).width();
         if (screensize >= 319) {
             if (scroll < 100) {
-                $(".sticky-header").removeClass("sticky");
+                // $(".sticky-header").removeClass("sticky");
             } else {
-                $(".sticky-header").addClass("sticky");
+                // $(".sticky-header").addClass("sticky");
             }
         }
     });

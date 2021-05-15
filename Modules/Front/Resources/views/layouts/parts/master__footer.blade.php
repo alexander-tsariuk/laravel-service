@@ -5,7 +5,7 @@
                 <div class="footer_widget_list footer_menu mb-lm-30px">
                     <ul>
                         <li>
-                            @if(request()->route()->getName() == 'front.home')
+                            @if(isMainPage())
                                 <a class="active">{{ __('front::mainpage.home') }}</a>
                             @else
                                 <a href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">Главная</a>
