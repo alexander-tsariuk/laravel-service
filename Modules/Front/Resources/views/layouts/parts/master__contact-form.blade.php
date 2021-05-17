@@ -1,7 +1,7 @@
 <div class="section_title text-center position-relative mb-66">
     <h2>Связаться <span>с нами</span></h2>
 </div>
-<div class="row">
+<div class="row" id="contact-row">
     <div class="col-12">
         <div class="footer_inner position-relative">
             <div class="footer_form">

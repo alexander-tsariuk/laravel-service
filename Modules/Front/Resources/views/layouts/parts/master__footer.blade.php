@@ -58,39 +58,39 @@
                     </div>
                     <div class="copyright_right">
                         <p>
-                            текст в футере
+{{--                            текст в футере--}}
                         </p>
                     </div>
                 </div>
-                <div class="footer_social">
-                    <ul class="d-flex">
-                        <li>
-                            <a href="https://twitter.com" data-tippy="Twitter" data-tippy-inertia="true"
-                               data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top"><i
-                                    class="ei ei-social_twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com" data-tippy="Facebook"
-                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                               data-tippy-placement="top"><i class="ei ei-social_facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.google.com" data-tippy="googleplus"
-                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                               data-tippy-placement="top"><i class="ei ei-social_googleplus"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com" data-tippy="Linkedin"
-                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
-                               data-tippy-placement="top"><i class="ei ei-social_linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com" data-tippy="Ress" data-tippy-inertia="true"
-                               data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top"><i
-                                    class="ei ei-social_rss"></i></a>
-                        </li>
-                    </ul>
-                </div>
+{{--                <div class="footer_social">--}}
+{{--                    <ul class="d-flex">--}}
+{{--                        <li>--}}
+{{--                            <a href="https://twitter.com" data-tippy="Twitter" data-tippy-inertia="true"--}}
+{{--                               data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top"><i--}}
+{{--                                    class="ei ei-social_twitter"></i></a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="https://www.facebook.com" data-tippy="Facebook"--}}
+{{--                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"--}}
+{{--                               data-tippy-placement="top"><i class="ei ei-social_facebook"></i></a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="https://www.google.com" data-tippy="googleplus"--}}
+{{--                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"--}}
+{{--                               data-tippy-placement="top"><i class="ei ei-social_googleplus"></i></a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="https://www.instagram.com" data-tippy="Linkedin"--}}
+{{--                               data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"--}}
+{{--                               data-tippy-placement="top"><i class="ei ei-social_linkedin"></i></a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="https://www.youtube.com" data-tippy="Ress" data-tippy-inertia="true"--}}
+{{--                               data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top"><i--}}
+{{--                                    class="ei ei-social_rss"></i></a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

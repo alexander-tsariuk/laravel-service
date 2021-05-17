@@ -214,6 +214,29 @@ figure {
   border-radius: 30px;
   overflow: hidden;
 }
+
+#project-container-fluid {
+    padding: 0;
+}
+
+#projects-container {
+    --bs-gutter-x: none !important;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+}
+
+#projects-container > div {
+    /*max-width: 33.3333% !important;*/
+    min-height: 470px;
+    height: auto;
+}
+
+#contact-row {
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .btn.btn-link {
     font-size: 16px;
@@ -5060,3 +5083,4 @@ textarea:-ms-input-placeholder {
     text-align: center;
   }
 }
+
