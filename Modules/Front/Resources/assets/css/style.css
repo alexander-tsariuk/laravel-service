@@ -227,7 +227,7 @@ figure {
 }
 
 #projects-container > div {
-    /*max-width: 33.3333% !important;*/
+    max-width: 33.3333% !important;
     min-height: 470px;
     height: auto;
 }
@@ -1369,10 +1369,10 @@ textarea:-ms-input-placeholder {
 }
 
 .footer_form {
-  border: 1px solid #fff;
-  border-radius: 10px;
-  padding: 50px 50px 65px;
-  background: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 50px 50px 30px;
+    background: #fff;
 }
 @media only screen and (max-width: 767px) {
   .footer_form {
@@ -1387,7 +1387,8 @@ textarea:-ms-input-placeholder {
   border: 0;
   border-bottom: 1px solid #e1e1e1;
   background: inherit;
-  height: 160px;
+  /*height: 160px;*/
+    heigth: 100px;
   resize: none;
   padding-bottom: 3px;
 }

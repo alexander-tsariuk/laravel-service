@@ -53,7 +53,7 @@
                 <div class="footer_bottom_left d-flex align-items-end">
                     <div class="footer_logo">
                         <a href="{{ request()->route()->getName() == 'front.home' ? 'javascript::void(0)' : route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">
-                            <img src="{{ Module::asset('front:img/logo/footer-logo.png') }}" alt="" />
+                            <img src="{{ Module::asset('front:img/dzg2_footer.png') }}" alt="" />
                         </a>
                     </div>
                     <div class="copyright_right">

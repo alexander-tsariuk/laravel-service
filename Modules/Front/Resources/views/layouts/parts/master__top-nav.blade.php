@@ -82,10 +82,10 @@
                     <div class="header_container d-flex justify-content-between align-items-center">
                         <div class="header_logo">
                             @if(isMainPage())
-                                <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
+                                <img src="{{ Module::asset('front:img/dzg2.png') }}" alt="" />
                             @else
                                 <a class="sticky_none" href="{{ route('front.home', ['lang' => app()->getLocale() != config()->get('app.defaultLocale') ? app()->getLocale() : null]) }}">
-                                    <img src="{{ Module::asset('front:img/logo/logo.png') }}" alt="" />
+                                    <img src="{{ Module::asset('front:img/dzg2.png') }}" alt="" />
                                 </a>
                             @endif
 
