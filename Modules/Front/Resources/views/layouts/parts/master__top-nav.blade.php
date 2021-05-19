@@ -32,7 +32,7 @@
 
                             @if(isset($menu['services']) && !empty($menu['services']))
                                 <li class="menu-item-has-children">
-                                    <a class="" href="javascript:void(0);">{{ __('front::label.services') }}</a>
+                                    <a class="menu-expand" href="javascript:void(0);">{{ __('front::label.services') }}</a>
                                     <ul class="sub-menu">
                                         @foreach($menu['services'] as $serviceMenu)
                                             <li>
@@ -44,7 +44,7 @@
                             @endif
                             @if(isset($menu['projects']) && !empty($menu['projects']))
                                 <li class="menu-item-has-children">
-                                    <a class="" href="javascript:void(0);">{{ __('front::label.projects') }}</a>
+                                    <a class="menu-expand" href="javascript:void(0);">{{ __('front::label.projects') }}</a>
                                     <ul class="sub-menu">
                                         @foreach($menu['projects'] as $projectMenu)
                                             <li>

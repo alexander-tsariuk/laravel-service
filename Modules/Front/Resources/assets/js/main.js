@@ -239,7 +239,8 @@
                 $this.siblings('ul').slideDown('slow');
             }
         }
-        if ($this.is('a') || $this.is('span') || $this.attr('clas').match(/\b(menu-expand)\b/)) {
+
+        if ($this.is('a') || $this.is('span') || $this.attr('class').match(/\b(menu-expand)\b/)) {
             $this.parent().toggleClass('menu-open');
         } else if ($this.is('li') && $this.attr('class').match(/\b('menu-item-has-children')\b/)) {
             $this.toggleClass('menu-open');
