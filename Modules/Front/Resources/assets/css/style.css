@@ -265,9 +265,9 @@ figure {
     }
 }
 
-.justify-content-between {
-    justify-content: normal !important;
-}
+/*.justify-content-between {*/
+/*    justify-content: normal !important;*/
+/*}*/
 
 .project_desc_popou > div {
     max-width: 300px;
