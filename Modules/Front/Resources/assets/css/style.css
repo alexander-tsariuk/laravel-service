@@ -252,7 +252,27 @@ figure {
     height: 48px;
     padding: 0 26px;
   }
+
+    #projects-container .col-4 {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto;
+    }
+
+    #contact-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
+
+.justify-content-between {
+    justify-content: normal !important;
+}
+
+.project_desc_popou > div {
+    max-width: 300px;
+}
+
 .btn.btn-link::before {
   content: "";
   position: absolute;

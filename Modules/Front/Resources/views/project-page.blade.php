@@ -45,7 +45,7 @@
                             <div class="project_desc_list">{!! $project->translation->content !!}</div>
 
                             @if(isset($project->images) && !empty($project->images))
-                                <div class="project_desc_popou d-flex justify-content-between mt-5">
+                                <div class="project_desc_popou d-flex mt-5">
                                     @foreach($project->images as $projectImage)
                                         <div class="popou_thumb_list wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
                                             <a class="port_popup" href="/storage{{ $projectImage->path }}">
