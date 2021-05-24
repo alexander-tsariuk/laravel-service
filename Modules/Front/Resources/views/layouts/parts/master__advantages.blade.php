@@ -3,8 +3,6 @@
         <div class="section_title text-center mb-67">
             <h2 class="wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s" style="visibility: visible; animation-duration: 1.1s; animation-delay: 0.1s; animation-name: fadeInUp;">
                 Наши преимущества
-                <span>Things That <br>
-                        You Needs!</span>
             </h2>
         </div>
         <div class="service_container">
@@ -17,8 +15,8 @@
                                     <i class="ei ei-pens"></i>
                                 </div>
                                 <div class="services_text pl-0 pr-4 pr-lm-0 pl-lm-4">
-                                    <h4>Unique Design</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.0') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.1') }}</p>
                                 </div>
                             </div>
                             <div class="single_services flex-md-row-reverse text-md-end d-flex wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.3s; animation-name: fadeInUp;">
@@ -26,8 +24,8 @@
                                     <i class="ei ei-desktop"></i>
                                 </div>
                                 <div class="services_text pl-0 pr-4 pr-lm-0 pl-lm-4">
-                                    <h4>Retina Ready</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.2') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.3') }}</p>
                                 </div>
                             </div>
                             <div class="single_services flex-md-row-reverse text-md-end d-flex wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.4s; animation-name: fadeInUp;">
@@ -35,8 +33,8 @@
                                     <i class="ei ei-adjust-horiz"></i>
                                 </div>
                                 <div class="services_text pl-0 pr-4 pr-lm-0 pl-lm-4">
-                                    <h4>Advanced Options</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.4') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.5') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +47,8 @@
                                     <i class="ei ei-target"></i>
                                 </div>
                                 <div class="services_text">
-                                    <h4>SEO Marketing</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.6') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.7') }}</p>
                                 </div>
                             </div>
                             <div class="single_services d-flex wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.4s; animation-name: fadeInUp;">
@@ -58,8 +56,8 @@
                                     <i class="ei ei-cart_alt"></i>
                                 </div>
                                 <div class="services_text">
-                                    <h4>Ecommerce Enable</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.8') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.9') }}</p>
                                 </div>
                             </div>
                             <div class="single_services d-flex wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.4s; animation-name: fadeInUp;">
@@ -67,8 +65,8 @@
                                     <i class="ei ei-cog"></i>
                                 </div>
                                 <div class="services_text">
-                                    <h4>Easy Customize</h4>
-                                    <p>Lorem ipsum dolor siteiln dolor adipisicing elit.</p>
+                                    <h4>{{ __('front::mainpage.advantages.10') }}</h4>
+                                    <p>{{ __('front::mainpage.advantages.11') }}</p>
                                 </div>
                             </div>
                         </div>
