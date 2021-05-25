@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------------
+services_icon/*-----------------------------------------------------------------------------------
 
     Template Name: Asore – Business Bootstrap 5 Template
     Version: 1.0
@@ -5105,3 +5105,12 @@ textarea:-ms-input-placeholder {
   }
 }
 
+.ei-desktop::before,
+.ei-cart_alt::before {
+    content: '' !important;
+}
+
+.ei-desktop > img,
+.ei-cart_alt > img {
+    width: 31px !important;
+}

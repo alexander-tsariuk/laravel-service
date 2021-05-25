@@ -21,7 +21,9 @@
                             </div>
                             <div class="single_services flex-md-row-reverse text-md-end d-flex wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.3s; animation-name: fadeInUp;">
                                 <div class="services_icon">
-                                    <i class="ei ei-desktop"></i>
+                                    <i class="ei ei-desktop">
+                                        <img src="{{ Module::asset('front:img/bg/bgimg8.jpg') }}"/>
+                                    </i>
                                 </div>
                                 <div class="services_text pl-0 pr-4 pr-lm-0 pl-lm-4">
                                     <h4>{{ __('front::mainpage.advantages.2') }}</h4>
@@ -33,7 +35,7 @@
                                     <i class="ei ei-adjust-horiz"></i>
                                 </div>
                                 <div class="services_text pl-0 pr-4 pr-lm-0 pl-lm-4">
-                                    <h4>{{ __('front::mainpage.advantages.4') }}</h4>
+                                    <h4>{!! __('front::mainpage.advantages.4')  !!}</h4>
                                     <p>{{ __('front::mainpage.advantages.5') }}</p>
                                 </div>
                             </div>
@@ -53,7 +55,9 @@
                             </div>
                             <div class="single_services d-flex wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.4s; animation-name: fadeInUp;">
                                 <div class="services_icon">
-                                    <i class="ei ei-cart_alt"></i>
+                                    <i class="ei ei-cart_alt">
+                                        <img src="{{ Module::asset('front:img/bg/bgimg9.jpg') }}"/>
+                                    </i>
                                 </div>
                                 <div class="services_text">
                                     <h4>{{ __('front::mainpage.advantages.8') }}</h4>
