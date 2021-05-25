@@ -73,14 +73,17 @@
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ Module::asset('front:css/style.css') }}" preload/>
-
-{{--    @if($agent->isMobile())--}}
-{{--    @else--}}
-{{--    @endif--}}
     <link rel="stylesheet" href="{{ Module::asset('front:css/slider.css') }}" preload/>
-    <link rel="stylesheet" href="{{ Module::asset('front:css/slick.css') }}" preload/>
-    <link rel="stylesheet" href="{{ Module::asset('front:css/slick-theme.css') }}" preload/>
 
+    @if($agent->isMobile())
+        <style>
+            .slide-item {
+                position: fixed;
+                top: 0;
+                margin-top: -1rem;
+            }
+        </style>
+    @endif
 </head>
 
 <body>
@@ -118,10 +121,11 @@
 <!-- Global Vendor, plugins JS -->
 
 <!-- Vendor JS -->
-<script src="{{Module::asset("front:js/vendor/jquery-3.5.1.min.js")}}"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+{{--<script src="{{Module::asset("front:js/vendor/jquery-3.5.1.min.js")}}"></script>--}}
 <script src="{{Module::asset("front:js/vendor/popper.min.js")}}"></script>
-<script src="{{Module::asset("front:js/vendor/bootstrap.min.js")}}"></script>
-<script src="{{Module::asset("front:js/vendor/jquery-migrate-3.3.0.min.js")}}"></script>
+{{--<script src="{{Module::asset("front:js/vendor/jquery-migrate-3.3.0.min.js")}}"></script>--}}
 <script src="{{Module::asset("front:js/vendor/modernizr-3.11.2.min.js")}}"></script>
 
 <!--Plugins JS-->
@@ -142,26 +146,10 @@
 
 <!-- Main Js -->
 <script src="{{Module::asset("front:js/main.js")}}"></script>
+<script src="{{Module::asset("front:js/slider.js")}}"></script>
 
-    <script src="{{Module::asset("front:js/slick.min.js")}}"></script>
-    <script>
-        $(document).ready(function(){
-            $('.your-class').slick({
-                autoplay: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                fade: true,
-                variableWidth: true,
-                speed: 1000,
-                autoplaySpeed: 3000,
-                cssEase: 'ease',
-                responsive: $('.hero_banner_section'),
-                variableWidth: true
-            });
-        });
-    </script>
-{{--    <script src="{{Module::asset("front:js/slider.js")}}"></script>--}}
+
+<script src="{{Module::asset("front:js/vendor/bootstrap.min.js")}}"></script>
 
 </body>
 
