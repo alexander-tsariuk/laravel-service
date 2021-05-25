@@ -13,17 +13,17 @@
         });
 
     /*---stickey menu---*/
-    // $(window).on('scroll', function () {
-    //     var scroll = $(window).scrollTop(),
-    //         screensize = $(window).width();
-    //     if (screensize >= 319) {
-    //         if (scroll < 100) {
-    //             // $(".sticky-header").removeClass("sticky");
-    //         } else {
-    //             // $(".sticky-header").addClass("sticky");
-    //         }
-    //     }
-    // });
+    $(window).on('scroll', function () {
+        var scroll = $(window).scrollTop(),
+            screensize = $(window).width();
+        if (screensize >= 319) {
+            if (scroll < 100) {
+                // $(".sticky-header").removeClass("sticky");
+            } else {
+                // $(".sticky-header").addClass("sticky");
+            }
+        }
+    });
 
 
     /*---------------------

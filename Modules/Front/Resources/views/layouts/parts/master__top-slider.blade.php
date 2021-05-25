@@ -1,11 +1,9 @@
 @if(isset($slides) && !empty($slides))
 {{--    @if($agent->isMobile())--}}
-        <section class="hero_banner_section d-flex " id="slider-mobile-block">
-            <div id="viewport">
-                <ul id="slidewrapper">
-                    @foreach($slides as $slide)
-                        <li class="slide">
-                            <section class="hero_banner_section d-flex slide-item"
+        <section class="hero_banner_section d-flex">
+            <div class="your-class card-group" style="overflow: hidden; width: 100%; opacity: 1;">
+                @foreach($slides as $slide)
+                            <div class="slide-item"
                                      data-bgimg="/storage{{ $slide->image }}">
                                 <div class="container align-self-center">
                                     <div class="row">
@@ -29,16 +27,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                        </li>
+                            </div>
                     @endforeach
-                </ul>
-
-                <div id="prev-next-btns">
-                    <i class="fas fa-angle-left" aria-hidden="true" style="color: #000;"></i>
-                    <i class="fa fa-angle-right" aria-hidden="true" style="color: #000;"></i>
                 </div>
-            </div>
+
         </section>
 {{--    @else--}}
 {{--        <section class="hero_banner_section d-flex " id="slider-block">--}}
