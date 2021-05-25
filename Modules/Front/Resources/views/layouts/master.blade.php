@@ -74,7 +74,11 @@
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ Module::asset('front:css/style.css') }}" preload/>
 
-    <link rel="stylesheet" href="{{ Module::asset('front:css/slider.css') }}" preload/>
+    @if($agent->isMobile())
+        <link rel="stylesheet" href="{{ Module::asset('front:css/slick.css') }}" preload/>
+    @else
+        <link rel="stylesheet" href="{{ Module::asset('front:css/slider.css') }}" preload/>
+    @endif
 </head>
 
 <body>
@@ -137,7 +141,33 @@
 <!-- Main Js -->
 <script src="{{Module::asset("front:js/main.js")}}"></script>
 
-<script src="{{Module::asset("front:js/slider.js")}}"></script>
+@if($agent->isMobile())
+    <script src="{{Module::asset("front:js/slick.min.js")}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#slider-mobile-block').slick({
+                // dots: false,
+                // slidesToScroll: 1,
+                // speed: 500,
+                // fade: false,
+                // centerMode: true,
+                // cssEase: 'linear',
+                // autoplay: true,
+                // autoplaySpeed: 2000,
+                // respondTo: 'window',
+                // pauseOnFocus: false,
+                // initialSlide: 1
+                autoplay: true,
+                infinite: true,
+                adaptiveHeight: true,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+        });
+    </script>
+@else
+    <script src="{{Module::asset("front:js/slider.js")}}"></script>
+@endif
 
 </body>
 

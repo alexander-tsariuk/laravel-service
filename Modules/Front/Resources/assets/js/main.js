@@ -13,17 +13,17 @@
         });
 
     /*---stickey menu---*/
-    $(window).on('scroll', function () {
-        var scroll = $(window).scrollTop(),
-            screensize = $(window).width();
-        if (screensize >= 319) {
-            if (scroll < 100) {
-                // $(".sticky-header").removeClass("sticky");
-            } else {
-                // $(".sticky-header").addClass("sticky");
-            }
-        }
-    });
+    // $(window).on('scroll', function () {
+    //     var scroll = $(window).scrollTop(),
+    //         screensize = $(window).width();
+    //     if (screensize >= 319) {
+    //         if (scroll < 100) {
+    //             // $(".sticky-header").removeClass("sticky");
+    //         } else {
+    //             // $(".sticky-header").addClass("sticky");
+    //         }
+    //     }
+    // });
 
 
     /*---------------------
@@ -70,113 +70,113 @@
         Testimonial Slider
      ---------------------- */
 
-    var testiSliderWrapper = new Swiper('.testimonial_slick.swiper-container', {
-        loop: true,
-        speed: 750,
-        slidesPerView: 1,
-        spaceBetween: 10,
-        autoplay: {
-            delay: 7000,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
+    // var testiSliderWrapper = new Swiper('.testimonial_slick.swiper-container', {
+    //     loop: true,
+    //     speed: 750,
+    //     slidesPerView: 1,
+    //     spaceBetween: 10,
+    //     autoplay: {
+    //         delay: 7000,
+    //         disableOnInteraction: false,
+    //     },
+    //     navigation: {
+    //         nextEl: ".swiper-button-next",
+    //         prevEl: ".swiper-button-prev",
+    //     },
+    // });
 
 
     /*---------------------
         Blog Slider
      ---------------------- */
 
-    var blogSliderWrapper = new Swiper('.blog_container.swiper-container', {
-        loop: true,
-        speed: 750,
-        slidesPerView: 3,
-        spaceBetween: 30,
-        autoplay: {
-            delay: 7000,
-            disableOnInteraction: false,
-        },
-
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-            },
-            478: {
-                slidesPerView: 1,
-            },
-            576: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 2,
-            },
-            992: {
-                slidesPerView: 3,
-            },
-            1200: {
-                slidesPerView: 3,
-            },
-        },
-    });
-
-    /*---------------------
-        Blog Slider
-     ---------------------- */
-
-    var projectSliderWrapper = new Swiper('.project_desc_slick.swiper-container', {
-        loop: true,
-        speed: 750,
-        slidesPerView: 1,
-        spaceBetween: 0,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay: {
-            delay: 7000,
-            disableOnInteraction: false,
-        },
-    });
-
+    // var blogSliderWrapper = new Swiper('.blog_container.swiper-container', {
+    //     loop: true,
+    //     speed: 750,
+    //     slidesPerView: 3,
+    //     spaceBetween: 30,
+    //     autoplay: {
+    //         delay: 7000,
+    //         disableOnInteraction: false,
+    //     },
+    //
+    //     breakpoints: {
+    //         0: {
+    //             slidesPerView: 1,
+    //         },
+    //         478: {
+    //             slidesPerView: 1,
+    //         },
+    //         576: {
+    //             slidesPerView: 2,
+    //         },
+    //         768: {
+    //             slidesPerView: 2,
+    //         },
+    //         992: {
+    //             slidesPerView: 3,
+    //         },
+    //         1200: {
+    //             slidesPerView: 3,
+    //         },
+    //     },
+    // });
 
     /*---------------------
         Blog Slider
      ---------------------- */
 
-    var relatedSliderWrapper = new Swiper('.blog_container-2.swiper-container', {
-        loop: true,
-        speed: 750,
-        slidesPerView: 1,
-        spaceBetween: 0,
-        autoplay: {
-            delay: 7000,
-            disableOnInteraction: false,
-        },
+    // var projectSliderWrapper = new Swiper('.project_desc_slick.swiper-container', {
+    //     loop: true,
+    //     speed: 750,
+    //     slidesPerView: 1,
+    //     spaceBetween: 0,
+    //     pagination: {
+    //         el: '.swiper-pagination',
+    //         clickable: true,
+    //     },
+    //     autoplay: {
+    //         delay: 7000,
+    //         disableOnInteraction: false,
+    //     },
+    // });
 
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-            },
-            478: {
-                slidesPerView: 1,
-            },
-            576: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 2,
-            },
-            992: {
-                slidesPerView: 3,
-            },
-            1200: {
-                slidesPerView: 3,
-            },
-        },
-    });
+
+    /*---------------------
+        Blog Slider
+     ---------------------- */
+
+    // var relatedSliderWrapper = new Swiper('.blog_container-2.swiper-container', {
+    //     loop: true,
+    //     speed: 750,
+    //     slidesPerView: 1,
+    //     spaceBetween: 0,
+    //     autoplay: {
+    //         delay: 7000,
+    //         disableOnInteraction: false,
+    //     },
+    //
+    //     breakpoints: {
+    //         0: {
+    //             slidesPerView: 1,
+    //         },
+    //         478: {
+    //             slidesPerView: 1,
+    //         },
+    //         576: {
+    //             slidesPerView: 2,
+    //         },
+    //         768: {
+    //             slidesPerView: 2,
+    //         },
+    //         992: {
+    //             slidesPerView: 3,
+    //         },
+    //         1200: {
+    //             slidesPerView: 3,
+    //         },
+    //     },
+    // });
 
 
     /*---canvas menu activation---*/
